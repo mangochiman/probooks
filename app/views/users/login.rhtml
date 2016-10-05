@@ -27,7 +27,12 @@
                 <span class="help-block"></span>
               </div>
               <% if flash[:error] %>
-                <div id="loginErrorMsg" class="alert alert-error"><%= flash[:error] %></div>
+                Failed to create your account. We encountered the following errors:
+                <div id="loginErrorMsg" class="alert alert-error" style="color: #d9534f; font-weight: bold;"><%= flash[:error] %></div>
+              <% end %>
+                
+              <% if flash[:notice] %>
+                <p style="color: green; font-weight: bold;"><%= flash[:notice] %></p>
               <% end %>
 
               <div class="checkbox">

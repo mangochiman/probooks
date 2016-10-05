@@ -78,7 +78,7 @@ class UsersController < ApplicationController
       flash[:notice] = "You have created your account. You may now login"
       redirect_to("/login") and return
     else
-      flash[:error] = user.errors.full_messages
+      flash[:error] = user.errors.full_messages.join('<br />')
       redirect_to("/login") and return
     end
 
