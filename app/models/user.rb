@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   set_primary_key :user_id
 
   has_many :user_roles, :foreign_key => :username, :primary_key => :username
+  validates_uniqueness_of :username, :message => 'Username already taken'
+  validates_uniqueness_of :email, :message => 'Email already taken'
+
   before_save :set_password
 
   cattr_accessor :current_user

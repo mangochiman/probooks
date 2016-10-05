@@ -26,7 +26,10 @@
                 <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password"/>
                 <span class="help-block"></span>
               </div>
-              <div id="loginErrorMsg" class="alert alert-error hide">Wrong username OR password</div>
+              <% if flash[:error] %>
+                <div id="loginErrorMsg" class="alert alert-error"><%= flash[:error] %></div>
+              <% end %>
+
               <div class="checkbox">
                 <label>
                   <input type="checkbox" name="remember" id="remember"/> Remember login
@@ -63,7 +66,7 @@
         <div class="modal-header">
           <h4 class="modal-title" id="H4"> <b>Create Account</b></h4>
         </div>
-        <form role="form" class="form-horizontal" method="POST">
+        <form action="/users/create" role="form" class="form-horizontal" method="POST">
           <div class="modal-body">
 
             <div class="form-group">
@@ -76,14 +79,14 @@
             <div class="form-group">
               <label class="control-label col-lg-4" for="last_name">Last Name</label>
               <div class="col-lg-7">
-                <input type="text" name="last_name_name" class="form-control" placeholder="Last Name" id="last_name" required/>
+                <input type="text" name="last_name" class="form-control" placeholder="Last Name" id="last_name" required/>
               </div>
             </div>
 
             <div class="form-group">
               <label class="control-label col-lg-4" for="phone_number">Phone #</label>
               <div class="col-lg-7">
-                <input type="text" name="phone" class="form-control" placeholder="Phone Number" id="phone_number" required/>
+                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number" id="phone_number" required/>
               </div>
             </div>
 
@@ -140,8 +143,8 @@
           <h4 class="modal-title" id="H4"> <b>Password Reminder</b></h4>
         </div>
         <form role="form" class="form-horizontal">
-        <div class="modal-body">
-          
+          <div class="modal-body">
+
             <div class="form-group">
               <label class="control-label col-lg-4" for="email">E-mail Address</label>
               <div class="col-lg-7">
@@ -149,13 +152,13 @@
               </div>
             </div>
 
-          
-        </div>
 
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-block btn-lg">Reset Password</button>
-        </div>
-          
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger btn-block btn-lg">Reset Password</button>
+          </div>
+
         </form>
       </div>
     </div>
@@ -173,7 +176,7 @@
 
   body{
     background-color: #ddd;
-}
+  }
 </style>
 
 <script type="text/javascript">

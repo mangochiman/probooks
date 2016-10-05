@@ -55,28 +55,33 @@ class UsersController < ApplicationController
   def create
     first_name = params[:first_name]
     last_name = params[:last_name]
+    email = params[:email]
+    phone_number = params[:phone_number]
+    username = params[:username]
     password = params[:password]
-    password_confirm = params[:password_confirm]
-    errors = ""
-    user_exists = User.find_by_username(params[:username])
-    errors += 'Username already exists.' if user_exists
-    errors += ' Password mismatch.' if (password != password_confirm)
+    password_confirm = params[:confirm_password]
 
-    unless (errors.blank?)
-      flash[:error] = "#{errors}"
-      redirect_to :controller => "user", :action => "new_user" and return
+    if (password != password_confirm)
+      flash[:error] = "Password Mismatch"
+      redirect_to("/login") and return
     end
 
-    user = User.create({
-        :first_name => first_name,
-        :last_name => last_name,
-        :password => password,
-        :username => params[:username]
-      })
-    if user
-      flash[:notice] = "Operation successful"
-      redirect_to :controller => "user", :action => "new_user" and return
+    user = User.new
+    user.first_name = first_name
+    user.last_name = last_name
+    user.email = email
+    user.phone_number = phone_number
+    user.password = password
+    user. username = username
+
+    if user.save
+      flash[:notice] = "You have created your account. You may now login"
+      redirect_to("/login") and return
+    else
+      flash[:error] = user.errors.full_messages
+      redirect_to("/login") and return
     end
+
   end
 
   def update_user_data
