@@ -4,6 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   map.new_user  '/new_user',  :controller => 'users', :action => 'new_user'
   map.view_users  '/view_users',  :controller => 'users', :action => 'view_users'
   map.void_users  '/void_users',  :controller => 'users', :action => 'void_users'
+  map.authenticate  '/authenticate',  :controller => 'users', :action => 'authenticate'
+  map.home  '/pages',  :controller => 'pages', :action => 'home'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
