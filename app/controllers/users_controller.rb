@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     end
   end
 
+
   def user_management_menu
     @users = User.find(:all)
   end
@@ -204,6 +205,12 @@ class UsersController < ApplicationController
         redirect_to :controller => "user", :action => "user_account_settings_menu" and return
       end
     end
+  end
+
+  def reset_password
+    email = params[:email]
+    flash[:notice] = "An E-mail has been sent to <b>#{email}. Check your email</b>"
+    redirect_to("/login") and return
   end
   
 end
