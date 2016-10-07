@@ -6,5 +6,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   skip_before_filter :verify_authenticity_token
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  before_filter :authenticate_user
+  filter_parameter_logging :password
+  def authenticate_user
+    user = User.find(session[:user].user_id) rescue nil
+    return true unless user.blank?
+    access_denied
+    return false
+  end
+
+  def access_denied
+    redirect_to ("/login") and return
+  end
 end

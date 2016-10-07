@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
-  skip_before_filter :authenticate_user, :only => [:login, :authenticate]
+  skip_before_filter :authenticate_user, :only => [:login, :authenticate, :create, :reset_password]
   def login
-    @school_name = GlobalProperty.find_by_property("school_name") rescue nil
+    #@school_name = GlobalProperty.find_by_property("school_name") rescue nil
     # @settings = school_setting
     render :layout => false
   end
 
   def logout
-    session[:current_user_id] = nil
-    flash[:notice] = "You have been logged out"
+    reset_session #Destroy all sessions
+    flash[:notice] = "You have been logged out. Bye"
     redirect_to("/login") and return
   end
 
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     logged_in_user = User.authenticate(params[:username], params[:password])
 
     if logged_in_user
-      session[:current_user_id] = user.id
+      session[:user] = user
       redirect_to("/pages") and return
     else
       flash[:error] = "Invalid username or password"
