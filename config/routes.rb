@@ -6,6 +6,13 @@ ActionController::Routing::Routes.draw do |map|
   map.void_users  '/void_users',  :controller => 'users', :action => 'void_users'
   map.authenticate  '/authenticate',  :controller => 'users', :action => 'authenticate'
   map.home  '/pages',  :controller => 'pages', :action => 'home'
+  map.upload_books_menu  '/upload_books_menu',  :controller => 'admin', :action => 'upload_books_menu'
+  map.view_books_menu  '/view_books_menu',  :controller => 'admin', :action => 'view_books_menu'
+  map.remove_books_menu  '/remove_books_menu',  :controller => 'admin', :action => 'remove_books_menu'
+  map.new_faculties_menu  '/new_faculties_menu',  :controller => 'admin', :action => 'new_faculties_menu'
+  map.edit_faculties_menu  '/edit_faculties_menu',  :controller => 'admin', :action => 'edit_faculties_menu'
+  map.view_faculties_menu  '/view_faculties_menu',  :controller => 'admin', :action => 'view_faculties_menu'
+  map.remove_faculties_menu  '/remove_faculties_menu',  :controller => 'admin', :action => 'remove_faculties_menu'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
