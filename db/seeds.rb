@@ -7,3 +7,10 @@ user.phone_number = '0111111111'
 user.password = 'user'
 user. username = 'super'
 user.save
+
+categories = ['Primary', 'Secondary', 'Tertiary']
+categories.each do |category_name|
+  new_category = Category.new
+  new_category.name = category_name
+  new_category.save
+end
