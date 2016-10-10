@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   def upload_books_menu
     @page_title = "Upload Books"
+    @book_categories = Category.all.collect{|c|[c.name, c.category_id]}
   end
 
   def view_books_menu
