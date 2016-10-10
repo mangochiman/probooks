@@ -1,7 +1,7 @@
 class CreateFaculties < ActiveRecord::Migration
   def self.up
-    create_table :faculties do |t|
-
+    create_table :faculties, :primary_key => :faculty_id do |t|
+      t.string :name
       t.timestamps
     end
   end
