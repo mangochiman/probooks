@@ -1,7 +1,8 @@
 class AdminController < ApplicationController
   def upload_books_menu
     @page_title = "Upload Books"
-    @book_categories = Category.all.collect{|c|[c.name, c.category_id]}
+    @book_categories = Category.all.collect{|c|[c.name, c.name]}
+    @faculties = [['Info Science', 'Info Science'], ['Engineering', 'Engineering']]
   end
 
   def create_book
@@ -12,7 +13,8 @@ class AdminController < ApplicationController
 
     if book.save
       
-      params[:book_category].each do |category_id|
+      params[:book_category].each do |category_name|
+        category_id = Category.find_by_name(category_name).category_id
         book_category = BookCategory.new
         book_category.book_id = book.book_id
         book_category.category_id = category_id

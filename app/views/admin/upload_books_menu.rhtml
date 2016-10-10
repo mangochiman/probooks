@@ -29,8 +29,20 @@
       <label class="control-label col-lg-4">Book Category</label>
 
       <div class="col-lg-7">
-        <select name="book_category[]" data-placeholder="&nbsp;" multiple class="form-control chzn-select" tabindex="8">
+        <select onchange="checkValue()" name="book_category[]" data-placeholder="&nbsp;" multiple class="form-control chzn-select book-category" tabindex="8">
           <% @book_categories.each do |key, value| %>
+            <option value="<%= value %>"><%= key %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group faculty-div">
+      <label class="control-label col-lg-4">Faculty</label>
+
+      <div class="col-lg-7">
+        <select name="faculty[]" data-placeholder="&nbsp;" multiple class="form-control chzn-select faculty" tabindex="8">
+          <% @faculties.each do |key, value| %>
             <option value="<%= value %>"><%= key %></option>
           <% end %>
         </select>
@@ -77,3 +89,22 @@
     </div>
   </form>
 </div>
+
+<script>
+  function checkValue(){
+    selectedValues = jQuery('.book-category').val();
+    if (selectedValues){
+      if (selectedValues.toString().match(/TERTIARY/i)){
+        jQuery('.faculty-div').show();
+      }else{
+        console.log('Here')
+        jQuery('.faculty-div').hide();
+        $(".faculty").val('').trigger("chosen:updated");
+      }
+    }else{
+      jQuery('.faculty-div').hide();
+      $(".faculty").val('').trigger("chosen:updated");
+    }
+  }
+  
+</script>
