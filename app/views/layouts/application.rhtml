@@ -187,7 +187,7 @@
           </li>
           <li class="panel ">
             <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#faculties-nav">
-              <i class="icon-book"> </i>Manage Faculties
+              <i class="icon-folder-open-alt"> </i>Manage Faculties
 
               <span class="pull-right">
                 <i class="icon-angle-left"></i>
@@ -202,7 +202,23 @@
               <li class=""><a href="/remove_faculties_menu"><i class="icon-angle-right"></i> Remove Faculties </a></li>
             </ul>
           </li>
+          <li class="panel ">
+            <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#users-nav">
+              <i class="icon-user"> </i>Manage Users
 
+              <span class="pull-right">
+                <i class="icon-angle-left"></i>
+              </span>
+              &nbsp; <span class="label label-danger">4</span>&nbsp;
+            </a>
+            <ul class="collapse" id="users-nav">
+
+              <li class=""><a href="/new_users_menu"><i class="icon-angle-right"></i> New User </a></li>
+              <li class=""><a href="/edit_users_menu"><i class="icon-angle-right"></i> Edit Users </a></li>
+              <li class=""><a href="/view_users_menu"><i class="icon-angle-right"></i> View Users </a></li>
+              <li class=""><a href="/remove_users_menu"><i class="icon-angle-right"></i> Remove Users </a></li>
+            </ul>
+          </li>
         </ul>
 
       </div>
@@ -217,7 +233,7 @@
             <div class="col-lg-12">
 
 
-              <h2>ProBooks</h2>
+              <h2><%= @page_title %></h2>
 
 
 

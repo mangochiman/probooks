@@ -13,6 +13,10 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_faculties_menu  '/edit_faculties_menu',  :controller => 'admin', :action => 'edit_faculties_menu'
   map.view_faculties_menu  '/view_faculties_menu',  :controller => 'admin', :action => 'view_faculties_menu'
   map.remove_faculties_menu  '/remove_faculties_menu',  :controller => 'admin', :action => 'remove_faculties_menu'
+  map.new_users_menu  '/new_users_menu',  :controller => 'admin', :action => 'new_users_menu'
+  map.edit_users_menu  '/edit_users_menu',  :controller => 'admin', :action => 'edit_users_menu'
+  map.view_users_menu  '/view_users_menu',  :controller => 'admin', :action => 'view_users_menu'
+  map.remove_users_menu  '/remove_users_menu',  :controller => 'admin', :action => 'remove_users_menu'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
