@@ -17,15 +17,32 @@ class AdminController < ApplicationController
         book_category.category_id = category_id
         book_category.save
       end
+      
+      book_id = book.book_id
+      new_book_name = "#{book_id}_#{params[:book].original_filename}"
+      new_book_cover_name = "#{book_id}_cover_#{params[:book_cover].original_filename}"
+      File.open(Rails.root.join('public', 'books', new_book_name), 'wb') do |file|
+        file.write(params[:book].read) #Create a book to a directory
+      end
+
+      File.open(Rails.root.join('public', 'books', new_book_cover_name), 'wb') do |file|
+        file.write(params[:book_cover].read) #Create a book cover to a directory
+      end
 
       flash[:notice] = "You have successfully uploaded a book"
       redirect_to("/upload_books_menu")
     else
-      flash[:error] = book.errors.full_messages.join('<br />')
+      #flash[:error] = book.errors.full_messages.join('<br />')
+      flash[:error] = book.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
       redirect_to("/upload_books_menu")
     end
   end
-  
+
+  def code_book
+    book = Book.find(params[:book_id])
+    send_data book.content, :filename => book.filename, :type => book.content_type, :disposition => "inline"
+  end
+
   def view_books_menu
     @page_title = "View Books"
   end
