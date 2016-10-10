@@ -9,6 +9,7 @@ class AdminController < ApplicationController
     book.uploaded_file = ([params[:book], params[:book_cover]])
     book.title = params[:book_title]
     book.author = params[:book_author]
+
     if book.save
       
       params[:book_category].each do |category_id|
@@ -19,14 +20,18 @@ class AdminController < ApplicationController
       end
       
       book_id = book.book_id
-      new_book_name = "#{book_id}_#{params[:book].original_filename}"
-      new_book_cover_name = "#{book_id}_cover_#{params[:book_cover].original_filename}"
+      new_book_name = "#{book_id.to_s}.pdf"
+      new_book_cover_name = "#{book_id.to_s}_cover_#{params[:book_cover].original_filename}"
+      
+      book_data = File.read(params[:book].path)
+      book_cover_data = File.read(params[:book_cover].path)
+      
       File.open(Rails.root.join('public', 'books', new_book_name), 'wb') do |file|
-        file.write(params[:book].read) #Create a book to a directory
+        file.write(book_data) #Create a book to a directory
       end
 
       File.open(Rails.root.join('public', 'books', new_book_cover_name), 'wb') do |file|
-        file.write(params[:book_cover].read) #Create a book cover to a directory
+        file.write(book_cover_data) #Create a book cover to a directory
       end
 
       flash[:notice] = "You have successfully uploaded a book"
