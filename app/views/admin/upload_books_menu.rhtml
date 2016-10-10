@@ -1,11 +1,11 @@
 <div id="div-1" class="accordion-body collapse in body">
-  <form class="form-horizontal">
+  <form class="form-horizontal" action="/admin/create_book" method="POST"  enctype="multipart/form-data">
 
     <div class="form-group">
       <label for="title" class="control-label col-lg-4">Title</label>
 
       <div class="col-lg-7">
-        <input required type="text" name="title" id="title" placeholder="Book title" class="form-control" />
+        <input required type="text" name="book_title" id="title" placeholder="Book title" class="form-control" />
       </div>
     </div>
 
@@ -21,7 +21,7 @@
       <label for="authors" class="control-label col-lg-4">Authors</label>
 
       <div class="col-lg-7">
-        <input required type="text" name="authors" id="authors" placeholder="Authors" class="form-control" />
+        <input required type="text" name="book_author" id="authors" placeholder="Authors" class="form-control" />
       </div>
     </div>
 
@@ -29,7 +29,7 @@
       <label class="control-label col-lg-4">Book Category</label>
 
       <div class="col-lg-7">
-        <select data-placeholder="&nbsp;" multiple class="form-control chzn-select" tabindex="8">
+        <select name="book_category[]" data-placeholder="&nbsp;" multiple class="form-control chzn-select" tabindex="8">
           <% @book_categories.each do |key, value| %>
             <option value="<%= value %>"><%= key %></option>
           <% end %>
@@ -44,7 +44,7 @@
           <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="/assets/img/demoUpload.jpg" alt="" /></div>
           <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
           <div>
-            <span class="btn btn-file btn-primary"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+            <span class="btn btn-file btn-primary"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="book_cover" required/></span>
             <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">Remove</a>
           </div>
         </div>
@@ -55,19 +55,13 @@
       <label class="control-label col-lg-4">Upload Book</label>
       <div class="col-lg-8">
         <div class="fileupload fileupload-new" data-provides="fileupload">
-
-
-
           <div class="input-group">
-
-
             <span class="btn btn-file btn-info">
               <span class="fileupload-new">Select file</span>
               <span class="fileupload-exists">Change</span>
-              <input type="file" />
+              <input type="file" name="book" required/>
             </span>
             <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">Remove</a>
-
             <br /> <br />
             <div class="col-lg-3">
               <i class="icon-file fileupload-exists"></i>

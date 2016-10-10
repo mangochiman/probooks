@@ -4,6 +4,28 @@ class AdminController < ApplicationController
     @book_categories = Category.all.collect{|c|[c.name, c.category_id]}
   end
 
+  def create_book
+    book = Book.new
+    book.uploaded_file = ([params[:book], params[:book_cover]])
+    book.title = params[:book_title]
+    book.author = params[:book_author]
+    if book.save
+      
+      params[:book_category].each do |category_id|
+        book_category = BookCategory.new
+        book_category.book_id = book.book_id
+        book_category.category_id = category_id
+        book_category.save
+      end
+
+      flash[:notice] = "You have successfully uploaded a book"
+      redirect_to("/upload_books_menu")
+    else
+      flash[:error] = book.errors.full_messages.join('<br />')
+      redirect_to("/upload_books_menu")
+    end
+  end
+  
   def view_books_menu
     @page_title = "View Books"
   end
