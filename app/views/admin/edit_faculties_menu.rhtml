@@ -1,0 +1,32 @@
+<div class="row" style="padding-left: 10px;">
+  <div class="col-lg-10" style="width: 99%;">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Faculty Name</th>
+                <th>Date Created</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% count = 0 %>
+              <%  @faculties.each do |faculty|%>
+                <% count = count + 1 %>
+                <tr>
+                  <td><%= count %></td>
+                  <td><%= faculty.name %></td>
+                  <td><%= faculty.created_at.to_date.strftime("%d-%b-%Y") rescue faculty.created_at %></td>
+                  <td><button class="btn btn-primary"><i class="icon-pencil icon-white"></i> Edit</button></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

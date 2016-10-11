@@ -8,8 +8,8 @@
               <tr>
                 <th>#</th>
                 <th>Faculty Name</th>
-                <th>Total Books</th>
                 <th>Date Created</th>
+                <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody>
@@ -19,12 +19,8 @@
                 <tr>
                   <td><%= count %></td>
                   <td><%= faculty.name %></td>
-                  <td>
-                    <button class="btn btn-default btn-circle btn-lg" type="button">
-                      <%= faculty.book_faculties.count %>
-                    </button>
-                  </td>
                   <td><%= faculty.created_at.to_date.strftime("%d-%b-%Y") rescue faculty.created_at %></td>
+                  <td><button class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button></td>
                 </tr>
               <% end %>
             </tbody>

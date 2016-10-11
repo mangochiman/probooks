@@ -77,14 +77,17 @@ class AdminController < ApplicationController
 
   def edit_faculties_menu
     @page_title = "Edit Faculties"
+    @faculties = Faculty.all
   end
 
   def view_faculties_menu
+    @faculties = Faculty.all
     @page_title = "View Faculties"
   end
 
   def remove_faculties_menu
     @page_title = "Remove Faculties"
+    @faculties = Faculty.all
   end
 
   def new_users_menu
