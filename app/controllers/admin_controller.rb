@@ -45,6 +45,18 @@ class AdminController < ApplicationController
     end
   end
 
+  def create_faculty
+    faculty = Faculty.new
+    faculty.name = params[:faculty_name]
+    if faculty.save
+      flash[:notice] = "You have successfully added a faculty"
+      redirect_to("/new_faculties_menu")
+    else
+      flash[:error] = faculty.errors.full_messages.join('<br />')
+      redirect_to("/new_faculties_menu")
+    end
+  end
+  
   def code_book
     book = Book.find(params[:book_id])
     send_data book.content, :filename => book.filename, :type => book.content_type, :disposition => "inline"
@@ -60,6 +72,7 @@ class AdminController < ApplicationController
 
   def new_faculties_menu
     @page_title = "New Faculty"
+    @faculties = Faculty.all
   end
 
   def edit_faculties_menu
