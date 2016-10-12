@@ -20,7 +20,7 @@
                   <td><%= count %></td>
                   <td><%= faculty.name %></td>
                   <td><%= faculty.created_at.to_date.strftime("%d-%b-%Y") rescue faculty.created_at %></td>
-                  <td><button class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button></td>
+                  <td><button onclick="deleteFacultyConfirm('<%= faculty.faculty_id %>')" class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button></td>
                 </tr>
               <% end %>
             </tbody>
@@ -30,3 +30,41 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteFacultyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Delete Faculty</h4>
+      </div>
+      <div class="modal-body">
+        This will delete the selected competition. The process is <b>irreversible</b>. Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+        <button onclick="deleteFaculty();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<script type="text/javascript">
+  var facultyID;
+  function deleteFacultyConfirm(faculty_id){
+    console.log(faculty_id);
+    facultyID = faculty_id;
+    jQuery('#deleteFacultyModal').modal('show');
+  }
+
+  function deleteFaculty(){
+    window.location = '/admin/delete_faculty?faculty_id=' + facultyID;
+  }
+  
+</script>

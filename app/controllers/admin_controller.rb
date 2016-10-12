@@ -97,7 +97,19 @@ class AdminController < ApplicationController
       redirect_to("/edit_faculty/#{params[:faculty_id]}") and return
     end
   end
-  
+
+  def delete_faculty
+    faculty = Faculty.find(params[:faculty_id])
+    faculty_name = faculty.name
+    if (faculty.delete)
+      flash[:notice] = "You have successfully delete faculty of <b>#{faculty_name}</b>"
+      redirect_to("/remove_faculties_menu/") and return
+    else
+      flash[:error] = faculty.errors.full_messages.join('<br />')
+      redirect_to("/remove_faculties_menu/") and return
+    end
+  end
+
   def view_faculties_menu
     @faculties = Faculty.all
     @page_title = "View Faculties"
