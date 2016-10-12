@@ -4,6 +4,7 @@
 <%= javascript_include_tag("jquery-2.0.3.min") %>
 <%= javascript_include_tag("bootstrap.min") %>
 <%= stylesheet_link_tag("bootstrap")%>
+<link rel="stylesheet" href="/assets/plugins/social-buttons/social-buttons.css" />
 
 <div id="login-overlay" class="modal-dialog login-modal-content">
   <div class="modal-content">
@@ -29,7 +30,7 @@
               <% if flash[:error] %>
                 <div id="loginErrorMsg" class="alert alert-error" style="color: #d9534f; font-weight: bold;"><%= flash[:error] %></div>
               <% end %>
-                
+
               <% if flash[:notice] %>
                 <p style="color: green; font-weight: bold;"><%= flash[:notice] %></p>
               <% end %>

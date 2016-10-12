@@ -86,7 +86,8 @@ class AdminController < ApplicationController
     @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
     @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
-    
+
+    @books = Book.all
   end
 
   def remove_books_menu
