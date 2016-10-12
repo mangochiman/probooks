@@ -324,9 +324,9 @@
         <div class="well well-small">
           <button class="btn btn-block"> <b>Total Books</b> </button>
           <ul class="list-unstyled">
-            <li>Primary &nbsp; : <span><%= @primary_books.count %></span></li>
-            <li>Secondary &nbsp; : <span><%= @secondary_books.count %></span></li>
-            <li>Tertiary &nbsp; : <span><%= @tertiary_books.count %></span></li>
+            <li><span class="col-lg-8">Primary</span> <button class="btn btn-default btn-circle" type="button"><span><%= @primary_books.count %></span></button></li>
+            <li><span class="col-lg-8">Secondary </span><button class="btn btn-default btn-circle" type="button"><span><%= @secondary_books.count %></span></button></li>
+            <li><span class="col-lg-8">Tertiary </span><button class="btn btn-default btn-circle" type="button"><span><%= @tertiary_books.count %></span></button></li>
           </ul>
         </div>
 
