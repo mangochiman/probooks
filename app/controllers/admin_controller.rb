@@ -80,6 +80,24 @@ class AdminController < ApplicationController
     @faculties = Faculty.all
   end
 
+  def edit_faculty
+    @faculties = Faculty.all
+    @faculty = Faculty.find(params[:faculty_id])
+    @page_title = "Editing #{@faculty.name}"
+  end
+
+  def update_faculty
+    faculty = Faculty.find(params[:faculty_id])
+    faculty.name = params[:faculty_name]
+    if faculty.save
+      flash[:notice] = "You have successfully updated a faculty"
+      redirect_to("/edit_faculty/#{params[:faculty_id]}") and return
+    else
+      flash[:error] = faculty.errors.full_messages.join('<br />')
+      redirect_to("/edit_faculty/#{params[:faculty_id]}") and return
+    end
+  end
+  
   def view_faculties_menu
     @faculties = Faculty.all
     @page_title = "View Faculties"

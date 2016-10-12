@@ -25,31 +25,29 @@
   <div class="col-lg-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <b>Add Faculty</b>
+        <b>Editing Faculty of <i><%= @faculty.name %></i></b>
       </div>
       <div class="panel-body">
 
 
 
         <div id="div-1" class="accordion-body collapse in body">
-          <form class="form-horizontal" action="/admin/create_faculty" method="POST"  enctype="multipart/form-data">
+          <form class="form-horizontal" action="/admin/update_faculty" method="POST">
 
             <div class="form-group">
               <label for="faculty" class="control-label col-lg-4">Faculty Name</label>
 
               <div class="col-lg-8">
-                <input required type="text" name="faculty_name" id="faculty" placeholder="Faculty Name" class="form-control" />
+                <input required type="text" name="faculty_name" value="<%=  @faculty.name %>" id="faculty" placeholder="Faculty Name" class="form-control" />
+                <input type="hidden" value="<%=  @faculty.faculty_id %>" name="faculty_id"></input>
               </div>
             </div>
 
             <div style="text-align:center;" class="form-actions no-margin-bottom">
-              <input type="submit" class="btn btn-success" value="Add Faculty"/>
+              <input type="submit" class="btn btn-success" value="Update Faculty"/>
             </div>
           </form>
         </div>
-
-
-
 
 
       </div>

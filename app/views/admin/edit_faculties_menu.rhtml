@@ -20,7 +20,7 @@
                   <td><%= count %></td>
                   <td><%= faculty.name %></td>
                   <td><%= faculty.created_at.to_date.strftime("%d-%b-%Y") rescue faculty.created_at %></td>
-                  <td><button class="btn btn-primary"><i class="icon-pencil icon-white"></i> Edit</button></td>
+                  <td><button onclick="editFaculty('<%= faculty.faculty_id %>')" class="btn btn-primary"><i class="icon-pencil icon-white"></i> Edit</button></td>
                 </tr>
               <% end %>
             </tbody>
@@ -30,3 +30,11 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+
+    function editFaculty(facultyID){
+      window.location = "/edit_faculty/" + facultyID;
+    }
+    
+</script>
