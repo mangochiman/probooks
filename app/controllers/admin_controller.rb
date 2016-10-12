@@ -2,10 +2,11 @@ class AdminController < ApplicationController
   def upload_books_menu
     @page_title = "Upload Books"
     @book_categories = Category.all.collect{|c|[c.name, c.name]}
-    @faculties = [['Info Science', 'Info Science'], ['Engineering', 'Engineering']]
+    @faculties = Faculty.all.collect{|f|[f.name, f.faculty_id]}
   end
 
   def create_book
+    raise params.inspect
     book = Book.new
     book.uploaded_file = ([params[:book], params[:book_cover]])
     book.title = params[:book_title]
@@ -20,7 +21,14 @@ class AdminController < ApplicationController
         book_category.category_id = category_id
         book_category.save
       end
-      
+
+      (params[:faculty] || []).each do |faculty_id|
+        book_faculty = BookFaculty.new
+        book_faculty.book_id = book.book_id
+        book_faculty.faculty_id = faculty_id
+        book_faculty.save
+      end
+
       book_id = book.book_id
       new_book_name = "#{book_id.to_s}.pdf"
       new_book_cover_name = "#{book_id.to_s}_cover_#{params[:book_cover].original_filename}"

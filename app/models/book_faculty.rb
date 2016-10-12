@@ -5,4 +5,12 @@ class BookFaculty < ActiveRecord::Base
 
   belongs_to :book
   belongs_to :faculty
+
+  before_save :add_time_stamps
+
+  def add_time_stamps
+    self.created_at = Time.now if self.created_at.blank?
+    self.updated_at = Time.now
+  end
+  
 end
