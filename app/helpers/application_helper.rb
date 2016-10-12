@@ -5,4 +5,10 @@ module ApplicationHelper
     user_names = user.first_name + ' ' + user.last_name
     return user_names
   end
+
+  def faculties
+    faculties = Faculty.all
+    return faculties
+  end
+  
 end

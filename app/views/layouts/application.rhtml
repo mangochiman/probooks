@@ -38,7 +38,6 @@
     <link rel="stylesheet" href="/assets/plugins/switch/static/stylesheets/bootstrap-switch.css" />
     <link rel="stylesheet" href="/assets/css/bootstrap-fileupload.min.css" />
     <link href="/assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/plugins/social-buttons/social-buttons.css" />
     <!--END GLOBAL STYLES -->
 
     <!-- PAGE LEVEL STYLES -->
@@ -330,6 +329,7 @@
             <li>Tertiary &nbsp; : <span><%= @tertiary_books.count %></span></li>
           </ul>
         </div>
+
         <div class="well well-small">
           <button class="btn btn-block"> <b>Book Categories</b> </button>
           <button class="btn btn-primary btn-block"> Primary</button>
@@ -337,6 +337,19 @@
           <button class="btn btn-success btn-block"> Tertiary </button>
         </div>
 
+        <div class="well well-small">
+          <button class="btn btn-block"> <b>Faculties</b> </button>
+
+          <%
+          btn_class_names = ["btn-primary", "btn-info", "btn-success", "btn-warning", "btn-danger"]
+          btn_class_names_copy = ["btn-primary", "btn-info", "btn-success", "btn-warning", "btn-danger"]
+        %>
+          <% faculties.each do |faculty| %>
+            <% btn_class_names = btn_class_names_copy if btn_class_names.blank?%>
+            <% btn_class_name = btn_class_names.shift %>
+            <button class="btn <%= btn_class_name %> btn-block"> <%= faculty.name[0..15] %></button>
+          <% end %>
+        </div>
       </div>
       <!-- END RIGHT STRIP  SECTION -->
 
@@ -378,7 +391,7 @@
       $('a.media').media({width:'100%', height:400});
 
       window.onload = function () {
-         jQuery('.faculty-div').hide();
+        jQuery('.faculty-div').hide();
       }
     </script>
     <!-- END GLOBAL SCRIPTS -->
