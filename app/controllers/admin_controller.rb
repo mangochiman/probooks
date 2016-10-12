@@ -98,6 +98,23 @@ class AdminController < ApplicationController
     @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
     @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+
+    @books = Book.all
+  end
+
+  def delete_book
+    book = Book.find(params[:book_id])
+    book_title = book.title
+    book_author = book.author
+
+    if (book.delete)
+      flash[:notice] = "You have successfully deleted book titled <b>#{book_title}</b> by <b><i>#{book_author}</i></b>"
+      redirect_to("/remove_books_menu/") and return
+    else
+      flash[:error] = book.errors.full_messages.join('<br />')
+      redirect_to("/remove_books_menu/") and return
+    end
+    
   end
 
   def new_faculties_menu
@@ -236,12 +253,13 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
     category = Category.find(params[:category_id])
     @page_title = "Browse Books By Category: #{category.name}"
-    
+    @selected_category_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", params[:category_id]])
+
   end
 
 end
