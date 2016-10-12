@@ -17,12 +17,9 @@
         </div>
         <div class="features">
           <ul>
-            <li>Premium Profile Listing</li>
-            <li>Unlimited File Access</li>
-            <li>Free Appointments</li>
-            <li><strong>5 Bonus Points</strong> every month</li>
-            <li>Customizable Profile Page</li>
-            <li><strong>2 months</strong> support</li>
+            <% @primary_books.each do |faculty_book| %>
+              <li><%= faculty_book.book.title %> By <%= faculty_book.book.author %></li>
+            <% end %>
           </ul>
         </div>
         <div class="footer">
@@ -38,12 +35,9 @@
         </div>
         <div class="features">
           <ul>
-            <li>Premium Profile Listing</li>
-            <li>Unlimited File Access</li>
-            <li>Free Appointments</li>
-            <li><strong>20 Bonus Points</strong> every month</li>
-            <li>Customizable Profile Page</li>
-            <li><strong>6 months</strong> support</li>
+            <% @secondary_books.each do |faculty_book| %>
+              <li><%= faculty_book.book.title %> By <%= faculty_book.book.author %></li>
+            <% end %>
           </ul>
         </div>
         <div class="footer">
@@ -59,12 +53,9 @@
         </div>
         <div class="features">
           <ul>
-            <li>Premium Profile Listing</li>
-            <li>Unlimited File Access</li>
-            <li>Free Appointments</li>
-            <li><strong>50 Bonus Points</strong> every month</li>
-            <li>Customizable Profile Page</li>
-            <li><strong>Lifetime</strong> support</li>
+            <% @tertiary_books.each do |faculty_book| %>
+              <li><%= faculty_book.book.title %> By <%= faculty_book.book.author %></li>
+            <% end %>
           </ul>
         </div>
         <div class="footer">

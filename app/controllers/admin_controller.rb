@@ -1,12 +1,19 @@
 class AdminController < ApplicationController
   def upload_books_menu
     @page_title = "Upload Books"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+
     @book_categories = Category.all.collect{|c|[c.name, c.name]}
     @faculties = Faculty.all.collect{|f|[f.name, f.faculty_id]}
   end
 
   def create_book
-    raise params.inspect
     book = Book.new
     book.uploaded_file = ([params[:book], params[:book_cover]])
     book.title = params[:book_title]
@@ -72,19 +79,50 @@ class AdminController < ApplicationController
 
   def view_books_menu
     @page_title = "View Books"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    
   end
 
   def remove_books_menu
     @page_title = "Remove Books"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def new_faculties_menu
     @page_title = "New Faculty"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    
     @faculties = Faculty.all
   end
 
   def edit_faculties_menu
     @page_title = "Edit Faculties"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    
     @faculties = Faculty.all
   end
 
@@ -92,6 +130,13 @@ class AdminController < ApplicationController
     @faculties = Faculty.all
     @faculty = Faculty.find(params[:faculty_id])
     @page_title = "Editing #{@faculty.name}"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def update_faculty
@@ -121,27 +166,69 @@ class AdminController < ApplicationController
   def view_faculties_menu
     @faculties = Faculty.all
     @page_title = "View Faculties"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def remove_faculties_menu
     @page_title = "Remove Faculties"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
     @faculties = Faculty.all
   end
 
   def new_users_menu
     @page_title = "New User"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def edit_users_menu
     @page_title = "Edit User"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def view_users_menu
     @page_title = "View Users"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def remove_users_menu
     @page_title = "Remove Users"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
   end
   
 end
