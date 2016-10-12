@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.view_users_menu  '/view_users_menu',  :controller => 'admin', :action => 'view_users_menu'
   map.remove_users_menu  '/remove_users_menu',  :controller => 'admin', :action => 'remove_users_menu'
   map.edit_faculty '/edit_faculty/:faculty_id', :controller => 'admin', :action => 'edit_faculty'
+  map.edit_faculty '/browse_by_category/:category_id', :controller => 'admin', :action => 'browse_by_category'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
