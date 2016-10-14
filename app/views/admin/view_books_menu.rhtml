@@ -12,7 +12,7 @@
     <tbody>
       <% count = 0 %>
       <%  @books.each do |book|%>
-      <% count = count + 1 %>
+        <% count = count + 1 %>
         <tr>
           <td><%= count %></td>
           <td><%= book.title %></td>
@@ -25,8 +25,54 @@
   </table>
 </div>
 
+
+
+
+<div class="col-lg-12">
+  <div class="modal fade" id="viewBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="H4"> <b>Book Viewing</b></h4>
+        </div>
+        <div class="modal-body">
+          &nbsp;
+          <!--<a class="media" href="/books/10.pdf">&nbsp;</a>-->
+          <iframe  width="100%" height="1000px"src="/books/10.pdf"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script type="text/javascript">
   function viewBook(bookID){
-
+    jQuery('#viewBook').modal('show');
   }
+
 </script>
+<style type="text/css">
+  #viewBook .modal-dialog {
+    width: 94%;
+    padding-top: 15px;
+  }
+
+  #viewBook .modal-header {
+    padding: 6px;
+  }
+
+  #viewBook .modal-footer {
+    margin-top: -16px;
+    padding: 19px 38px 12px;
+    text-align: right;
+  }
+
+  #viewBook .modal-body{
+    padding: 1px;
+  }
+</style>
