@@ -76,6 +76,10 @@ class UsersController < ApplicationController
     user. username = username
 
     if user.save
+      new_user_role = UserRole.new
+      new_user_role.username = user.username
+      new_user_role.role = 'user'
+      new_user_role.save
       flash[:notice] = "You have created your account. You may now login"
       redirect_to("/login") and return
     else
