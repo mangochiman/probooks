@@ -236,6 +236,8 @@ class AdminController < ApplicationController
     @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
     @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+
+    @users = User.find(:all, :conditions => ["user_id != ?", session[:user].user_id])
   end
 
   def remove_users_menu
@@ -263,4 +265,45 @@ class AdminController < ApplicationController
 
   end
 
+  def edit_user
+    @user = User.find(params[:user_id])
+    @page_title = "Editing #{@user.username}"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+  end
+
+  def delete_user
+    if request.post?
+      user = User.find(params[:user_id])
+      username = user.username
+      if user.delete
+        flash[:notice] = "you have successfully deleted <b>#{username}'s</b> account"
+        redirect_to("/view_users_menu")
+      else
+        flash[:notice] = "Unable to delete <b>#{username}'s</b> account"
+        redirect_to("/view_users_menu")
+      end
+    end
+  end
+
+  def update_account_by_admin
+    @user = User.find(params[:user_id])
+    if @user.update_attributes({
+          :first_name => params[:first_name],
+          :last_name => params[:last_name],
+          :phone_number => params[:phone_number],
+          :email => params[:email]
+        })
+      flash[:notice] = "You have successfully edited <b>#{@user.username}'s </b> account"
+      redirect_to("/view_users_menu") and return
+    else
+      flash[:error] = "Failed to update the account <b>#{@user.username}</b>"
+      redirect_to("/view_users_menu") and return
+    end
+  end
 end
