@@ -1,4 +1,14 @@
 <form action="/admin/update_account_by_admin" role="form" class="form-horizontal" method="POST">
+  <div class="form-group">
+    <label class="control-label col-lg-4">User Role</label>
+
+    <div class="col-lg-7">
+      <select class="form-control" name="user_role" required>
+        <option id="user" value="user">Non Admin</option>
+        <option id="admin" value="admin">Admin</option>
+      </select>
+    </div>
+  </div>
 
   <div class="form-group">
     <label class="control-label col-lg-4" for="first_name">First Name</label>
@@ -38,3 +48,15 @@
 
   <input type="hidden" value="<%=  params[:user_id] %>" name="user_id"/>
 </form>
+
+<script type="text/javascript">
+  var userRole = '<%= @user_role %>';
+  function selectPreviousUserRole(){
+    console.log("oooooo")
+    if (userRole.length > 0){
+      console.log("here")
+      document.getElementById(userRole).selected = true;
+    }
+  }
+window.setTimeout("selectPreviousUserRole()", 350);
+</script>

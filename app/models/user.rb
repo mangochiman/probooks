@@ -49,4 +49,10 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(password+salt)
   end
 
+  def role
+    user_roles = self.user_roles
+    return "" if user_roles.blank?
+    return user_roles.last.role
+  end
+
 end

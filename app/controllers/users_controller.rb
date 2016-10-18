@@ -236,6 +236,10 @@ class UsersController < ApplicationController
     user. username = username
 
     if user.save
+      user_role = UserRole.new
+      user_role.username = user.username
+      user_role.role = params[:user_role]
+      user_role.save
       flash[:notice] = "You have successfully created an account."
       redirect_to("/new_users_menu") and return
     else

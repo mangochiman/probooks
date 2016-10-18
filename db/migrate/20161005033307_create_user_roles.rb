@@ -1,6 +1,6 @@
 class CreateUserRoles < ActiveRecord::Migration
   def self.up
-    create_table :user_role, :id => false do |t|
+    create_table :user_role, :primary_key => :user_role_id do |t|
       t.string :username
       t.string :role
       t.integer :sort_weight

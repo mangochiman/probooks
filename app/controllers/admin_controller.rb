@@ -267,6 +267,7 @@ class AdminController < ApplicationController
 
   def edit_user
     @user = User.find(params[:user_id])
+    @user_role = @user.role.downcase
     @page_title = "Editing #{@user.username}"
     primary_category_id = Category.find_by_name("PRIMARY").category_id
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
@@ -299,6 +300,19 @@ class AdminController < ApplicationController
           :phone_number => params[:phone_number],
           :email => params[:email]
         })
+      
+      ActiveRecord::Base.transaction do
+        user_roles = UserRole.find(:all, :conditions => ["username = ?", @user.username])
+        user_roles.each do |user_role|
+          user_role.delete
+        end
+
+        new_user_role = UserRole.new
+        new_user_role.username = @user.username
+        new_user_role.role = params[:user_role]
+        new_user_role.save
+      end
+
       flash[:notice] = "You have successfully edited <b>#{@user.username}'s </b> account"
       redirect_to("/view_users_menu") and return
     else
