@@ -8,6 +8,11 @@ user.password = 'user'
 user. username = 'super'
 user.save
 
+user_role = UserRole.new
+user_role.username = user.username
+user_role.role = 'admin'
+user_role.save
+
 categories = ['Primary', 'Secondary', 'Tertiary']
 categories.each do |category_name|
   new_category = Category.new
