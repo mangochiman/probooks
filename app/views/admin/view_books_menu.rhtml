@@ -18,7 +18,7 @@
           <td><%= book.title %></td>
           <td><%= book.author %></td>
           <td><%= book.created_at.to_date.strftime("%d-%b-%Y") rescue book.created_at %></td>
-          <td><button class="btn btn-block" onclick="viewBook('<%= book.book_id %>')"><i class="icon-eye-open"></i> View</button></td>
+          <td><button class="btn btn-block" onclick="viewBook('<%= book.book_id %>', '<%= book.title %>', '<%= book.author %>')"><i class="icon-eye-open"></i> View</button></td>
         </tr>
       <% end %>
     </tbody>
@@ -34,12 +34,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-          <h4 class="modal-title" id="H4"> <b>Book Viewing</b></h4>
+          <h4 class="modal-title" id="H4"> <b id="book-title">Book Viewing</b></h4>
         </div>
         <div class="modal-body">
           &nbsp;
           <!--<a class="media" href="/books/10.pdf">&nbsp;</a>-->
-          <iframe  width="100%" height="1000px"src="/books/10.pdf"></iframe>
+          <iframe  width="100%" height="1000px" src=""></iframe>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -52,7 +52,10 @@
 
 
 <script type="text/javascript">
-  function viewBook(bookID){
+  function viewBook(bookID, bookTitle, bookAuthor){
+    document.getElementById('book-title').innerHTML = bookTitle + ' By ' + bookAuthor;
+    iframe = document.getElementsByTagName('iframe')[0];
+    iframe.src = '/books/' + bookID + '.pdf'
     jQuery('#viewBook').modal('show');
   }
 
