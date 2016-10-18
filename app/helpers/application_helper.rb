@@ -10,5 +10,19 @@ module ApplicationHelper
     faculties = Faculty.all
     return faculties
   end
-  
+
+  def primary_category_id
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    return primary_category_id
+  end
+
+  def secondary_category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    return secondary_category_id
+  end
+
+  def tertiary_category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+    return tertiary_category_id
+  end
 end

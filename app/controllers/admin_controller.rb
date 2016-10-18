@@ -5,10 +5,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
-
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
     @book_categories = Category.all.collect{|c|[c.name, c.name]}
     @faculties = Faculty.all.collect{|f|[f.name, f.faculty_id]}
   end
@@ -83,9 +82,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
     @books = Book.all
   end
@@ -96,9 +95,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
     @books = Book.all
   end
@@ -124,9 +123,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
     
     @faculties = Faculty.all
   end
@@ -137,9 +136,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
     
     @faculties = Faculty.all
   end
@@ -152,9 +151,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def update_faculty
@@ -188,9 +187,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def remove_faculties_menu
@@ -199,9 +198,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
     @faculties = Faculty.all
   end
 
@@ -211,9 +210,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def edit_users_menu
@@ -222,9 +221,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def view_users_menu
@@ -233,9 +232,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
     @users = User.find(:all, :conditions => ["user_id != ?", session[:user].user_id])
   end
@@ -246,9 +245,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def browse_by_category
@@ -259,6 +258,7 @@ class AdminController < ApplicationController
     @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
     @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
     category = Category.find(params[:category_id])
     @page_title = "Browse Books By Category: #{category.name}"
     @selected_category_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", params[:category_id]])
@@ -272,9 +272,9 @@ class AdminController < ApplicationController
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books = BookCategory.find(:all, :conditions => ["category_id =?", primary_category_id])
-    @secondary_books = BookCategory.find(:all, :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books = BookCategory.find(:all, :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
   end
 
   def delete_user
@@ -306,4 +306,18 @@ class AdminController < ApplicationController
       redirect_to("/view_users_menu") and return
     end
   end
+
+  def view_by_faculty
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+    @faculty = Faculty.find(params[:faculty_id])
+    @page_title = "#{@faculty.name}"
+  end
+
 end

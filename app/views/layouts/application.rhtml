@@ -324,17 +324,17 @@
         <div class="well well-small">
           <button class="btn btn-block"> <b>Total Books</b> </button>
           <ul class="list-unstyled">
-            <li><span class="col-lg-8">Primary</span> <button class="btn btn-default btn-circle" type="button"><span><%= @primary_books.count %></span></button></li>
-            <li><span class="col-lg-8">Secondary </span><button class="btn btn-default btn-circle" type="button"><span><%= @secondary_books.count %></span></button></li>
-            <li><span class="col-lg-8">Tertiary </span><button class="btn btn-default btn-circle" type="button"><span><%= @tertiary_books.count %></span></button></li>
+            <li><span class="col-lg-8">Primary</span> <button class="btn btn-default btn-circle" type="button" onclick="browseByCategory('<%= primary_category_id %>')"><span><%= @primary_books.count %></span></button></li>
+            <li><span class="col-lg-8">Secondary </span><button class="btn btn-default btn-circle" type="button" onclick="browseByCategory('<%= secondary_category_id %>')"><span><%= @secondary_books.count %></span></button></li>
+            <li><span class="col-lg-8">Tertiary </span><button class="btn btn-default btn-circle" type="button" onclick="browseByCategory('<%= tertiary_category_id %>')"><span><%= @tertiary_books.count %></span></button></li>
           </ul>
         </div>
 
         <div class="well well-small">
           <button class="btn btn-block"> <b>Book Categories</b> </button>
-          <button class="btn btn-primary btn-block"> Primary</button>
-          <button class="btn btn-info btn-block"> Secondary </button>
-          <button class="btn btn-success btn-block"> Tertiary </button>
+          <button onclick="browseByCategory('<%= primary_category_id %>')"  class="btn btn-primary btn-block"> Primary</button>
+          <button onclick="browseByCategory('<%= secondary_category_id %>')" class="btn btn-info btn-block"> Secondary </button>
+          <button onclick="browseByCategory('<%= tertiary_category_id %>')" class="btn btn-success btn-block"> Tertiary </button>
         </div>
 
         <div class="well well-small">
@@ -342,12 +342,11 @@
 
           <%
           btn_class_names = ["btn-primary", "btn-info", "btn-success", "btn-warning", "btn-danger"]
-          btn_class_names_copy = ["btn-primary", "btn-info", "btn-success", "btn-warning", "btn-danger"]
         %>
           <% faculties.each do |faculty| %>
-            <% btn_class_names = btn_class_names_copy if btn_class_names.blank?%>
+            <% btn_class_names = ["btn-primary", "btn-info", "btn-success", "btn-warning", "btn-danger"] if btn_class_names.blank?%>
             <% btn_class_name = btn_class_names.shift %>
-            <button class="btn <%= btn_class_name %> btn-block"> <%= faculty.name[0..15] %></button>
+            <button  onclick="browseByFaculty('<%= faculty.faculty_id%>')" class="btn <%= btn_class_name %> btn-block"> <%= faculty.name[0..15] %></button>
           <% end %>
         </div>
       </div>
@@ -425,6 +424,15 @@
         $('[data-toggle="tooltip"]').tooltip();
 
       };
+
+      function browseByCategory(categoryID){
+        window.location = "/browse_by_category/" + categoryID;
+      }
+
+      function browseByFaculty(facultyID){
+        window.location = "/view_by_faculty/" + facultyID;
+      }
+
     </script>
     <!-- END GLOBAL SCRIPTS -->
   </body>
