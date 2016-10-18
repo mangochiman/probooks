@@ -317,7 +317,10 @@ class AdminController < ApplicationController
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
     @faculty = Faculty.find(params[:faculty_id])
-    @page_title = "#{@faculty.name}"
+    @faculty_books = @faculty.books
+    book_text = "Books"
+    book_text = "Book" if @faculty_books.count == 1
+    @page_title = "#{@faculty.name} (#{@faculty_books.count} #{book_text})"
   end
 
 end

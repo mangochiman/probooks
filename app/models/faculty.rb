@@ -3,6 +3,7 @@ class Faculty < ActiveRecord::Base
   set_primary_key :faculty_id
 
   has_many :book_faculties, :dependent => :destroy
+  has_many :books, :through => :book_faculties
   validates_presence_of :name, :message => "can't be blank"
   validates_uniqueness_of :name, :message => "already exists"
   
