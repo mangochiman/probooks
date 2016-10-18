@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
     if logged_in_user
       session[:user] = user
-      redirect_to("/pages") and return
+      redirect_to("/") and return
     else
       flash[:error] = "Invalid username or password"
       redirect_to("/login") and return
@@ -212,5 +212,36 @@ class UsersController < ApplicationController
     flash[:notice] = "An E-mail has been sent to <b>#{email}. Check your email</b>"
     redirect_to("/login") and return
   end
-  
+
+  def create_account_by_admin
+    first_name = params[:first_name]
+    last_name = params[:last_name]
+    email = params[:email]
+    phone_number = params[:phone_number]
+    username = params[:username]
+    password = params[:password]
+    password_confirm = params[:confirm_password]
+
+    if (password != password_confirm)
+      flash[:error] = "Password Mismatch"
+      redirect_to("/new_users_menu") and return
+    end
+
+    user = User.new
+    user.first_name = first_name
+    user.last_name = last_name
+    user.email = email
+    user.phone_number = phone_number
+    user.password = password
+    user. username = username
+
+    if user.save
+      flash[:notice] = "You have successfully created an account."
+      redirect_to("/new_users_menu") and return
+    else
+      flash[:error] = user.errors.full_messages.join('<br />')
+      redirect_to("/new_users_menu") and return
+    end
+  end
+
 end
