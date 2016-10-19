@@ -17,8 +17,8 @@ class UsersController < ApplicationController
     logged_in_user = User.authenticate(params[:username], params[:password])
 
     if logged_in_user
-      redirect_to("/dashboard") and return if user.role == 'user'
       session[:user] = user
+      redirect_to("/dashboard") and return if user.role == 'user'
       redirect_to("/") and return
     else
       flash[:error] = "Invalid username or password"
