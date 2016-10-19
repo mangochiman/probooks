@@ -48,6 +48,49 @@
     .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
       color: #fff;
     }
+
+    .dropdown.dropdown-lg .dropdown-menu {
+      margin-top: -1px;
+      padding: 6px 20px;
+    }
+    .input-group-btn .btn-group {
+      display: flex !important;
+    }
+    .btn-group .btn {
+      border-radius: 0;
+      margin-left: -1px;
+    }
+    .btn-group .btn:last-child {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+    .btn-group .form-horizontal .btn[type="submit"] {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    .form-horizontal .form-group {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .form-group .form-control:last-child {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+
+    @media screen and (min-width: 768px) {
+      #adv-search {
+        width: 500px;
+        margin: 0 auto;
+      }
+      .dropdown.dropdown-lg {
+        position: static !important;
+      }
+      .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+      }
+    }
+
+    .panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
   </style>
 
 
@@ -121,37 +164,93 @@
 
   <div class="content">
     <div class="header">
-
       <h1 class="page-title">Dashboard</h1>
       <ul class="breadcrumb">
         <li><a href="/dashboard">Home</a> </li>
         <li class="active">Home</li>
       </ul>
-
-    </div>
+      <div class="row pull-right" style="margin-top: -31px;">
+        <div class="col-md-12">
+          <div class="input-group" id="adv-search">
+            <input type="text" class="form-control" placeholder="Search for Books" />
+            <div class="input-group-btn">
+              <div class="btn-group" role="group">
+                <div class="dropdown dropdown-lg">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                  <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    <form class="form-horizontal" role="form">
+                      <div class="form-group">
+                        <label for="filter">Filter by</label>
+                        <select class="form-control">
+                          <option value="0" selected>All Snippets</option>
+                          <option value="1">Featured</option>
+                          <option value="2">Most popular</option>
+                          <option value="3">Top rated</option>
+                          <option value="4">Most commented</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="contain">Author</label>
+                        <input class="form-control" type="text" />
+                      </div>
+                      <div class="form-group">
+                        <label for="contain">Contains the words</label>
+                        <input class="form-control" type="text" />
+                      </div>
+                      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </form>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><br />
     <div class="main-content">
-
       <div class="faq-content">
+
         <div class="row">
           <div class="col-sm-9 col-md-9">
 
-            <div class="panel panel-default">
-              <p class="panel-heading">Book Shelf</p>
+
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts</h3>
+              </div>
               <div class="panel-body">
-                <div class="row" style="text-align: center;">
-                  &nbsp;
+                <div class="row">
+                  <div class="col-xs-6 col-md-12">
+                    <a href="#" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-list-alt"></span> <br/>Apps</a>
+                    <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-bookmark"></span> <br/>Bookmarks</a>
+                    <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-signal"></span> <br/>Reports</a>
+                    <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-comment"></span> <br/>Comments</a>
+                  </div>
                 </div>
                 <div class="clearfix"></div>
+                
               </div>
             </div>
 
           </div>
           <div class="col-sm-3 col-md-3">
-            &nbsp;
+            <div class="well well-small">
+              <button class="btn btn-block"> <b>Menu</b> </button>
+              <button class="btn btn-primary btn-block" onclick=""> Bookstore</button>
+              <button class="btn btn-info btn-block" onclick=""> Recent Books </button>
+              <button class="btn btn-success btn-block" onclick=""> Extras </button>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3 pull-right">
+            <div class="well well-small">
+              <button class="btn btn-block"> <b>Headlines</b> </button>
+
+            </div>
           </div>
         </div>
       </div>
-
 
       <footer>
         <hr />
@@ -159,6 +258,14 @@
         <p>© 2016 <a href="#">proBooks</a></p>
       </footer>
     </div>
+
+
+
+
+
+
+
+
   </div>
 
 
