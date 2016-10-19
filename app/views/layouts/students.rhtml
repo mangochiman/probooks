@@ -213,40 +213,14 @@
 
         <div class="row">
           <div class="col-sm-9 col-md-9">
-
-
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">
-                  <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts</h3>
-              </div>
-              <div class="panel-body">
-                <div class="row">
-                  <div class="col-xs-6 col-md-12">
-                    <a href="#" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-list-alt"></span> <br/>Apps</a>
-                    <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-bookmark"></span> <br/>Bookmarks</a>
-                    <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-signal"></span> <br/>Reports</a>
-                    <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-comment"></span> <br/>Comments</a>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-                
-              </div>
-            </div>
-
+            <%= yield %>
           </div>
-          <div class="col-sm-3 col-md-3">
+          <div class="col-sm-3 col-md-3 pull-right">
             <div class="well well-small">
               <button class="btn btn-block"> <b>Menu</b> </button>
               <button class="btn btn-primary btn-block" onclick=""> Bookstore</button>
               <button class="btn btn-info btn-block" onclick=""> Recent Books </button>
               <button class="btn btn-success btn-block" onclick=""> Extras </button>
-            </div>
-          </div>
-          <div class="col-sm-3 col-md-3 pull-right">
-            <div class="well well-small">
-              <button class="btn btn-block"> <b>Headlines</b> </button>
-
             </div>
           </div>
         </div>
@@ -279,6 +253,19 @@
   </script>
   <script type="text/javascript">
     $("[rel=tooltip]").tooltip();
+
+    function goToBookStore(){
+      window.location = "/select_books_from_store";
+    }
+
+    function goToRecentBooks(){
+      window.location = "/my_recent_books_menu";
+    }
+
+    function goToExtras(){
+      window.location = "/extras";
+    }
+    
   </script>
 
 
