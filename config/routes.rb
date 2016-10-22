@@ -22,6 +22,10 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_user '/edit_user/:user_id', :controller => 'admin', :action => 'edit_user'
   map.view_by_faculty '/view_by_faculty/:faculty_id', :controller => 'admin', :action => 'view_by_faculty'
   map.dashboard  '/dashboard',  :controller => 'students', :action => 'dashboard'
+  map.select_books_from_store  '/select_books_from_store',  :controller => 'students', :action => 'select_books_from_store'
+  map.my_recent_books_menu  '/my_recent_books_menu',  :controller => 'students', :action => 'my_recent_books_menu'
+  map.extras  '/extras',  :controller => 'students', :action => 'extras'
+  map.extras  '/my_account',  :controller => 'students', :action => 'my_account'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

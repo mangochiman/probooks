@@ -1,0 +1,34 @@
+<style>
+  .thumb-sm {
+    max-height: 111px;
+    max-width: 100px;
+}
+</style>
+
+<div class="panel panel-default">
+  <p class="panel-heading">SECONDARY BOOKS</p>
+  <div class="panel-body">
+    <ul class="list-group">
+      <% @secondary_books_category.each do |category| %>
+        <li class="list-group-item">
+          <div class="media">
+            <a href="#" class="pull-left">
+              <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
+
+                %>
+              <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+            </a>
+            <div class="media-body">
+              <p class="text-sm pull-right muted">Uploaded on <%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></p>
+              <p class="media-heading">
+                Book title: <a href="#"><%= category.book.title %></a><br />
+                Authors: <a href="#"><%= category.book.author %></a></p>
+              <p>Subscribed By: </p>
+              <button class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
