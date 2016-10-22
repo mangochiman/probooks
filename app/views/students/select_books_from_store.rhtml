@@ -2,7 +2,7 @@
   .thumb-sm {
     max-height: 111px;
     max-width: 100px;
-}
+  }
 </style>
 <div class="panel panel-default">
   <p class="panel-heading"><b>PRIMARY BOOKS</b></p>
@@ -14,7 +14,7 @@
             <a href="#" class="pull-left">
               <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
 
-                %>
+            %>
               <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
             </a>
             <div class="media-body">
@@ -23,7 +23,7 @@
                 Book title: <a href="#"><%= category.book.title %></a><br />
                 Authors: <a href="#"><%= category.book.author %></a></p>
               <p>Subscribed By: </p>
-              <button class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
+              <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
             </div>
           </div>
         </li>
@@ -42,7 +42,7 @@
             <a href="#" class="pull-left">
               <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
 
-                %>
+            %>
               <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
             </a>
             <div class="media-body">
@@ -51,7 +51,7 @@
                 Book title: <a href="#"><%= category.book.title %></a><br />
                 Authors: <a href="#"><%= category.book.author %></a></p>
               <p>Subscribed By: </p>
-              <button class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
+              <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
             </div>
           </div>
         </li>
@@ -70,16 +70,16 @@
             <a href="#" class="pull-left">
               <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
 
-                %>
+            %>
               <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
             </a>
             <div class="media-body">
               <p class="text-sm pull-right muted">Uploaded on <%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></p>
               <p class="media-heading">
-                
+
                 <% faculties = [] %>
                 <% category.book.faculties.each do |faculty|  %>
-                    <% faculties << "<a href='/select_books_by_faculty/#{faculty.faculty_id}'>#{faculty.name}</a>" %>
+                  <% faculties << "<a href='/select_books_by_faculty/#{faculty.faculty_id}'>#{faculty.name}</a>" %>
                 <% end %>
 
                 Book title: <a href="#"><%= category.book.title %></a><br />
@@ -87,7 +87,7 @@
                 Faculties: <%= faculties.join(", ") %>
               </p>
               <p>Subscribed By: </p>
-              <button class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
+              <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
             </div>
           </div>
         </li>
@@ -95,3 +95,53 @@
     </ul>
   </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="selectBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Book Selection</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to select this book?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+        <button onclick="selectBook();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<script type="text/javascript">
+  var bookID;
+
+  function selectBookConfirm(bookid){
+    bookID = bookid;
+    jQuery('#selectBookModal').modal('show');
+  }
+
+  function selectBook(){
+    body = document.getElementsByTagName("body")[0];
+
+    form = document.createElement("form");
+    form.method = "POST"
+    form.action = "/students/update_my_book_shelf";
+    body.appendChild(form);
+
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.value = bookID;
+    input.name = "book_id";
+    form.appendChild(input);
+    
+    form.submit();
+  }
+
+</script>

@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   layout 'students'
   
   def dashboard
-    @page_title = "Dashboard"
+    @page_title = "Book Shelf"
   end
 
   def select_books_from_store
@@ -17,7 +17,16 @@ class StudentsController < ApplicationController
   end
 
   def update_my_book_shelf
-
+    user_book = UserBook.new
+    user_book.user_id = session[:user].user_id
+    user_book.book_id = params[:book_id]
+    if user_book.save
+      flash[:notice] = "Your operation is successful"
+      redirect_to("/dashboard") and return
+    else
+      flash[:error] = "Unable to complete your request"
+      redirect_to("/select_books_from_store") and return
+    end
   end
   
   def remove_books_from_shelf_menu
