@@ -9,13 +9,20 @@ class StudentsController < ApplicationController
 
   def select_books_from_store
     @page_title = "Book Store"
+    user = User.find(session[:user].user_id)
+    selected_book_ids = user.books.collect{|b|b.book_id}
+    selected_book_ids = [0] if selected_book_ids.blank?
+
     primary_category_id = Category.find_by_name("PRIMARY").category_id
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
 
-    @primary_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
-    @secondary_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
-    @tertiary_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+    @primary_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", 
+      :conditions => ["category_id =? AND book_id NOT IN (?)", primary_category_id, selected_book_ids])
+    @secondary_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", 
+      :conditions => ["category_id =? AND book_id NOT IN (?)", secondary_category_id, selected_book_ids])
+    @tertiary_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)",
+      :conditions => ["category_id =? AND book_id NOT IN (?)", tertiary_category_id, selected_book_ids])
   end
 
   def update_my_book_shelf
