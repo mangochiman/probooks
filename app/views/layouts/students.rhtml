@@ -230,6 +230,7 @@
           <div class="col-sm-3 col-md-3 pull-right">
             <div class="well well-small">
               <button class="btn btn-block"> <b>Menu</b> </button>
+              <button onclick="goToBookShelf();" class="btn btn-info btn-block" onclick=""> Book Shelf </button>
               <button onclick="goToBookStore();" class="btn btn-primary btn-block" onclick=""> Bookstore</button>
               <button onclick="goToRecentBooks();" class="btn btn-info btn-block" onclick=""> Recent Books </button>
               <button onclick="goToExtras();" class="btn btn-success btn-block" onclick=""> Extras </button>
@@ -266,6 +267,9 @@
   <script type="text/javascript">
     $("[rel=tooltip]").tooltip();
 
+    function goToBookShelf(){
+      window.location = "/dashboard";
+    }
     function goToBookStore(){
       window.location = "/select_books_from_store";
     }
