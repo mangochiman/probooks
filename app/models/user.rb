@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   set_primary_key :user_id
 
   has_many :user_roles, :foreign_key => :username, :primary_key => :username, :dependent => :destroy
+  has_many :user_books, :foreign_key => :user_id
+  has_many :books, :through => :user_books
+
   validates_uniqueness_of :username, :message => ' already taken'
   validates_uniqueness_of :email, :message => ' already taken'
 

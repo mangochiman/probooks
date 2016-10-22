@@ -5,14 +5,32 @@
 <%= javascript_include_tag("bootstrap.min") %>
 <%= stylesheet_link_tag("bootstrap")%>
 <link rel="stylesheet" href="/assets/plugins/social-buttons/social-buttons.css" />
-
+<style type="text/css">
+  .logo{
+    height: 104px;
+    border-radius: 5px;
+  }
+</style>
 <div id="login-overlay" class="modal-dialog login-modal-content">
   <div class="modal-content">
     <div class="modal-header">
 
-      <h4 class="modal-title" id="myModalLabel"><b>ProBooks</b></h4>
+      <h4 class="modal-title" id="myModalLabel"><b>ProBooks Login</b></h4>
     </div>
     <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-4">
+
+        </div>
+        <div class="col-xs-7 col-md-4">
+          <figure>
+            <%= image_tag("logo.jpeg", :class=> "logo") %>
+            <div class="col-xs-10" style="padding-left: 50px;">
+              <b>ProBooks Malawi</b>
+            </div>
+          </figure>
+        </div>
+      </div><br />
       <div class="row">
         <div class="col-xs-6">
           <div class="well">
@@ -194,4 +212,5 @@
     jQuery('#passwordReminder').modal('show');
   }
 
+  jQuery('img').on('dragstart', function(event) { event.preventDefault(); });
 </script>

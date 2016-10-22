@@ -7,3 +7,4 @@ nbproject
 Gemfile.lock
 log/*
 tmp/
+public/books
