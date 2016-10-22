@@ -4,9 +4,36 @@
     max-width: 100px;
 }
 </style>
+<div class="panel panel-default">
+  <p class="panel-heading"><b>PRIMARY BOOKS</b></p>
+  <div class="panel-body">
+    <ul class="list-group">
+      <% @primary_books_category.each do |category| %>
+        <li class="list-group-item">
+          <div class="media">
+            <a href="#" class="pull-left">
+              <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
+
+                %>
+              <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+            </a>
+            <div class="media-body">
+              <p class="text-sm pull-right muted">Uploaded on <%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></p>
+              <p class="media-heading">
+                Book title: <a href="#"><%= category.book.title %></a><br />
+                Authors: <a href="#"><%= category.book.author %></a></p>
+              <p>Subscribed By: </p>
+              <button class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
 <div class="panel panel-default">
-  <p class="panel-heading">SECONDARY BOOKS</p>
+  <p class="panel-heading"><b>SECONDARY BOOKS</b></p>
   <div class="panel-body">
     <ul class="list-group">
       <% @secondary_books_category.each do |category| %>
@@ -23,6 +50,42 @@
               <p class="media-heading">
                 Book title: <a href="#"><%= category.book.title %></a><br />
                 Authors: <a href="#"><%= category.book.author %></a></p>
+              <p>Subscribed By: </p>
+              <button class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <p class="panel-heading"><b>TERTIARY BOOKS</b></p>
+  <div class="panel-body">
+    <ul class="list-group">
+      <% @tertiary_books_category.each do |category| %>
+        <li class="list-group-item">
+          <div class="media">
+            <a href="#" class="pull-left">
+              <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
+
+                %>
+              <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+            </a>
+            <div class="media-body">
+              <p class="text-sm pull-right muted">Uploaded on <%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></p>
+              <p class="media-heading">
+                
+                <% faculties = [] %>
+                <% category.book.faculties.each do |faculty|  %>
+                    <% faculties << "<a href='/select_books_by_faculty/#{faculty.faculty_id}'>#{faculty.name}</a>" %>
+                <% end %>
+
+                Book title: <a href="#"><%= category.book.title %></a><br />
+                Authors: <a href="#"><%= category.book.author %></a><br />
+                Faculties: <%= faculties.join(", ") %>
+              </p>
               <p>Subscribed By: </p>
               <button class="btn btn-primary btn-block"><i class="fa fa-thumbs-up "></i> Select</button>
             </div>

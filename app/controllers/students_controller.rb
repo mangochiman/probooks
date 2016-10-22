@@ -40,4 +40,9 @@ class StudentsController < ApplicationController
     @page_title = "My Account"
   end
 
+  def select_books_by_faculty
+    @faculty = Faculty.find(params[:faculty_id])
+    @page_title = "#{@faculty.name} Books"
+  end
+  
 end

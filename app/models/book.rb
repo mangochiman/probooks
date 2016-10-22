@@ -4,6 +4,7 @@ class Book < ActiveRecord::Base
 
   has_many :book_categories, :dependent => :destroy
   has_many :book_faculties, :dependent => :destroy
+  has_many :faculties, :through => :book_faculties
   #validates_format_of :cover_photo, :with => %r{\.(png|jpg|jpeg)$}i, :message => "whatever"
   #validates_format_of :content_type, :with => ["application/pdf"], :message => "Only PDFs are supported"
   validates_format_of :content_type, :with => /pdf$/, :message => "_Only books that are in pdf format are supported"

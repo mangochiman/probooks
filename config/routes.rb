@@ -25,7 +25,8 @@ ActionController::Routing::Routes.draw do |map|
   map.select_books_from_store  '/select_books_from_store',  :controller => 'students', :action => 'select_books_from_store'
   map.my_recent_books_menu  '/my_recent_books_menu',  :controller => 'students', :action => 'my_recent_books_menu'
   map.extras  '/extras',  :controller => 'students', :action => 'extras'
-  map.extras  '/my_account',  :controller => 'students', :action => 'my_account'
+  map.my_account  '/my_account',  :controller => 'students', :action => 'my_account'
+  map.view_by_faculty '/select_books_by_faculty/:faculty_id', :controller => 'students', :action => 'select_books_by_faculty'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
