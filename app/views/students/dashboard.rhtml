@@ -1,1 +1,81 @@
+<style type="text/css">
+  .thumb-sm {
+    max-height: 111px;
+    max-width: 100px;
+  }
+</style>
+<div class="panel panel-default">
+  <p class="panel-heading"><b>MY BOOKS (<%= @my_books.count %>)</b></p>
+  <div class="panel-body">
+    <ul class="list-group">
+      <% @my_books.each do |book| %>
+        <li class="list-group-item">
+          <div class="media">
+            <a href="#" class="pull-left">
+              <% cover_location = "#{book.book_id}_cover_#{book.cover_photo_file_name}" %>
+              <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+            </a>
+            <div class="media-body">
+              <p class="text-sm pull-right muted">Uploaded on <%= book.created_at.to_date.strftime("%d-%b-%Y") %></p>
+              <p class="media-heading">
+                Book title: <a href="#"><%= book.title %></a><br />
+                Authors: <a href="#"><%= book.author %></a></p>
+              <p>Subscribed By: </p>
+              <button onclick="viewBook('<%= book.book_id %>')" class="btn btn-primary"><i class="fa fa-eye"></i> Browse Book</button>
+              <button onclick="removeBookConfirm('<%= book.book_id %>')" class="btn pull-right btn-danger"><i class="fa fa-eye"></i> Delete</button>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="deleteBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to remove the selected book from your bookshelf?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+        <button onclick="removeBook();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<script type="text/javascript">
+  var bookID;
+
+  function removeBookConfirm(bookid){
+    bookID = bookid;
+    jQuery('#deleteBookModal').modal('show');
+  }
+
+  function removeBook(){
+    body = document.getElementsByTagName("body")[0];
+
+    form = document.createElement("form");
+    form.method = "POST"
+    form.action = "/students/delete_books_from_my_shelf";
+    body.appendChild(form);
+
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.value = bookID;
+    input.name = "book_id";
+    form.appendChild(input);
+
+    form.submit();
+  }
+
+</script>

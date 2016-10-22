@@ -3,6 +3,8 @@ class StudentsController < ApplicationController
   
   def dashboard
     @page_title = "Book Shelf"
+    user = User.find(session[:user].user_id)
+    @my_books = user.books
   end
 
   def select_books_from_store
@@ -33,8 +35,16 @@ class StudentsController < ApplicationController
     @page_title = "Remove Books"
   end
 
-  def delete_books_from_menu
-
+  def delete_books_from_my_shelf
+    user_book = UserBook.find(:last, :conditions => ["book_id =? AND user_id =?",
+        params[:book_id], session[:user].user_id])
+    if user_book.delete
+      flash[:notice] = "Your operation was successful"
+      redirect_to("/dashboard") and return
+    else
+      flash[:error] = "Unable to process your request"
+      redirect_to("/dashboard") and return
+    end
   end
   
   def my_recent_books_menu
