@@ -26,7 +26,7 @@
                   Book title: <a href="#"><%= book.title %></a><br />
                   Authors: <a href="#"><%= book.author %></a></p>
                 <p>Subscribed By: </p>
-                <button onclick="viewBook('<%= book.book_id %>')" class="btn btn-primary"><i class="fa fa-eye"></i> Browse Book</button>
+                <button onclick="viewBook('<%= book.book_id %>', '<%= book.title %>', '<%= book.author %>')" class="btn btn-primary"><i class="fa fa-eye"></i> Browse Book</button>
                 <button onclick="removeBookConfirm('<%= book.book_id %>')" class="btn pull-right btn-danger"><i class="fa fa-eye"></i> Delete</button>
               </div>
             </div>
@@ -62,6 +62,49 @@
 </div>
 <!-- /.modal -->
 
+<div class="col-lg-12">
+  <div class="modal fade" id="viewBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+          <h4 class="modal-title" id="H4"> <b id="book-title">Book Viewing</b></h4>
+        </div>
+        <div class="modal-body">
+          &nbsp;
+          <iframe  width="100%" height="1000px" src=""></iframe>
+        </div>
+        <!--<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>-->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+  #viewBook .modal-dialog {
+    width: 94%;
+    padding-top: 15px;
+  }
+
+  #viewBook .modal-header {
+    cursor: move;
+    padding: 6px;
+  }
+
+  #viewBook .modal-footer {
+    margin-top: -16px;
+    padding: 19px 38px 12px;
+    text-align: right;
+  }
+
+  #viewBook .modal-body{
+    padding: 1px;
+  }
+</style>
+
 <script type="text/javascript">
   var bookID;
 
@@ -91,4 +134,11 @@
     window.location = "/select_books_from_store";
   }
 
+  function viewBook(bookID, bookTitle, bookAuthor){
+    document.getElementById('book-title').innerHTML = bookTitle + ' By ' + bookAuthor;
+    iframe = document.getElementsByTagName('iframe')[0];
+    iframe.src = '/books/' + bookID + '.pdf'
+    jQuery('#viewBook').modal('show');
+  }
+  
 </script>
