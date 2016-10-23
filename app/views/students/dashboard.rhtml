@@ -25,7 +25,7 @@
                 <p class="media-heading">
                   Book title: <a href="#"><%= book.title %></a><br />
                   Authors: <a href="#"><%= book.author %></a></p>
-                <p>Subscribed By: </p>
+                <p>Subscribed By: <span class="label label-success"><%= book.users.count %></span></p>
                 <button onclick="viewBook('<%= book.book_id %>', '<%= book.title %>', '<%= book.author %>')" class="btn btn-primary"><i class="fa fa-eye"></i> Browse Book</button>
                 <button onclick="removeBookConfirm('<%= book.book_id %>')" class="btn pull-right btn-danger"><i class="fa fa-eye"></i> Delete</button>
               </div>
