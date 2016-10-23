@@ -212,6 +212,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_account_details
+    raise params.inspect
+  end
+  
   def reset_password
     email = params[:email]
     flash[:notice] = "An E-mail has been sent to <b>#{email}. Check your email</b>"
