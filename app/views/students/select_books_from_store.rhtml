@@ -4,6 +4,9 @@
     max-width: 100px;
   }
 </style>
+<div class="alert alert-success">
+  Welcome to Bookstore. Subscribe to books that you like. Books that you have already subscribed to are NOT visible
+</div>
 <div class="panel panel-default">
   <p class="panel-heading"><b>PRIMARY BOOKS</b></p>
   <div class="panel-body">
@@ -23,7 +26,7 @@
                 <p class="media-heading">
                   Book title: <a href="#"><%= category.book.title %></a><br />
                   Authors: <a href="#"><%= category.book.author %></a></p>
-                <p>Subscribed By: </p>
+                <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p>
                 <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
                 <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success pull-right"><i class="fa fa-eye"></i> Browse Book</button>
               </div>
@@ -59,7 +62,7 @@
                 <p class="media-heading">
                   Book title: <a href="#"><%= category.book.title %></a><br />
                   Authors: <a href="#"><%= category.book.author %></a></p>
-                <p>Subscribed By: </p>
+                <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span></p>
                 <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
                 <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success pull-right"><i class="fa fa-eye"></i> Browse Book</button>
               </div>
@@ -103,7 +106,7 @@
                   Authors: <a href="#"><%= category.book.author %></a><br />
                   Faculties: <%= faculties.join(", ") %>
                 </p>
-                <p>Subscribed By: </p>
+                <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span></p>
                 <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
                 <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success pull-right"><i class="fa fa-eye"></i> Browse Book</button>
               </div>
