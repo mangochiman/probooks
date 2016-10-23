@@ -3,8 +3,8 @@ class StudentsController < ApplicationController
   
   def dashboard
     @page_title = "Book Shelf"
-    user = User.find(session[:user].user_id)
-    @my_books = user.books
+    @user = User.find(session[:user].user_id)
+    @my_books = @user.books
   end
 
   def select_books_from_store
@@ -64,6 +64,7 @@ class StudentsController < ApplicationController
 
   def my_account
     @page_title = "My Account"
+    @user = User.find(session[:user].user_id)
   end
 
   def select_books_by_faculty

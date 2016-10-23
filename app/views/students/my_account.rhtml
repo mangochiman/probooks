@@ -1,0 +1,39 @@
+<div>
+  <div class="panel panel-default">
+    <div class="panel-heading no-collapse"><b>My Account</b></div>
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>First Name</th>
+          <td><a href="#"><%= @user.first_name %></a></td>
+          <td><button class="btn btn-success btn-block" onclick=""> Edit </button></td>
+        </tr>
+        <tr>
+          <th>Last Name</th>
+          <td><a href="#"><%= @user.last_name %></a></td>
+          <td><button class="btn btn-success btn-block" onclick=""> Edit </button></td>
+        </tr>
+        <tr>
+          <th>Phone #</th>
+          <td><a href="#"><%= @user.phone_number %></a></td>
+          <td><button class="btn btn-success btn-block" onclick=""> Edit </button></td>
+        </tr>
+        <tr>
+          <th>E-mail</th>
+          <td><a href="#"><%= @user.email %></a></td>
+          <td><button class="btn btn-success btn-block" onclick=""> Edit </button></td>
+        </tr>
+        <tr>
+          <th>Username</th>
+          <td><a href="#"><%= @user.username %></a></td>
+          <td><button class="btn btn-success btn-block" onclick=""> Edit </button></td>
+        </tr>
+        <tr>
+          <th>Password</th>
+          <td><a href="#">********</a></td>
+          <td><button class="btn btn-success btn-block" onclick=""> Edit </button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
