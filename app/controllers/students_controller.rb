@@ -71,5 +71,9 @@ class StudentsController < ApplicationController
     @faculty = Faculty.find(params[:faculty_id])
     @page_title = "#{@faculty.name} Books"
   end
+
+  def search_results
+    @page_title = "Search Results"
+  end
   
 end

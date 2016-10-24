@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="/AircraftAdminFree/lib/font-awesome/css/font-awesome.css"/>
 
     <script src="/AircraftAdminFree/lib/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
-
+    <script src="/javascripts/jquery-ui.js" type="text/javascript"></script>
 
     <link rel="stylesheet" type="text/css" href="/AircraftAdminFree/stylesheets/theme.css"/>
     <link rel="stylesheet" type="text/css" href="/AircraftAdminFree/stylesheets/premium.css"/>
@@ -172,16 +171,18 @@
       <div class="row pull-right" style="margin-top: -31px;">
         <div class="col-md-12">
           <div class="input-group" id="adv-search">
-            <input type="text" class="form-control" placeholder="Search for Books" />
+            <form class="form-horizontal" role="form" method="GET" action="/search_results" id="general-search-form">
+              <input type="text" name="general_search" id="general-search" class="form-control" placeholder="Search for Books" />
+            </form>
             <div class="input-group-btn">
               <div class="btn-group" role="group">
                 <div class="dropdown dropdown-lg">
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                   <div class="dropdown-menu dropdown-menu-right" role="menu">
-                    <form class="form-horizontal" role="form" method="GET" action="/search_results">
+                    <form class="form-horizontal" role="form" method="GET" action="/search_results" id="search-form">
                       <div class="form-group">
                         <label for="filter">Filter by</label>
-                        <select class="form-control">
+                        <select class="form-control" name="search_type">
                           <option value="all" selected>Everything</option>
                           <option value="author">Book Author</option>
                           <option value="title">Book Title</option>
@@ -189,13 +190,13 @@
                       </div>
                       <div class="form-group">
                         <label for="contain">Contains the words</label>
-                        <input class="form-control" type="text" />
+                        <input class="form-control" type="text" name="search_words" />
                       </div>
                       <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </form>
                   </div>
                 </div>
-                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                <button onclick="submitSearchForm()" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
               </div>
             </div>
           </div>
@@ -279,6 +280,11 @@
     $("#viewBook").draggable({
       handle: ".modal-header"
     });
+
+    function submitSearchForm(){
+      $('#general-search-form').submit();
+    }
+
   </script>
 
 
