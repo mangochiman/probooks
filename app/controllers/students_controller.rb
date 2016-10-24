@@ -73,6 +73,7 @@ class StudentsController < ApplicationController
   end
 
   def search_results
+    @user = User.find(session[:user].user_id)
     @page_title = "Search Results"
     @books_by_title = []
     @books_by_authors = []

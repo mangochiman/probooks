@@ -26,7 +26,11 @@
                   Authors: <a href="#"><%= book.author %></a></p>
                 <p>Subscribed By: <span class="label label-success"><%= book.users.count %></span></p>
                 <button onclick="viewBook('<%= book.book_id %>', '<%= book.title %>', '<%= book.author %>')" class="btn btn-default"><i class="fa fa-eye"></i> Browse Book</button>
-                <button onclick="removeBookConfirm('<%= book.book_id %>')" class="btn pull-right btn-default"><i class="fa fa-plus"></i> Add To my Bookshelf</button>
+                <% if @user.has_book?(book) %>
+                  <button class="btn pull-right btn-default disabled"><i class="fa fa-plus"></i> Add To my Bookshelf</button>
+                <% else %>
+                  <button onclick="selectBookConfirm('<%= book.book_id %>')" class="btn pull-right btn-default"><i class="fa fa-plus"></i> Add To my Bookshelf</button>
+                <% end %>
               </div>
             </div>
           </li>
@@ -55,7 +59,11 @@
                   Authors: <a href="#"><%= book.author %></a></p>
                 <p>Subscribed By: <span class="label label-success"><%= book.users.count %></span></p>
                 <button onclick="viewBook('<%= book.book_id %>', '<%= book.title %>', '<%= book.author %>')" class="btn btn-default"><i class="fa fa-eye"></i> Browse Book</button>
-                <button onclick="removeBookConfirm('<%= book.book_id %>')" class="btn pull-right btn-default"><i class="fa fa-plus"></i> Add To my Bookshelf</button>
+                <% if @user.has_book?(book) %>
+                  <button class="btn pull-right btn-default disabled"><i class="fa fa-plus"></i> Add To my Bookshelf</button>
+                <% else %>
+                  <button onclick="selectBookConfirm('<%= book.book_id %>')" class="btn pull-right btn-default"><i class="fa fa-plus"></i> Add To my Bookshelf</button>
+                <% end %>
               </div>
             </div>
           </li>
@@ -64,3 +72,103 @@
     </div>
   </div>
 <% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="selectBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Book Selection</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to select this book?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+        <button onclick="selectBook();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="col-lg-12">
+  <div class="modal fade" id="viewBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+          <h4 class="modal-title" id="H4"> <b id="book-title">Book Viewing</b></h4>
+        </div>
+        <div class="modal-body">
+          &nbsp;
+          <iframe  width="100%" height="1000px" src=""></iframe>
+        </div>
+        <!--<div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>-->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+  #viewBook .modal-dialog {
+    width: 94%;
+    padding-top: 15px;
+  }
+
+  #viewBook .modal-header {
+    cursor: move;
+    padding: 6px;
+  }
+
+  #viewBook .modal-footer {
+    margin-top: -16px;
+    padding: 19px 38px 12px;
+    text-align: right;
+  }
+
+  #viewBook .modal-body{
+    padding: 1px;
+  }
+
+</style>
+
+<script type="text/javascript">
+  var bookID;
+
+  function selectBookConfirm(bookid){
+    bookID = bookid;
+    jQuery('#selectBookModal').modal('show');
+  }
+
+  function selectBook(){
+    body = document.getElementsByTagName("body")[0];
+
+    form = document.createElement("form");
+    form.method = "POST"
+    form.action = "/students/update_my_book_shelf";
+    body.appendChild(form);
+
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.value = bookID;
+    input.name = "book_id";
+    form.appendChild(input);
+
+    form.submit();
+  }
+
+  function viewBook(bookID, bookTitle, bookAuthor){
+    document.getElementById('book-title').innerHTML = bookTitle + ' By ' + bookAuthor;
+    iframe = document.getElementsByTagName('iframe')[0];
+    iframe.src = '/books/' + bookID + '.pdf'
+    jQuery('#viewBook').modal('show');
+  }
+
+</script>

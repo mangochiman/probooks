@@ -58,4 +58,10 @@ class User < ActiveRecord::Base
     return user_roles.last.role
   end
 
+  def has_book?(book)
+    return false if self.books.blank?
+    return true if self.books.include?(book)
+    return false
+  end
+
 end
