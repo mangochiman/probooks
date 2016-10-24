@@ -74,26 +74,35 @@ class StudentsController < ApplicationController
 
   def search_results
     @page_title = "Search Results"
+    @books_by_title = []
+    @books_by_authors = []
+    @books = []
+    @search_term = ""
     unless params[:general_search].blank?
       search_term = params[:general_search]
+      @search_term = search_term
       @books_by_title = Book.search_all_by_title(search_term)
       @books_by_authors = Book.search_all_by_authors(search_term)
     end
 
     unless params[:search_type].blank?
       search_term = params[:search_words]
-      if params[:search_type] == 'author'
-        @books_by_authors = Book.search_all_by_authors(search_term)
-      end
-      if params[:search_type] == 'title'
-        @books_by_title = Book.search_all_by_title(search_term)
-      end
-      if params[:search_type] == 'all'
-        @books_by_title = Book.search_all_by_title(search_term)
-        @books_by_authors = Book.search_all_by_authors(search_term)
+      @search_term = search_term
+      unless search_term.blank?
+        if params[:search_type] == 'author'
+          @books_by_authors = Book.search_all_by_authors(search_term)
+        end
+        if params[:search_type] == 'title'
+          @books_by_title = Book.search_all_by_title(search_term)
+        end
+        if params[:search_type] == 'all'
+          @books_by_title = Book.search_all_by_title(search_term)
+          @books_by_authors = Book.search_all_by_authors(search_term)
+        end
       end
     end
 
+    @books = (@books_by_title + @books_by_authors).uniq
   end
   
 end
