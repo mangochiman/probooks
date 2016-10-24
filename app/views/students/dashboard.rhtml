@@ -21,7 +21,7 @@
                 <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
               </a>
               <div class="media-body">
-                <p class="text-sm pull-right muted">Uploaded on <%= book.created_at.to_date.strftime("%d-%b-%Y") %></p>
+                <p class="text-sm pull-right muted">Uploaded on <%= Book.date_book_was_saved_by_user(session[:user].user_id, book.book_id).to_date.strftime("%d-%b-%Y") rescue "&nbsp;"%></p>
                 <p class="media-heading">
                   Book title: <a href="#"><%= book.title %></a><br />
                   Authors: <a href="#"><%= book.author %></a></p>

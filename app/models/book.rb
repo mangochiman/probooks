@@ -41,6 +41,16 @@ class Book < ActiveRecord::Base
     return books
   end
 
+  def self.date_book_was_saved_by_user(user_id, book_id)
+    user_book = UserBook.find(:last, :joins => [:book], :conditions => ["user_books.user_id =? AND user_books.book_id =?",
+        user_id, book_id])
+    unless user_book.blank?
+      date_book_saved = user_book.created_at
+      return date_book_saved
+    end
+    return nil
+  end
+
   private
   def sanitize_filename (filename)
     #get only the filename, not the whole path (from IE)
