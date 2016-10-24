@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :message => ' already taken'
   validates_uniqueness_of :email, :message => ' already taken'
 
-  before_save :set_password
+  #before_save :set_password
 
   cattr_accessor :current_user
 

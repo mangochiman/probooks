@@ -31,24 +31,10 @@ class UsersController < ApplicationController
     @users = User.find(:all)
   end
 
-  def user_management_dashboard
-  end
-
   def new_user
     @users = User.find(:all)
   end
 
-  def edit_user
-    if (params[:user_id])
-      @user = User.find(params[:user_id])
-    end
-    @users = User.find(:all)
-
-  end
-
-  def void_users
-    @users = User.find(:all)
-  end
 
   def view_users
     @users = User.find(:all)
@@ -67,14 +53,16 @@ class UsersController < ApplicationController
       flash[:error] = "Password Mismatch"
       redirect_to("/login") and return
     end
+    salt = User.random_string(10)
 
     user = User.new
     user.first_name = first_name
     user.last_name = last_name
     user.email = email
     user.phone_number = phone_number
-    user.password = password
-    user. username = username
+    user.password = User.encrypt(password, salt)
+    user.salt = salt
+    user.username = username
 
     if user.save
       new_user_role = UserRole.new
@@ -90,130 +78,86 @@ class UsersController < ApplicationController
 
   end
 
-  def update_user_data
-    if params[:user_id].blank?
-      flash[:error] = "You didn't select any user to edit. Select user first"
-      redirect_to :controller => "user", :action => "edit_user" and return
-    end
-    user = User.find(params[:user_id])
-    first_name = params[:first_name]
-    last_name = params[:last_name]
-    password = params[:password]
-    password_confirm = params[:password_confirm]
-    if (password != password_confirm)
-      flash[:error] = "Password mismatch."
-      redirect_to :controller => "user", :action => "edit_user", :user_id => params[:user_id] and return
-    end
-    if (user.update_attributes({
-            :first_name => first_name,
-            :last_name => last_name,
-            :username => params[:username],
-            :password => params[:password]
-          }))
-      flash[:notice] = "Operation successful"
-      redirect_to :controller => "user", :action => "edit_user" and return
-    else
-      flash[:error] = "Oops. Something wen't wrong. That's what we know"
-      redirect_to :controller => "user", :action => "edit_user" and return
-    end
-  end
-
-  def delete_users
-    if (params[:mode] == 'single_entry')
-      user = User.find(params[:user_id])
-      user.delete
-      render :text => "true" and return
-    end
-
-    user_ids = params[:user_ids].split(",")
-    (user_ids || []).each do |user_id|
-      user = User.find(user_id)
-      user.delete
-    end
-
-    render :text => "true" and return
-  end
-
-  def user_account_settings_menu
-    @user = User.find(session[:current_user_id])
-  end
-
-  def update_account
-    @user = User.find(session[:current_user_id])
-
-    if params[:edit_mode] == 'username'
-      user = User.find_by_username(params[:username])
-      unless user.blank?
-        unless (user.id == @user.id)
-          flash[:error] = "Unable to save. Username is already in use."
-          redirect_to :controller => "user", :action => "user_account_settings_menu", :edit_mode => "username" and return
-        end
-      end
-      if @user.update_attributes({
-            :username => params[:username]
-          })
-        flash[:notice] = "Operation successful"
-        redirect_to :controller => "user", :action => "user_account_settings_menu" and return
-      end
-    end
-
-    if params[:edit_mode] == 'password'
-      if (User.authenticate(@user.username, params[:password]))
-        if (params[:new_password] == params[:repeat_password])
-          @user.password = params[:new_password]
-          @user.save
-          flash[:notice] = "Operation successful"
-          redirect_to :controller => "user", :action => "user_account_settings_menu" and return
-        else
-          flash[:error] = "Unable to save. New Password and Repeat password mismatch"
-          redirect_to :controller => "user", :action => "user_account_settings_menu" and return
-        end
-      else
-        flash[:error] = "Unable to save. Old password is not correct"
-        redirect_to :controller => "user", :action => "/user_account_settings_menu", :edit_mode => "password" and return
-      end
-    end
-
-    if params[:edit_mode] == 'first_name'
+  def update_account_details
+    @user = User.find(session[:user].user_id)
+    
+    if params[:field_type] == 'first_name'
       if @user.update_attributes({
             :first_name => params[:first_name]
           })
-        flash[:notice] = "Operation successful"
-        redirect_to :controller => "user", :action => "user_account_settings_menu" and return
+        flash[:notice] = "You have successfully updated your first name"
+        redirect_to("/my_account") and return
       else
-        flash[:error] = "Unable to save. Check for erros and try again"
-        redirect_to :controller => "user", :action => "user_account_settings_menu" and return
+        flash[:error] = "Unable to process your request"
+        redirect_to("/my_account") and return
       end
     end
 
-    if params[:edit_mode] == 'last_name'
+    if params[:field_type] == 'last_name'
       if @user.update_attributes({
             :last_name => params[:last_name]
           })
-        flash[:notice] = "Operation successful"
-        redirect_to :controller => "user", :action => "user_account_settings_menu" and return
+        flash[:notice] = "You have successfully udated your last name"
+        redirect_to("/my_account") and return
       else
-        flash[:error] = "Unable to save. Check for erros and try again"
-        redirect_to :controller => "user", :action => "user_account_settings_menu" and return
+        flash[:error] = "Unable to process your request"
+        redirect_to("/my_account") and return
       end
     end
 
-    if params[:edit_mode] == 'names'
+    if params[:field_type] == 'phone'
       if @user.update_attributes({
-            :first_name => params[:first_name],
-            :last_name => params[:last_name]
+            :phone_number => params[:phone_number]
           })
-        flash[:notice] = "Operation successful"
-        redirect_to :controller => "user", :action => "user_account_settings_menu" and return
+        flash[:notice] = "You have successfully updated your phone number"
+        redirect_to("/my_account") and return
       else
-        flash[:error] = "Unable to save. Check for erros and try again"
-        redirect_to :controller => "user", :action => "user_account_settings_menu" and return
+        flash[:error] = "Unable to process your request"
+        redirect_to("/my_account") and return
       end
     end
-  end
 
-  def update_account_details
-    raise params.inspect
+    if params[:field_type] == 'email'
+      if @user.update_attributes({
+            :email => params[:email]
+          })
+        flash[:notice] = "You have successfully updated your email"
+        redirect_to("/my_account") and return
+      else
+        flash[:error] = "Unable to process your request"
+        redirect_to("/my_account") and return
+      end
+    end
+
+    if params[:field_type] == 'username'
+      if @user.update_attributes({
+            :username => params[:username]
+          })
+        flash[:notice] = "You have successfully updated your username"
+        redirect_to("/my_account") and return
+      else
+        flash[:error] = "Unable to process your request"
+        redirect_to("/my_account") and return
+      end
+    end
+
+    if params[:field_type] == 'password'
+      if (User.authenticate(@user.username, params[:old_password]))
+        if (params[:new_password] == params[:repeat_password])
+          @user.password = User.encrypt(params[:new_password], @user.salt)
+          @user.save
+          flash[:notice] = "You have successfully updated your password. Your new password is <b>#{params[:new_password]}</b>"
+          redirect_to("/my_account") and return
+        else
+          flash[:error] = "Unable to save. New Password and Confirmation password does not match"
+          redirect_to("/my_account") and return
+        end
+      else
+        flash[:error] = "Unable to save. Old password is not correct"
+        redirect_to("/my_account") and return
+      end
+    end
+    
   end
   
   def reset_password
@@ -235,13 +179,15 @@ class UsersController < ApplicationController
       flash[:error] = "Password Mismatch"
       redirect_to("/new_users_menu") and return
     end
-
+    salt = User.random_string(10)
+    
     user = User.new
     user.first_name = first_name
     user.last_name = last_name
     user.email = email
     user.phone_number = phone_number
-    user.password = password
+    user.salt = salt
+    user.password = User.encrypt(password, salt)
     user. username = username
 
     if user.save
