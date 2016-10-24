@@ -69,6 +69,8 @@ class StudentsController < ApplicationController
 
   def select_books_by_faculty
     @faculty = Faculty.find(params[:faculty_id])
+    @faculty_books = @faculty.books
+    @user = User.find(session[:user].user_id)
     @page_title = "#{@faculty.name} Books"
   end
 
