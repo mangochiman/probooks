@@ -1,4 +1,37 @@
+<style type="text/css">
+  .panel-body .btn:not(.btn-block) {
+    width: 170px;
+  }
+</style>
 <div class="row">
-<h4 class="pull-right">Search Term: <b><%= @search_term %></b></h4>
-<h4 style="padding-left: 10px;"><span class="label label-success"><%= @books.count %></span> Results Found</h4>
+  <h4 class="pull-right" style="padding-right: 16px;">Search Term: <b><%= @search_term %></b></h4>
+  <h4 style="padding-left: 16px;"><span class="label label-success"><%= @books.count %></span> Results Found</h4>
 </div>
+<% unless @books_by_title.blank? %>
+  <div class="panel panel-default">
+    <p class="panel-heading"><b>Search results based on book title <span class="label label-success"><%= @books_by_title.count %></span></b></p>
+    <div class="panel-body">
+      <ul class="list-group">
+        <% @books_by_title.each do |book| %>
+          <li class="list-group-item">
+            <div class="media">
+              <a href="#" class="pull-left">
+                <% cover_location = "#{book.book_id}_cover_#{book.cover_photo_file_name}" %>
+                <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+              </a>
+              <div class="media-body">
+                <p class="text-sm pull-right muted">Uploaded on <%= book.created_at.to_date.strftime("%d-%b-%Y") %></p>
+                <p class="media-heading">
+                  Book title: <a href="#"><%= book.title %></a><br />
+                  Authors: <a href="#"><%= book.author %></a></p>
+                <p>Subscribed By: <span class="label label-success"><%= book.users.count %></span></p>
+                <button onclick="viewBook('<%= book.book_id %>', '<%= book.title %>', '<%= book.author %>')" class="btn btn-default"><i class="fa fa-eye"></i> Browse Book</button>
+                <button onclick="removeBookConfirm('<%= book.book_id %>')" class="btn pull-right btn-default"><i class="fa fa-plus"></i> Add To my Bookshelf</button>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
