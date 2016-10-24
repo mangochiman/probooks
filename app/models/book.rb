@@ -30,7 +30,17 @@ class Book < ActiveRecord::Base
   def cover_photo_file_name=(new_filename)
     write_attribute("cover_photo_file_name", sanitize_filename(new_filename))
   end
-  
+
+  def self.search_all_by_title(title)
+    books = Book.find(:all, :conditions => ["title LIKE (?)", '%' + title + '%'])
+    return books
+  end
+
+  def self.search_all_by_authors(author)
+    books = Book.find(:all, :conditions => ["author LIKE (?)", '%' + author + '%'])
+    return books
+  end
+
   private
   def sanitize_filename (filename)
     #get only the filename, not the whole path (from IE)
