@@ -38,12 +38,22 @@
       });
     </script>-->
   <style type="text/css">
+
+    .logo_middle img{
+      height: 50px;
+      padding-bottom: 20px;
+    }
+
     #line-chart {
       height:300px;
       width:800px;
       margin: 0px auto;
       margin-top: 1em;
     }
+    .navbar-brand{
+      padding-left: 450px;
+    }
+
     .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
       color: #fff;
     }
@@ -90,6 +100,55 @@
     }
 
     .panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
+
+    .logo-header{
+      padding-bottom: 20px !important;
+      line-height: 10px;
+
+      margin-top: -10px;
+      position: relative;
+    }
+
+    .left-title{
+      position: absolute;
+      left: 520px;
+      padding-top: 5px;
+      color: black;
+    }
+
+    .right-title{
+      position: absolute;
+      padding-left: 20px;
+      padding-top: 5px;
+      color: black;
+    }
+
+    .logo_middle img{
+      padding-left: 150px;
+    }
+
+    .theme-blue .navbar {
+      background: rgba(0, 0, 0, 0) -moz-linear-gradient(center bottom , #F4F4F4 0%, #FFFFFF 100%) repeat scroll 0 0;
+    }
+    .dropdown-toggle{
+      background-color: #AAAAAA;
+    }
+
+    .headlines{
+      text-align: center;
+      font-weight: bold;
+      position: relative;
+      top: -10px;
+    }
+
+    .well u{
+      margin-left: 38%;
+
+    }
+
+    .well{
+      border-radius: 10px;
+    }
   </style>
 
 
@@ -116,13 +175,17 @@
 
   <div class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="" href="/dashboard"><span class="navbar-brand"><span class="fa fa-book"></span> ProBooks</span></a></div>
+
+      <!--<a class="logo">
+        <img alt="ProBooks Logo" src="/images/logo.jpeg"/>
+      </a>-->
+      <a class="" href="/dashboard">
+        <span class="navbar-brand">
+          <span class="left-title">ProBooks </span><i class="logo_middle">
+            <img alt="ProBooks Logo" src="/images/logo.jpeg"/></i>
+          <span class="right-title"class="logo-header">Library</span>
+        </span></a>
+    </div>
 
     <div class="navbar-collapse collapse" style="height: 1px;">
       <ul id="main-menu" class="nav navbar-nav navbar-right">
@@ -232,61 +295,82 @@
               <button onclick="goToExtras();" class="btn btn-success btn-block" onclick=""> Extras </button>-->
             </div>
           </div>
+
+          <div class="col-sm-3 col-md-3 pull-right">
+            <div class="well well-large" style="min-height: 150px; ">
+              <b class="headlines pull-right">Headlines</b><br />
+
+              <li class="list-group-item"><a href="#"><i class="fa fa-th-list "></i> Heading 1</a></li>
+              <li class="list-group-item"><a href="#"><i class="fa fa-th-list "></i> Heading 2</a></li>
+              <li class="list-group-item"><a href="#"><i class="fa fa-th-list "></i> Heading 3</a></li>
+
+            </div>
+          </div>
+
+          <div class="col-sm-3 col-md-3 pull-right">
+            <div class="well well-large" style="min-height: 150px; ">
+              <b class="headlines pull-right">Updates <span class="label label-success">27</span></b><br />
+
+              <li class="list-group-item"><a href="#"><i class="fa fa-refresh "></i> Update 1</a></li>
+              <li class="list-group-item"><a href="#"><i class="fa fa-refresh "></i> Update 2</a></li>
+              <li class="list-group-item"><a href="#"><i class="fa fa-refresh "></i> Update 3</a></li>
+
+            </div>
+          </div>
         </div>
+
+        <footer>
+          <hr />
+
+          <p>© 2016 <a href="#">proBooks</a></p>
+        </footer>
       </div>
 
-      <footer>
-        <hr />
 
-        <p>© 2016 <a href="#">proBooks</a></p>
-      </footer>
+
+
+
+
+
+
     </div>
 
+    <script src="/AircraftAdminFree/lib/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        var uls = $('.sidebar-nav > ul > *').clone();
+        uls.addClass('visible-xs');
+        $('#main-menu').append(uls.clone());
+      });
+
+    </script>
+    <script type="text/javascript">
+      $("[rel=tooltip]").tooltip();
+
+      function goToBookShelf(){
+        window.location = "/dashboard";
+      }
+      function goToBookStore(){
+        window.location = "/select_books_from_store";
+      }
+
+      function goToRecentBooks(){
+        window.location = "/my_recent_books_menu";
+      }
+
+      function goToExtras(){
+        window.location = "/extras";
+      }
+
+      $("#viewBook").draggable({
+        handle: ".modal-header"
+      });
+
+      function submitSearchForm(){
+        $('#general-search-form').submit();
+      }
+
+    </script>
 
 
-
-
-
-
-
-  </div>
-
-
-  <script src="/AircraftAdminFree/lib/bootstrap/js/bootstrap.js"></script>
-  <script type="text/javascript">
-    $(function() {
-      var uls = $('.sidebar-nav > ul > *').clone();
-      uls.addClass('visible-xs');
-      $('#main-menu').append(uls.clone());
-    });
-  </script>
-  <script type="text/javascript">
-    $("[rel=tooltip]").tooltip();
-
-    function goToBookShelf(){
-      window.location = "/dashboard";
-    }
-    function goToBookStore(){
-      window.location = "/select_books_from_store";
-    }
-
-    function goToRecentBooks(){
-      window.location = "/my_recent_books_menu";
-    }
-
-    function goToExtras(){
-      window.location = "/extras";
-    }
-
-    $("#viewBook").draggable({
-      handle: ".modal-header"
-    });
-
-    function submitSearchForm(){
-      $('#general-search-form').submit();
-    }
-
-  </script>
-
-
-</body></html>
+  </body></html>
