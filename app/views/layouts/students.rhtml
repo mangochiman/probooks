@@ -179,6 +179,21 @@
       padding: 8px 10px;
       width: 40px;
     }
+
+    /*.icon-text{
+      font-size: 12pt;
+      position: absolute;
+      padding-top: 40px;
+      right: 191px;
+      float: right;
+      color: #428bca;
+
+    }*/
+
+    .icon-text:hover {
+      color: #2a6496;
+    }
+
   </style>
 
 
@@ -314,18 +329,46 @@
     </div><br />
 
     <div class="row" style="padding-right: 64px; top: -36px; position: relative;">
-      
+
       <button class="btn btn-default btn-circle btn-xl pull-right" type="button" >
         <i class="glyphicon glyphicon-time"></i>
+        <span class="icon-text" style="
+              font-size: 12pt;
+              position: absolute;
+              padding-top: 47px;
+              right: 70px;
+              float: right;
+              color: #428bca;">
+          Extras
+        </span>
       </button>
 
-      <button class="btn btn-default btn-circle btn-xl pull-right" type="button" style="margin-right: 10px;">
+      <button onclick="goToBookShelf();" class="btn btn-default btn-circle btn-xl pull-right" type="button" style="margin-right: 40px;">
         <i class="glyphicon glyphicon-search"></i>
+        <span class="icon-text" style="
+              font-size: 12pt;
+              position: absolute;
+              padding-top: 47px;
+              right: 150px;
+              float: right;
+              color: #428bca;">
+          Book Shelf
+        </span>
       </button>
-      
-      <button class="btn btn-default btn-circle btn-xl pull-right" type="button" style="margin-right: 10px;">
+
+      <button onclick="goToBookStore();" class="btn btn-default btn-circle btn-xl pull-right" type="button" style="margin-right: 40px;">
         <i class="glyphicon glyphicon-folder-open"></i>
+        <span class="icon-text" style="
+              font-size: 12pt;
+              position: absolute;
+              padding-top: 47px;
+              right: 249px;
+              float: right;
+              color: #428bca;">
+          Book Store
+        </span>
       </button>
+
       <br /><br /><br />
     </div>
 
@@ -348,15 +391,15 @@
             <% end %>
             <%= yield %>
           </div>
-          <div class="col-sm-3 col-md-3 pull-right">
+          <!--<div class="col-sm-3 col-md-3 pull-right">
             <div class="well well-small">
               <button class="btn btn-block"> <b>Menu</b> </button>
               <button onclick="goToBookShelf();" class="btn btn-info btn-block" onclick=""> Book Shelf </button>
               <button onclick="goToBookStore();" class="btn btn-primary btn-block" onclick=""> Bookstore</button>
               <!--<button onclick="goToRecentBooks();" class="btn btn-info btn-block" onclick=""> Recent Books </button>
               <button onclick="goToExtras();" class="btn btn-success btn-block" onclick=""> Extras </button>-->
-            </div>
-          </div>
+            <!--</div>
+          </div>-->
 
           <div class="col-sm-3 col-md-3 pull-right">
             <div class="well well-large" style="min-height: 150px; ">
