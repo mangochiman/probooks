@@ -330,7 +330,7 @@
 
     <div class="row" style="padding-right: 64px; top: -36px; position: relative;">
 
-      <button class="btn btn-default btn-circle btn-xl pull-right" type="button" >
+      <button class="btn btn-default btn-circle btn-xl pull-right main-icon" type="button" >
         <i class="glyphicon glyphicon-time"></i>
         <span class="icon-text" style="
               font-size: 12pt;
@@ -338,12 +338,12 @@
               padding-top: 47px;
               right: 70px;
               float: right;
-              color: #428bca;">
+              color: #5B5B5B;">
           Extras
         </span>
       </button>
 
-      <button onclick="goToBookShelf();" class="btn btn-default btn-circle btn-xl pull-right" type="button" style="margin-right: 40px;">
+      <button onclick="goToBookShelf();" class="btn btn-default btn-circle btn-xl pull-right main-icon" type="button" style="margin-right: 40px;">
         <i class="glyphicon glyphicon-search"></i>
         <span class="icon-text" style="
               font-size: 12pt;
@@ -351,12 +351,12 @@
               padding-top: 47px;
               right: 150px;
               float: right;
-              color: #428bca;">
+              color: #5B5B5B;">
           Book Shelf
         </span>
       </button>
 
-      <button onclick="goToBookStore();" class="btn btn-default btn-circle btn-xl pull-right" type="button" style="margin-right: 40px;">
+      <button onclick="goToBookStore();" class="btn btn-default btn-circle btn-xl pull-right main-icon" type="button" style="margin-right: 40px;">
         <i class="glyphicon glyphicon-folder-open"></i>
         <span class="icon-text" style="
               font-size: 12pt;
@@ -364,7 +364,7 @@
               padding-top: 47px;
               right: 249px;
               float: right;
-              color: #428bca;">
+              color: #5B5B5B;">
           Book Store
         </span>
       </button>
@@ -396,10 +396,10 @@
               <button class="btn btn-block"> <b>Menu</b> </button>
               <button onclick="goToBookShelf();" class="btn btn-info btn-block" onclick=""> Book Shelf </button>
               <button onclick="goToBookStore();" class="btn btn-primary btn-block" onclick=""> Bookstore</button>
-              <!--<button onclick="goToRecentBooks();" class="btn btn-info btn-block" onclick=""> Recent Books </button>
-              <button onclick="goToExtras();" class="btn btn-success btn-block" onclick=""> Extras </button>-->
-            <!--</div>
-          </div>-->
+          <!--<button onclick="goToRecentBooks();" class="btn btn-info btn-block" onclick=""> Recent Books </button>
+          <button onclick="goToExtras();" class="btn btn-success btn-block" onclick=""> Extras </button>-->
+          <!--</div>
+        </div>-->
 
           <div class="col-sm-3 col-md-3 pull-right">
             <div class="well well-large" style="min-height: 150px; ">
@@ -476,6 +476,17 @@
       $('#general-search-form').submit();
     }
 
+    function changeTextColor(){
+      $(".main-icon").mouseover(function() {
+        $(this).find('.icon-text').css( "color", "#333333" );
+      });
+
+      $(".main-icon").mouseout(function() {
+        $(this).find('.icon-text').css( "color", "#5B5B5B" );
+      });
+    }
+
+    changeTextColor();
   </script>
 
 
