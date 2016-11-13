@@ -194,6 +194,11 @@
       color: #2a6496;
     }
 
+    .del:hover{
+      text-decoration: underline;
+      cursor: pointer;
+      color: red !important;
+    }
   </style>
 
 
@@ -269,9 +274,17 @@
       </li>
     </ul>
     <div style="padding-left: 5px; width: 98%;">
-      <div class="well well-large" style="border-radius: 0px; min-height: 120px;">
+      <div class="well well-large" style="border-radius: 0px; min-height: 200px;">
         <b class="notes-header">Notes </b>
-
+        <div style="overflow-y: auto; height: 130px; width: 109%">
+          <ul>
+            <% count = 1 %>
+            <% user_notes.each do |user_note| %>
+              <li><a href="#" onclick="return showViewNotespopup('<%= user_note.user_note_id  %>')"><%= "#{count}.#{UserNote.trim(user_note.data, 20)}"%></a><span onclick="showRemoveNotesPopup(<%= user_note.user_note_id%>);" style="color: #8B0000; padding-right: 10px !important;" class="pull-right del">X</span></li>
+              <% count = count + 1 %>
+            <% end %>
+          </ul>
+        </div>
       </div>
       <span class="pull-right" style="position: relative; bottom:  50px; padding-right: 5px;"><a href="#" onclick="return showNewNotesPopup();"><i class="fa fa-plus"></i> New Note</a></span>
     </div>
@@ -330,7 +343,7 @@
 
     <div class="row" style="padding-right: 64px; top: -36px; position: relative;">
 
-      <button class="btn btn-default btn-circle btn-xl pull-right main-icon" type="button" >
+      <button onclick="goToExtras();" class="btn btn-default btn-circle btn-xl pull-right main-icon" type="button" >
         <i class="glyphicon glyphicon-time"></i>
         <span class="icon-text" style="
               font-size: 12pt;
@@ -454,16 +467,50 @@
                 <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
                 <button class="btn btn-primary" type="button" onclick="saveUserNotes();">Save changes</button>
               </div>
-              
+
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Modal -->
+      <div class="modal fade" id="deleteNotesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to remove the selected notes?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+              <button onclick="removeNotes();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 
+      <div class="col-lg-12">
+        <div class="modal" id="viewNotesModal" tabindex="-1"    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Notes</h4>
+              </div>
+              <div class="modal-body" id="viewNotesModalBody">
 
+              </div>
 
-
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -522,6 +569,51 @@
     function saveUserNotes(){
       jQuery("#userNotesForm").submit();
     }
+
+    var currentUserNotedID;
+    
+    function showRemoveNotesPopup(userNotesID){
+      currentUserNotedID = userNotesID
+      jQuery('#deleteNotesModal').modal('show');
+      return false;
+    }
+
+    function removeNotes(){
+      body = document.getElementsByTagName("body")[0];
+
+      form = document.createElement("form");
+      form.method = "POST"
+      form.action = "/students/delete_user_notes";
+      body.appendChild(form);
+
+      input = document.createElement("input");
+      input.type = "hidden";
+      input.value = currentUserNotedID;
+      input.name = "user_note_id";
+      form.appendChild(input);
+
+      form.submit();
+    }
+
+    function showViewNotespopup(userNoteID){
+
+      jQuery.ajax({
+        type: "POST",
+        url: "/students/render_students_notes",
+        data: "user_note_id=" + userNoteID,
+        beforeSend: function(){
+          console.log("Before Send");
+          document.getElementById('viewNotesModalBody').innerHTML = 'Please wait ...'
+        },
+        success: function(result){
+          document.getElementById('viewNotesModalBody').innerHTML = result;
+        }
+
+      });
+      jQuery('#viewNotesModal').modal('show');
+      return false;
+    }
+
   </script>
 
 

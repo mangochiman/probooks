@@ -4,4 +4,13 @@ class UserNote < ActiveRecord::Base
 
   belongs_to :user, :foreign_key => :user_id, :primary_key => :user_id
   validates_presence_of :data, :message => "_Notes can't be blank"
+
+  def self.trim(data, size)
+    if data.size > size
+      return data[0..size].to_s.squish + ' ...'
+    else
+      return data
+    end
+  end
+
 end

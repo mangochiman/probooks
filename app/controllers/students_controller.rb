@@ -122,4 +122,21 @@ class StudentsController < ApplicationController
     end
   end
 
+  def delete_user_notes
+    uri_referrer = request.referer
+    user_note = UserNote.find(params[:user_note_id])
+    if user_note.delete
+      flash[:notice] = "Notes successfully deleted"
+      redirect_to(uri_referrer) and return
+    else
+      flash[:error] = "Unable to delete the selected notes"
+      redirect_to(uri_referrer) and return
+    end
+  end
+
+  def render_students_notes
+    user_note = UserNote.find(params[:user_note_id])
+    render :text => user_note.data and return
+  end
+
 end
