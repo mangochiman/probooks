@@ -107,5 +107,19 @@ class StudentsController < ApplicationController
 
     @books = (@books_by_title + @books_by_authors).uniq
   end
-  
+
+  def save_user_notes
+    uri_referrer = request.referer
+    user_note = UserNote.new
+    user_note.data = params[:notes]
+    user_note.user_id = session[:user].user_id
+    if user_note.save
+      flash[:notice] = "You have successfully saved your notes"
+      redirect_to(uri_referrer) and return
+    else
+      flash[:error] = user_note.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      redirect_to(uri_referrer) and return
+    end
+  end
+
 end
