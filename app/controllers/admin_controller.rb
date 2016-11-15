@@ -337,4 +337,100 @@ class AdminController < ApplicationController
     @page_title = "#{@faculty.name} (#{@faculty_books.count} #{book_text})"
   end
 
+  def new_headlines_menu
+    @page_title = "New Headlines"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def edit_headlines_menu
+    @page_title = "Edit Headlines"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def view_headlines_menu
+    @page_title = "View Headlines"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def remove_headlines_menu
+    @page_title = "Remove Headlines"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def new_updates_menu
+    @page_title = "New Update"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def edit_updates_menu
+    @page_title = "Edit Updates"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def view_updates_menu
+    @page_title = "View Updates"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def remove_updates_menu
+    @page_title = "Remove Updates"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
 end

@@ -18,6 +18,19 @@ ActionController::Routing::Routes.draw do |map|
   map.view_users_menu  '/view_users_menu',  :controller => 'admin', :action => 'view_users_menu'
   map.remove_users_menu  '/remove_users_menu',  :controller => 'admin', :action => 'remove_users_menu'
   map.edit_faculty '/edit_faculty/:faculty_id', :controller => 'admin', :action => 'edit_faculty'
+
+  map.new_headlines_menu  '/new_headlines_menu',  :controller => 'admin', :action => 'new_headlines_menu'
+  map.edit_headlines_menu  '/edit_headlines_menu',  :controller => 'admin', :action => 'edit_headlines_menu'
+  map.view_headlines_menu  '/view_headlines_menu',  :controller => 'admin', :action => 'view_headlines_menu'
+  map.remove_headlines_menu  '/remove_headlines_menu',  :controller => 'admin', :action => 'remove_headlines_menu'
+  map.edit_headline '/edit_headline/:headline_id', :controller => 'admin', :action => 'edit_headline'
+
+  map.new_updates_menu  '/new_updates_menu',  :controller => 'admin', :action => 'new_updates_menu'
+  map.edit_updates_menu  '/edit_updates_menu',  :controller => 'admin', :action => 'edit_updates_menu'
+  map.edit_headlines_menu  '/view_updates_menu',  :controller => 'admin', :action => 'view_updates_menu'
+  map.remove_updates_menu  '/remove_updates_menu',  :controller => 'admin', :action => 'remove_updates_menu'
+  map.edit_update '/edit_update/:update_id', :controller => 'admin', :action => 'edit_update'
+
   map.browse_by_category '/browse_by_category/:category_id', :controller => 'admin', :action => 'browse_by_category'
   map.edit_user '/edit_user/:user_id', :controller => 'admin', :action => 'edit_user'
   map.view_by_faculty '/view_by_faculty/:faculty_id', :controller => 'admin', :action => 'view_by_faculty'
