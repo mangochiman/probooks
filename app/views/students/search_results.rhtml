@@ -3,12 +3,13 @@
     width: 170px;
   }
 </style>
-<div class="row">
+
+<div class="row" style="min-height: 500px">
   <h4 class="pull-right" style="padding-right: 16px;">Search Term: <b><%= @search_term %></b></h4>
   <h4 style="padding-left: 16px;"><span class="label label-success"><%= @books.count %></span> Results Found</h4>
-</div>
+
 <% unless @books_by_title.blank? %>
-  <div class="panel panel-default" style="min-height: 200px">
+  <div class="panel panel-default" >
     <p class="panel-heading"><b>Search results based on book title <span class="label label-success"><%= @books_by_title.count %></span></b></p>
     <div class="panel-body">
       <ul class="list-group">
@@ -41,7 +42,7 @@
 <% end %>
 
 <% unless @books_by_authors.blank? %>
-  <div class="panel panel-default" style="min-height: 200px">
+  <div class="panel panel-default">
     <p class="panel-heading"><b>Search results based on book author <span class="label label-success"><%= @books_by_authors.count %></span></b></p>
     <div class="panel-body">
       <ul class="list-group">
@@ -72,7 +73,7 @@
     </div>
   </div>
 <% end %>
-
+</div>
 <!-- Modal -->
 <div class="modal fade" id="selectBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
