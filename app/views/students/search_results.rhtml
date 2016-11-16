@@ -8,7 +8,7 @@
   <h4 style="padding-left: 16px;"><span class="label label-success"><%= @books.count %></span> Results Found</h4>
 </div>
 <% unless @books_by_title.blank? %>
-  <div class="panel panel-default">
+  <div class="panel panel-default" style="min-height: 200px">
     <p class="panel-heading"><b>Search results based on book title <span class="label label-success"><%= @books_by_title.count %></span></b></p>
     <div class="panel-body">
       <ul class="list-group">
@@ -41,7 +41,7 @@
 <% end %>
 
 <% unless @books_by_authors.blank? %>
-  <div class="panel panel-default">
+  <div class="panel panel-default" style="min-height: 200px">
     <p class="panel-heading"><b>Search results based on book author <span class="label label-success"><%= @books_by_authors.count %></span></b></p>
     <div class="panel-body">
       <ul class="list-group">
