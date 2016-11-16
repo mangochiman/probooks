@@ -42,6 +42,13 @@
 
     <!-- PAGE LEVEL STYLES -->
     <link href="/assets/css/layout2.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/plugins/Font-Awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/plugins/wysihtml5/dist/bootstrap-wysihtml5-0.0.2.css" />
+    <link rel="stylesheet" href="assets/css/Markdown.Editor.hack.css" />
+    <link rel="stylesheet" href="assets/plugins/CLEditor1_4_3/jquery.cleditor.css" />
+    <link rel="stylesheet" href="assets/css/jquery.cleditor-hack.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-wysihtml5-hack.css" />
     <!-- END PAGE LEVEL  STYLES -->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -358,6 +365,13 @@
     <script src="/assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
     <script src="/javascripts/jquery.media.js"></script> <!-- For rendering PDF documents -->
 
+    <script src="/assets/plugins/wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
+    <script src="/assets/plugins/bootstrap-wysihtml5-hack.js"></script>
+    <script src="/assets/plugins/CLEditor1_4_3/jquery.cleditor.min.js"></script>
+    <script src="/assets/plugins/pagedown/Markdown.Converter.js"></script>
+    <script src="/assets/plugins/pagedown/Markdown.Sanitizer.js"></script>
+    <script src="/assets/plugins/Markdown.Editor-hack.js"></script>
+    <script src="/assets/js/editorInit.js"></script>
     <script type="text/javascript">
       $(function () { formInit(); });
       $('a.media').media({width:'100%', height:400});
@@ -406,6 +420,7 @@
         window.location = "/view_by_faculty/" + facultyID;
       }
 
+      $(function () { formWysiwyg(); });
     </script>
     <!-- END GLOBAL SCRIPTS -->
   </body>

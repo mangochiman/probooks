@@ -1,0 +1,31 @@
+
+<style>
+  ul.wysihtml5-toolbar > li {
+    position: relative;
+  }
+</style>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box">
+      <div id="div-1" class="body collapse in">
+        <form action="/admin/create_headlines" method="POST">
+          <div class="form-group">
+            <label>Headline</label>
+            <input class="form-control" name="headline"/>
+          </div><br />
+
+          <div class="form-group">
+            <textarea id="wysihtml5" class="form-control" rows="10" name="data"></textarea>
+          </div>
+          <div class="form-actions">
+            <br />
+            <input type="submit" value="Submit" class="btn btn-primary" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE LEVEL SCRIPTS -->

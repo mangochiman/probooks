@@ -359,6 +359,7 @@ class AdminController < ApplicationController
     @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
+    @news_headlines = News.find(:all)
   end
 
   def view_headlines_menu
@@ -433,4 +434,16 @@ class AdminController < ApplicationController
 
   end
 
+  def create_headlines
+    news = News.new
+    news.title = params[:headline]
+    news.data = params[:data]
+    if news.save
+      flash[:notice] = "You have created headline"
+      redirect_to("/new_headlines_menu")
+    else
+      flash[:error] = news.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      redirect_to("/new_headlines_menu")
+    end
+  end
 end
