@@ -524,6 +524,23 @@ class AdminController < ApplicationController
     @page_title = @update.title
   end
 
+  def remove_updates
+    update_ids = params[:update_ids].split(',')
+    if update_ids.blank?
+      flash[:error] = "Select item to delete"
+      redirect_to("/remove_updates_menu") and return
+    end
+
+    update_ids.each do |update_id|
+      update = Update.find(update_id)
+      update.delete
+    end
+
+    flash[:notice] = "You have succesfully deleted updates"
+    redirect_to("/remove_updates_menu") and return
+
+  end
+
   def remove_updates_menu
     @page_title = "Remove Updates"
     primary_category_id = Category.find_by_name("PRIMARY").category_id
