@@ -1,7 +1,7 @@
 <div class="panel panel-danger">
   <div class="panel-body">
     <% @news_headlines.each do |row| %>
-      <div class="list-group">
+      <div class="list-group" onclick="editHeadLines('<%= row.news_id %>')">
         <a class="list-group-item" href="#">
           <i class="icon-indent-right"></i> <%= row.title %>
           <span class="pull-right text-muted small"><em> <%= row.created_at.strftime("%d/%b/%Y") %></em>
@@ -13,3 +13,8 @@
   </div>
 
 </div>
+<script>
+  function editHeadLines(newsID){
+    window.location = "/edit_headline/" + newsID;
+  }
+</script>

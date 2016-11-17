@@ -24,12 +24,14 @@ ActionController::Routing::Routes.draw do |map|
   map.view_headlines_menu  '/view_headlines_menu',  :controller => 'admin', :action => 'view_headlines_menu'
   map.remove_headlines_menu  '/remove_headlines_menu',  :controller => 'admin', :action => 'remove_headlines_menu'
   map.edit_headline '/edit_headline/:headline_id', :controller => 'admin', :action => 'edit_headline'
+  map.show_headline '/show_headline/:headline_id', :controller => 'admin', :action => 'show_headline'
 
   map.new_updates_menu  '/new_updates_menu',  :controller => 'admin', :action => 'new_updates_menu'
   map.edit_updates_menu  '/edit_updates_menu',  :controller => 'admin', :action => 'edit_updates_menu'
   map.edit_headlines_menu  '/view_updates_menu',  :controller => 'admin', :action => 'view_updates_menu'
   map.remove_updates_menu  '/remove_updates_menu',  :controller => 'admin', :action => 'remove_updates_menu'
   map.edit_update '/edit_update/:update_id', :controller => 'admin', :action => 'edit_update'
+  map.show_update '/show_update/:update_id', :controller => 'admin', :action => 'show_update'
 
   map.browse_by_category '/browse_by_category/:category_id', :controller => 'admin', :action => 'browse_by_category'
   map.edit_user '/edit_user/:user_id', :controller => 'admin', :action => 'edit_user'

@@ -372,6 +372,49 @@ class AdminController < ApplicationController
     @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
+    @news_headlines = News.find(:all)
+
+  end
+
+  def show_headline
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+
+    @news = News.find(params[:headline_id])
+    @page_title = @news.title
+  end
+
+  def edit_headline
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+
+    @news = News.find(params[:headline_id])
+    @page_title = @news.title
+  end
+
+  def update_headlines
+    news = News.find(params[:news_id])
+    news.title = params[:headline]
+    news.data = params[:data]
+    if news.save
+      flash[:notice] = "You have successfully updated your headline"
+      redirect_to("/edit_headlines_menu") and return
+    else
+      flash[:error] = news.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      redirect_to("/edit_headline/#{params[:news_id]}") and return
+    end
   end
 
   def remove_headlines_menu
@@ -419,6 +462,10 @@ class AdminController < ApplicationController
     @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
     @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def show_update
 
   end
 
