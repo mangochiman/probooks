@@ -1,0 +1,22 @@
+<div class="panel panel-danger">
+  <div class="panel-body">
+    <% @updates.each do |update| %>
+      <div class="list-group" onclick="showUpdates('<%= update.update_id %>')">
+        <a class="list-group-item" href="#">
+          <i class="icon-indent-right"></i> <%= update.title %>
+          <span class="pull-right text-muted small"><em> <%= update.created_at.strftime("%d/%b/%Y") %></em>
+          </span>
+        </a>
+      </div>
+    <% end %>
+
+  </div>
+
+</div>
+<script type="text/javascript">
+
+  function showUpdates(updateID){
+    window.location = "/show_update/" + updateID;
+  }
+  
+</script>
