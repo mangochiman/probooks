@@ -421,6 +421,14 @@
       }
 
       $(function () { formWysiwyg(); });
+
+      function checkUncheckAll(){
+        $("#select_all").change(function(){  //"select all" change
+          $(".checkbox").prop('checked', $(this).prop("checked")); //change all ".checkbox" checked status
+        });
+      }
+      
+      checkUncheckAll();
     </script>
     <!-- END GLOBAL SCRIPTS -->
   </body>

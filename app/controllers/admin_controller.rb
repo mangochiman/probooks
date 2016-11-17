@@ -427,6 +427,23 @@ class AdminController < ApplicationController
     @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
+    @news_headlines = News.find(:all)
+  end
+
+  def remove_headlines
+    news_ids = params[:news_ids].split(',')
+    if news_ids.blank?
+      flash[:error] = "Select item to delete"
+      redirect_to("/remove_headlines_menu") and return
+    end
+
+    news_ids.each do |news_id|
+      news = News.find(news_id)
+      news.delete
+    end
+
+    flash[:notice] = "You have succesfully deleted headlines"
+    redirect_to("/remove_headlines_menu") and return
   end
 
   def new_updates_menu
