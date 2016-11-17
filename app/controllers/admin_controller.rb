@@ -468,6 +468,8 @@ class AdminController < ApplicationController
     @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
+    @updates = Update.find(:all)
+    
   end
 
   def view_updates_menu
@@ -480,6 +482,33 @@ class AdminController < ApplicationController
     @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
+    @updates = Update.find(:all)
+  end
+
+  def edit_update
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+    @update = Update.find(params[:update_id])
+    @page_title = @update.title
+  end
+
+  def update_updates
+    update = Update.find(params[:update_id])
+    update.title = params[:title]
+    update.details = params[:details]
+    if update.save
+      flash[:notice] = "You have successfully updated your headline"
+      redirect_to("/edit_updates_menu") and return
+    else
+      flash[:error] = update.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      redirect_to("/edit_update/#{params[:update_id]}") and return
+    end
   end
 
   def show_update
@@ -496,6 +525,7 @@ class AdminController < ApplicationController
     @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
+    @updates = Update.find(:all)
   end
 
   def create_headlines
@@ -509,5 +539,20 @@ class AdminController < ApplicationController
       flash[:error] = news.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
       redirect_to("/new_headlines_menu")
     end
+  end
+
+  def create_updates
+    update = Update.new
+    update.title = params[:title]
+    update.details = params[:details]
+
+    if update.save
+      flash[:notice] = "You have created an update"
+      redirect_to("/new_updates_menu")
+    else
+      flash[:error] = update.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      redirect_to("/new_updates_menu")
+    end
+    
   end
 end
