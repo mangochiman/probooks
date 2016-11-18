@@ -31,5 +31,15 @@ module ApplicationHelper
     user_notes = UserNote.find(:all, :conditions => ["User_id =?", user_id], :order => "user_note_id DESC")
     return user_notes
   end
-  
+
+  def headlines
+    news = News.find(:all)
+    return news
+  end
+
+  def updates
+    updates = Update.find(:all)
+    return updates
+  end
+
 end

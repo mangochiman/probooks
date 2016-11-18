@@ -139,4 +139,10 @@ class StudentsController < ApplicationController
     render :text => user_note.data and return
   end
 
+  def read_headlines
+    @news = News.find(params[:news_id])
+    @user = User.find(session[:user].user_id)
+    @page_title = UserNote.trim(@news.title, 50)
+  end
+  
 end

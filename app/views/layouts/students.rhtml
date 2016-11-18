@@ -417,11 +417,9 @@
           <div class="col-sm-3 col-md-3 pull-right">
             <div class="well well-large" style="min-height: 150px; ">
               <b class="headlines pull-right">Headlines</b><br />
-
-              <li class="list-group-item"><a href="#"><i class="fa fa-th-list "></i> Heading 1</a></li>
-              <li class="list-group-item"><a href="#"><i class="fa fa-th-list "></i> Heading 2</a></li>
-              <li class="list-group-item"><a href="#"><i class="fa fa-th-list "></i> Heading 3</a></li>
-
+              <% headlines.each do |headline| %>
+                <li class="list-group-item" onclick="showHeadlineDetails('<%= headline.news_id %>')"><a href="#"><i class="fa fa-th-list "></i> <%= UserNote.trim(headline.title, 20) %></a></li>
+              <% end %>
             </div>
           </div>
 
@@ -612,6 +610,10 @@
       });
       jQuery('#viewNotesModal').modal('show');
       return false;
+    }
+
+    function showHeadlineDetails(newsID){
+      window.location = "/read_headlines/" + newsID;
     }
 
   </script>
