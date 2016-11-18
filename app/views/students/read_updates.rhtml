@@ -1,0 +1,14 @@
+<div class="row" style="min-height: 500px">
+  <div class="bs-callout bs-callout-info" style="margin-left: 6px;">
+    <p><b><%= @update.title %></b></p>
+
+    <p><%= @update.details %></p>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h5>Date Created:</h5>
+        <p><%= @update.created_at.to_date.strftime("%d/%b/%Y") %></p>
+      </div>
+    </div>
+  </div>
+</div>

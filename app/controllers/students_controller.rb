@@ -142,7 +142,13 @@ class StudentsController < ApplicationController
   def read_headlines
     @news = News.find(params[:news_id])
     @user = User.find(session[:user].user_id)
-    @page_title = UserNote.trim(@news.title, 50)
+    @page_title = "Headline: " + UserNote.trim(@news.title, 50)
   end
-  
+
+  def read_updates
+    @update = Update.find(params[:update_id])
+    @user = User.find(session[:user].user_id)
+    @page_title = "Update: " + UserNote.trim(@update.title, 50)
+  end
+
 end

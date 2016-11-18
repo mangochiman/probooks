@@ -425,12 +425,10 @@
 
           <div class="col-sm-3 col-md-3 pull-right">
             <div class="well well-large" style="min-height: 150px; ">
-              <b class="headlines pull-right">Updates <span class="label label-success">27</span></b><br />
-
-              <li class="list-group-item"><a href="#"><i class="fa fa-refresh "></i> Update 1</a></li>
-              <li class="list-group-item"><a href="#"><i class="fa fa-refresh "></i> Update 2</a></li>
-              <li class="list-group-item"><a href="#"><i class="fa fa-refresh "></i> Update 3</a></li>
-
+              <b class="headlines pull-right">Updates <span class="label label-success"><%= updates.count %></span></b><br />
+              <% updates.each do |update| %>
+                <li class="list-group-item" onclick="showUpdateDetails('<%= update.update_id %>')"><a href="#"><i class="fa fa-refresh "></i> <%= UserNote.trim(update.title, 20) %></a></li>
+              <% end %>
             </div>
           </div>
         </div>
@@ -614,6 +612,10 @@
 
     function showHeadlineDetails(newsID){
       window.location = "/read_headlines/" + newsID;
+    }
+
+    function showUpdateDetails(updateID){
+      window.location = "/read_updates/" + updateID;
     }
 
   </script>

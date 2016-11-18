@@ -44,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.view_by_faculty '/select_books_by_faculty/:faculty_id', :controller => 'students', :action => 'select_books_by_faculty'
   map.search_results  '/search_results',  :controller => 'students', :action => 'search_results'
   map.read_headlines '/read_headlines/:news_id', :controller => 'students', :action => 'read_headlines'
+  map.read_updates '/read_updates/:update_id', :controller => 'students', :action => 'read_updates'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
