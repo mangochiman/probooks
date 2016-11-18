@@ -415,16 +415,18 @@
         </div>-->
 
           <div class="col-sm-3 col-md-3 pull-right">
-            <div class="well well-large" style="min-height: 150px; ">
+            <div class="well well-large" style="min-height: 150px;">
               <b class="headlines pull-right">Headlines</b><br />
-              <% headlines.each do |headline| %>
-                <li class="list-group-item" onclick="showHeadlineDetails('<%= headline.news_id %>')"><a href="#"><i class="fa fa-th-list "></i> <%= UserNote.trim(headline.title, 20) %></a></li>
-              <% end %>
+              <div style="overflow: auto; height: 150px; overflow-y: hidden;" class="news-headlines">
+                <% headlines.each do |headline| %>
+                  <li class="list-group-item" onclick="showHeadlineDetails('<%= headline.news_id %>')"><a href="#"><i class="fa fa-th-list "></i> <%= UserNote.trim(headline.title, 20) %></a></li>
+                <% end %>
+              </div>
             </div>
           </div>
 
           <div class="col-sm-3 col-md-3 pull-right">
-            <div class="well well-large" style="min-height: 150px; ">
+            <div class="well well-large" style="min-height: 150px;">
               <b class="headlines pull-right">Updates <span class="label label-success"><%= updates.count %></span></b><br />
               <% updates.each do |update| %>
                 <li class="list-group-item" onclick="showUpdateDetails('<%= update.update_id %>')"><a href="#"><i class="fa fa-refresh "></i> <%= UserNote.trim(update.title, 20) %></a></li>
@@ -617,6 +619,22 @@
     function showUpdateDetails(updateID){
       window.location = "/read_updates/" + updateID;
     }
+
+    $(".news-headlines").animate({ scrollTop: $('.news-headlines').height() }, 5000);
+    setTimeout(function() {
+      $('.news-headlines').animate({scrollTop:0}, 5000);
+    },5000);
+
+    var scrolltopbottom =  setInterval(function(){
+      $(".news-headlines").animate({
+        scrollTop: $('.news-headlines').height()
+      }, 5000);
+
+      setTimeout(function() {
+        $('.news-headlines').animate({scrollTop:0}, 5000);
+      },5000);
+
+    },10000);
 
   </script>
 
