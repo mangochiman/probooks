@@ -13,7 +13,7 @@ user_role.username = user.username
 user_role.role = 'admin'
 user_role.save
 
-categories = ['Primary', 'Secondary', 'Tertiary']
+categories = ['Primary', 'Secondary', 'Tertiary', 'DIGEST']
 categories.each do |category_name|
   new_category = Category.new
   new_category.name = category_name

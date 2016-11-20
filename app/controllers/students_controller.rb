@@ -16,6 +16,7 @@ class StudentsController < ApplicationController
     primary_category_id = Category.find_by_name("PRIMARY").category_id
     secondary_category_id = Category.find_by_name("SECONDARY").category_id
     tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+    digest_category_id = Category.find_by_name("DIGEST").category_id
 
     @primary_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", 
       :conditions => ["category_id =? AND book_id NOT IN (?)", primary_category_id, selected_book_ids])
@@ -23,6 +24,9 @@ class StudentsController < ApplicationController
       :conditions => ["category_id =? AND book_id NOT IN (?)", secondary_category_id, selected_book_ids])
     @tertiary_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)",
       :conditions => ["category_id =? AND book_id NOT IN (?)", tertiary_category_id, selected_book_ids])
+    @reades_digest_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)",
+      :conditions => ["category_id =? AND book_id NOT IN (?)", digest_category_id, selected_book_ids])
+    
   end
 
   def update_my_book_shelf

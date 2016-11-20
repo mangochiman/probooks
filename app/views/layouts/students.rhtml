@@ -416,7 +416,7 @@
 
           <div class="col-sm-3 col-md-3 pull-right">
             <div class="well well-large" style="min-height: 150px;">
-              <b class="headlines pull-right">Headlines</b><br />
+              <b class="headlines pull-right">Headlines <span class="label label-success"><%= headlines.count %></span></b><br />
               <div style="overflow: auto; height: 150px; overflow-y: hidden;" class="news-headlines">
                 <% headlines.each do |headline| %>
                   <li class="list-group-item" onclick="showHeadlineDetails('<%= headline.news_id %>')"><a href="#"><i class="fa fa-th-list "></i> <%= UserNote.trim(headline.title, 20) %></a></li>

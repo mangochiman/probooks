@@ -127,6 +127,41 @@
   </div>
 </div>
 
+<div class="panel panel-default">
+  <p class="panel-heading"><b>READER'S DIGEST BOOKS</b></p>
+  <div class="panel-body">
+    <% unless @reades_digest_books_category.blank? %>
+      <ul class="list-group">
+        <% @reades_digest_books_category.each do |category| %>
+          <li class="list-group-item">
+            <div class="media">
+              <a href="#" class="pull-left">
+                <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
+
+              %>
+                <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+              </a>
+              <div class="media-body">
+                <p class="text-sm pull-right muted">Uploaded on <%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></p>
+                <p class="media-heading">
+                  Book title: <a href="#"><%= category.book.title %></a><br />
+                  Authors: <a href="#"><%= category.book.author %></a></p>
+                <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span></p>
+                <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
+                <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success pull-right"><i class="fa fa-eye"></i> Browse Book</button>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        No books under this category
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="selectBookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
