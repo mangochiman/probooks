@@ -33,12 +33,12 @@ module ApplicationHelper
   end
 
   def headlines
-    news = News.find(:all)
+    news = News.find(:all, :order => "news_id DESC")
     return news
   end
 
   def updates
-    updates = Update.find(:all)
+    updates = Update.find(:all, :order => "update_id DESC")
     return updates
   end
 
