@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-
+  before_filter :check_admin_role
   def home
     @page_title = "Home"
     primary_category_id = Category.find_by_name("PRIMARY").category_id
