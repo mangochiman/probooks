@@ -854,7 +854,8 @@ table.table.list tr:first-child td {
     max-width: 300px;
   }
 }
-.theme-blue .navbar {
+
+/*.theme-blue .navbar {
   background: #4d5b76;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));
   background: -ms-linear-gradient(bottom, #4d5b76, #6f80a1);
@@ -862,7 +863,8 @@ table.table.list tr:first-child td {
   background: -o-linear-gradient(bottom, #4d5b76, #6f80a1);
   filter: progid:dximagetransform.microsoft.gradient(startColorStr='#e3e3e3', EndColorStr='#ffffff');
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#6f80a1',EndColorStr='#4d5b76')";
-}
+}*/
+
 /* Side notes for calling out things
 -------------------------------------------------- */
 /* Base styles (regardless of theme) */
