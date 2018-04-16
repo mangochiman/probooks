@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_filter :check_admin_role
+  #before_filter :check_admin_role
   def upload_books_menu
     @page_title = "Upload Books"
     primary_category_id = Category.find_by_name("PRIMARY").category_id

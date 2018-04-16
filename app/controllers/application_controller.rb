@@ -23,9 +23,9 @@ class ApplicationController < ActionController::Base
     user = User.find(session[:user].user_id) rescue nil
     unless user.blank?
       user_roles = user.user_roles.collect{|r|r.role}
-      return true if user_roles.include?('admin')
-      redirect_to ("/dashboard") and return
-      return false
+      #return true if user_roles.include?('admin')
+      #redirect_to ("/dashboard") and return
+      #return false
     end
   end
 
