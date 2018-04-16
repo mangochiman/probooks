@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  skip_before_filter :authenticate_user, :only => [:login, :authenticate, :create, :reset_password]
+  #skip_before_filter :authenticate_user, :only => [:login, :authenticate, :create, :reset_password]
+  #skip_before_filter :access_denied, :only => [:access_denied]
+  
   def login
     #@school_name = GlobalProperty.find_by_property("school_name") rescue nil
     # @settings = school_setting
@@ -205,4 +207,8 @@ class UsersController < ApplicationController
     end
   end
 
+  def access_denied
+    render :layout => false
+  end
+  
 end
