@@ -1,165 +1,181 @@
-<style>
+<script type="text/javascript">
+  function showBooks(bookCategory){
+    jQuery(".primary, .secondary, .tertiary, .readers").hide();
+    jQuery('.category').html(bookCategory.toUpperCase() + " Books");
+    jQuery("." + bookCategory).show();
+  }
+</script>
+
+<style type="text/css">
   .thumb-sm {
     max-height: 111px;
     max-width: 100px;
   }
 
-  .panel-body .btn:not(.btn-block) {
-    width: 147px;
+  .scrollable{
+    overflow: auto;
+    height: 350px;
   }
+
+  body{
+    overflow: hidden;
+  }
+
+  .primary, .secondary, .tertiary, .readers{
+    display: none;
+}
 </style>
-<div class="alert alert-success">
+<!--<div class="alert alert-success">
   Welcome to Bookstore. Subscribe to books that you like. Books that you have already subscribed to are NOT visible
-</div>
-<div class="panel panel-default">
-  <p class="panel-heading"><b>PRIMARY BOOKS</b></p>
-  <div class="panel-body">
-    <% unless @primary_books_category.blank? %>
-      <ul class="list-group">
-        <% @primary_books_category.each do |category| %>
-          <li class="list-group-item">
-            <div class="media">
-              <a href="#" class="pull-left">
-                <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
+</div>-->
 
-              %>
-                <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
-              </a>
-              <div class="media-body">
-                <p class="text-sm pull-right muted">Uploaded on <%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></p>
-                <p class="media-heading">
-                  Book title: <a href="#"><%= category.book.title %></a><br />
-                  Authors: <a href="#"><%= category.book.author %></a></p>
-                <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p>
-                <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success pull-right"><i class="fa fa-eye"></i> Browse Book</button>
-              </div>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <div class="alert alert-danger alert-dismissable">
-        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-        No books under this category
-      </div>
-    <% end %>
+
+<div class="panel panel-default">
+  <p class="panel-heading"><b>BOOK CATEGORIES</b></p>
+  <div class="panel-body">
+    <p style="text-align: center;">
+      <button onclick="showBooks('primary');" class="btn btn-primary btn-large">Primary Books</button>
+      <button onclick="showBooks('secondary');" class="btn btn-primary btn-large">Secondary Books</button>
+      <button onclick="showBooks('tertiary');" class="btn btn-primary btn-large">Tertiary Books</button>
+      <button onclick="showBooks('readers');" class="btn btn-primary btn-large">Readers Digest Books </button>
+    </p>
   </div>
 </div>
 
 <div class="panel panel-default">
-  <p class="panel-heading"><b>SECONDARY BOOKS</b></p>
-  <div class="panel-body">
-    <% unless @secondary_books_category.blank? %>
-      <ul class="list-group">
-        <% @secondary_books_category.each do |category| %>
-          <li class="list-group-item">
-            <div class="media">
-              <a href="#" class="pull-left">
-                <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
+  <div class="header" style="padding-bottom: 0px; margin: 0px;"><h1 class="category"style="text-align: center;">Select category</h1></div>
+  <div class="scrollable">
+    <div class="panel-body">
+      <div class="primary">
+        <table style="width: 100%;">
+          <% @primary_books_category.in_groups_of(3, false).each do |group| %>
+            <tr style="padding-bottom: 100px;">
+              <% group.each do |category| %>
+                <td style="padding-right: 20px;">
+                  <div class="media">
+                    <a href="#" class="pull-left">
+                      <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}" %>
+                      <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+                    </a>
 
-              %>
-                <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
-              </a>
-              <div class="media-body">
-                <p class="text-sm pull-right muted">Uploaded on <%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></p>
-                <p class="media-heading">
-                  Book title: <a href="#"><%= category.book.title %></a><br />
-                  Authors: <a href="#"><%= category.book.author %></a></p>
-                <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span></p>
-                <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success pull-right"><i class="fa fa-eye"></i> Browse Book</button>
-              </div>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <div class="alert alert-danger alert-dismissable">
-        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-        No books under this category
+                    <div>
+                      <p>
+                        Book title: <a href="#"><%= category.book.title %></a><br />
+                        Authors: <a href="#"><%= category.book.author %></a><br />
+                        Uploaded on <a href="#"><%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></a>
+                      </p>
+
+                      <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p><br />
+                      <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
+                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Browse Book</button>
+                    </div>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
       </div>
-    <% end %>
-  </div>
-</div>
 
-<div class="panel panel-default">
-  <p class="panel-heading"><b>TERTIARY BOOKS</b></p>
-  <div class="panel-body">
-    <% unless @tertiary_books_category.blank? %>
-      <ul class="list-group">
-        <% @tertiary_books_category.each do |category| %>
-          <li class="list-group-item">
-            <div class="media">
-              <a href="#" class="pull-left">
-                <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
 
-              %>
-                <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
-              </a>
-              <div class="media-body">
-                <p class="text-sm pull-right muted">Uploaded on <%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></p>
-                <p class="media-heading">
 
-                  <% faculties = [] %>
-                  <% category.book.faculties.each do |faculty|  %>
-                    <% faculties << "<a href='/select_books_by_faculty/#{faculty.faculty_id}'>#{faculty.name}</a>" %>
-                  <% end %>
+      <div class="secondary">
+        <table style="width: 100%;">
+          <% @secondary_books_category.in_groups_of(3, false).each do |group| %>
+            <tr style="padding-bottom: 100px;">
+              <% group.each do |category| %>
+                <td style="padding-right: 20px;">
+                  <div class="media">
+                    <a href="#" class="pull-left">
+                      <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}" %>
+                      <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+                    </a>
 
-                  Book title: <a href="#"><%= category.book.title %></a><br />
-                  Authors: <a href="#"><%= category.book.author %></a><br />
-                  Faculties: <%= faculties.join(", ") %>
-                </p>
-                <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span></p>
-                <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success pull-right"><i class="fa fa-eye"></i> Browse Book</button>
-              </div>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <div class="alert alert-danger alert-dismissable">
-        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-        No books under this category
+                    <div>
+                      <p>
+                        Book title: <a href="#"><%= category.book.title %></a><br />
+                        Authors: <a href="#"><%= category.book.author %></a><br />
+                        Uploaded on <a href="#"><%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></a>
+                      </p>
+
+                      <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p><br />
+                      <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
+                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Browse Book</button>
+                    </div>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
       </div>
-    <% end %>
-  </div>
-</div>
 
-<div class="panel panel-default">
-  <p class="panel-heading"><b>READER'S DIGEST BOOKS</b></p>
-  <div class="panel-body">
-    <% unless @reades_digest_books_category.blank? %>
-      <ul class="list-group">
-        <% @reades_digest_books_category.each do |category| %>
-          <li class="list-group-item">
-            <div class="media">
-              <a href="#" class="pull-left">
-                <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}"
 
-              %>
-                <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
-              </a>
-              <div class="media-body">
-                <p class="text-sm pull-right muted">Uploaded on <%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></p>
-                <p class="media-heading">
-                  Book title: <a href="#"><%= category.book.title %></a><br />
-                  Authors: <a href="#"><%= category.book.author %></a></p>
-                <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span></p>
-                <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success pull-right"><i class="fa fa-eye"></i> Browse Book</button>
-              </div>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <div class="alert alert-danger alert-dismissable">
-        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-        No books under this category
+
+      <div class="tertiary">
+        <table style="width: 100%;">
+          <% @tertiary_books_category.in_groups_of(3, false).each do |group| %>
+            <tr style="padding-bottom: 100px;">
+              <% group.each do |category| %>
+                <td style="padding-right: 20px;">
+                  <div class="media">
+                    <a href="#" class="pull-left">
+                      <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}" %>
+                      <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+                    </a>
+
+                    <div>
+                      <p>
+                        Book title: <a href="#"><%= category.book.title %></a><br />
+                        Authors: <a href="#"><%= category.book.author %></a><br />
+                        Uploaded on <a href="#"><%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></a>
+                      </p>
+
+                      <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p><br />
+                      <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
+                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Browse Book</button>
+                    </div>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
       </div>
-    <% end %>
+
+
+      <div class="readers">
+        <table style="width: 100%;">
+          <% @reades_digest_books_category.in_groups_of(3, false).each do |group| %>
+            <tr style="padding-bottom: 100px;">
+              <% group.each do |category| %>
+                <td style="padding-right: 20px;">
+                  <div class="media">
+                    <a href="#" class="pull-left">
+                      <% cover_location = "#{category.book.book_id}_cover_#{category.book.cover_photo_file_name}" %>
+                      <img class="media-object thumb-sm" src="/books/<%= cover_location %>"/>
+                    </a>
+
+                    <div>
+                      <p>
+                        Book title: <a href="#"><%= category.book.title %></a><br />
+                        Authors: <a href="#"><%= category.book.author %></a><br />
+                        Uploaded on <a href="#"><%= category.book.created_at.to_date.strftime("%d-%b-%Y") %></a>
+                      </p>
+
+                      <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p><br />
+                      <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
+                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Browse Book</button>
+                    </div>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
+    </div>
   </div>
 </div>
 
