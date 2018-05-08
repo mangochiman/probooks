@@ -4,6 +4,12 @@
     jQuery('.category').html(bookCategory.toUpperCase() + " Books");
     jQuery("." + bookCategory).show();
   }
+
+  function highLight(obj){
+    jQuery(".book-category-buttons button").removeClass('btn-default').addClass('btn-primary');
+    jQuery(obj).removeClass('btn-primary').addClass('btn-default');
+  }
+
 </script>
 
 <style type="text/css">
@@ -32,12 +38,12 @@
 
 <div class="panel panel-default">
   <p class="panel-heading"><b>BOOK CATEGORIES</b></p>
-  <div class="panel-body">
+  <div class="panel-body book-category-buttons">
     <p style="text-align: center;">
-      <button onclick="showBooks('primary');" class="btn btn-primary btn-large">Primary Books</button>
-      <button onclick="showBooks('secondary');" class="btn btn-primary btn-large">Secondary Books</button>
-      <button onclick="showBooks('tertiary');" class="btn btn-primary btn-large">Tertiary Books</button>
-      <button onclick="showBooks('readers');" class="btn btn-primary btn-large">Readers Digest Books </button>
+      <button onclick="showBooks('primary'); highLight(this);" class="btn btn-primary btn-large">Primary Books</button>
+      <button onclick="showBooks('secondary'); highLight(this);" class="btn btn-primary btn-large">Secondary Books</button>
+      <button onclick="showBooks('tertiary'); highLight(this);" class="btn btn-primary btn-large">Tertiary Books</button>
+      <button onclick="showBooks('readers'); highLight(this);" class="btn btn-primary btn-large">Readers Digest Books </button>
     </p>
   </div>
 </div>
