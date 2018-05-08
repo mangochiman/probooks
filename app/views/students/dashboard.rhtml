@@ -43,6 +43,18 @@
 <div class="panel panel-default" style="min-height: 500px">
   <p class="panel-heading"><b>MY BOOKS (<%= @my_books.count %>)</b></p>
 
+
+  <% if flash[:info] %>
+    <center>
+      <div class="alert alert-success alert-dismissable" style="width: 60%;">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <%= flash[:info] %>
+      </div>
+    </center>
+    <br />
+  <% end %>
+
+
   <div class="scrollable">
     <div class="panel-body">
       <% unless @my_books.blank? %>
