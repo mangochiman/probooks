@@ -1,7 +1,12 @@
 <script type="text/javascript">
   function showBooks(bookCategory){
-    jQuery(".primary, .secondary, .tertiary, .readers").hide();
-    jQuery('.category').html(bookCategory.toUpperCase() + " Books");
+    jQuery(".primary, .secondary, .tertiary, .readers, .posters, .catalogs").hide();
+    if (bookCategory.match(/poster|catalog/i)){
+      jQuery('.category').html(bookCategory.toUpperCase());
+    } else {
+      jQuery('.category').html(bookCategory.toUpperCase() + " Books");
+    }
+    
     jQuery("." + bookCategory).show();
   }
 
@@ -44,6 +49,8 @@
       <button onclick="showBooks('secondary'); highLight(this);" class="btn btn-primary btn-large">Secondary Books</button>
       <button onclick="showBooks('tertiary'); highLight(this);" class="btn btn-primary btn-large">Tertiary Books</button>
       <button onclick="showBooks('readers'); highLight(this);" class="btn btn-primary btn-large">Readers Digest Books </button>
+      <button onclick="showBooks('posters'); highLight(this);" class="btn btn-primary btn-large">Posters </button>
+      <button onclick="showBooks('catalogs'); highLight(this);" class="btn btn-primary btn-large">Catalogs </button>
     </p>
   </div>
 </div>
