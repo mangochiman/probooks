@@ -209,6 +209,10 @@
       cursor: pointer;
       color: red !important;
     }
+
+    .news-headlines a:hover, .news-headlines a:focus, .updates a:hover, .updates a:focus {
+      color: blue !important;
+    }
   </style>
 
 
@@ -290,7 +294,7 @@
           <ul>
             <% count = 1 %>
             <% user_notes.each do |user_note| %>
-              <li><a href="#" onclick="return showViewNotespopup('<%= user_note.user_note_id  %>')"><%= "#{count}.#{UserNote.trim(user_note.data, 20)}"%></a><span onclick="showRemoveNotesPopup(<%= user_note.user_note_id%>);" style="color: #8B0000; padding-right: 10px !important;" class="pull-right del">X</span></li>
+              <li><a class="notes" href="#" onclick="return showViewNotespopup('<%= user_note.user_note_id  %>')"><%= "#{count}.#{UserNote.trim(user_note.data, 20)}"%></a><span onclick="showRemoveNotesPopup(<%= user_note.user_note_id%>);" style="color: #8B0000; padding-right: 10px !important;" class="pull-right del">X</span></li>
               <% count = count + 1 %>
             <% end %>
           </ul>
