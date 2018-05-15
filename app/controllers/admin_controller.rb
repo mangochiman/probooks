@@ -447,6 +447,78 @@ class AdminController < ApplicationController
     redirect_to("/remove_headlines_menu") and return
   end
 
+  def new_catalog_menu
+    @page_title = "New Catalog"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+
+  def create_catalog
+    catalog = Catalog.new
+    catalog.uploaded_file = params[:catalog]
+    catalog.title = params[:catalog_title]
+
+    if catalog.save
+      catalog_data = File.read(params[:catalog].path)
+
+      File.open(Rails.root.join('public', 'catalogs', catalog.filename), 'wb') do |file|
+        file.write(catalog_data) #Create a catalog to a directory
+      end 
+
+      flash[:notice] = "You have successfully uploaded a catalog"
+      redirect_to("/new_catalog_menu")
+    else
+      #flash[:error] = book.errors.full_messages.join('<br />')
+      flash[:error] = catalog.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      redirect_to("/new_catalog_menu")
+    end
+  end
+
+
+  def remove_catalogs_menu
+    @page_title = "Remove Catalogs"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def new_posters_menu
+    @page_title = "New Posters"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+  def remove_posters_menu
+    @page_title = "Remove Posters"
+    primary_category_id = Category.find_by_name("PRIMARY").category_id
+    secondary_category_id = Category.find_by_name("SECONDARY").category_id
+    tertiary_category_id = Category.find_by_name("TERTIARY").category_id
+
+    @primary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", primary_category_id])
+    @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
+    @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
+
+  end
+
+
   def new_updates_menu
     @page_title = "New Update"
     primary_category_id = Category.find_by_name("PRIMARY").category_id

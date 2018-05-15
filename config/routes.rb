@@ -33,6 +33,13 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_update '/edit_update/:update_id', :controller => 'admin', :action => 'edit_update'
   map.show_update '/show_update/:update_id', :controller => 'admin', :action => 'show_update'
 
+  map.new_catalog_menu  '/new_catalog_menu',  :controller => 'admin', :action => 'new_catalog_menu'
+  map.remove_catalogs_menu  '/remove_catalogs_menu',  :controller => 'admin', :action => 'remove_catalogs_menu'
+
+  map.new_posters_menu  '/new_posters_menu',  :controller => 'admin', :action => 'new_posters_menu'
+  map.remove_posters_menu  '/remove_posters_menu',  :controller => 'admin', :action => 'remove_posters_menu'
+
+
   map.browse_by_category '/browse_by_category/:category_id', :controller => 'admin', :action => 'browse_by_category'
   map.edit_user '/edit_user/:user_id', :controller => 'admin', :action => 'edit_user'
   map.view_by_faculty '/view_by_faculty/:faculty_id', :controller => 'admin', :action => 'view_by_faculty'
