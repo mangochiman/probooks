@@ -26,7 +26,9 @@ class StudentsController < ApplicationController
       :conditions => ["category_id =? AND book_id NOT IN (?)", tertiary_category_id, selected_book_ids])
     @reades_digest_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)",
       :conditions => ["category_id =? AND book_id NOT IN (?)", digest_category_id, selected_book_ids])
-    
+
+    @catalogs = Catalog.all
+    @posters = Poster.all
   end
 
   def update_my_book_shelf

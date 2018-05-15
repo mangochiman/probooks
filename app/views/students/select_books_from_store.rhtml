@@ -32,7 +32,7 @@
     overflow: hidden;
   }
 
-  .primary, .secondary, .tertiary, .readers{
+  .primary, .secondary, .tertiary, .readers, .posters, .catalogs{
     display: none;
 }
 </style>
@@ -179,6 +179,62 @@
                       <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p><br />
                       <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
                       <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Browse Book</button>
+                    </div>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
+      <div class="catalogs">
+        <table style="width: 100%;">
+          <% @catalogs.in_groups_of(3, false).each do |group| %>
+            <tr style="padding-bottom: 100px;">
+              <% group.each do |catalog| %>
+                <td style="padding-right: 20px;">
+                  <div class="media">
+                    <a href="#" class="pull-left">
+                      <img class="media-object thumb-sm" src="/catalogs/<%= catalog.filename %>"/>
+                    </a>
+
+                    <div>
+                      <p>
+                        Title: <a href="#"><%= catalog.title %></a><br />
+                        Uploaded on <a href="#"><%= catalog.created_at.to_date.strftime("%d-%b-%Y") %></a>
+                      </p>
+
+                      <button onclick="selectCatalogConfirm('<%= catalog.catalog_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
+                      <button onclick="zoomPoster('<%= catalog.catalog_id %>')" class="btn btn-success"><i class="fa fa-eye"></i> Zoom</button>
+                    </div>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
+      <div class="posters">
+        <table style="width: 100%;">
+          <% @posters.in_groups_of(3, false).each do |group| %>
+            <tr style="padding-bottom: 100px;">
+              <% group.each do |poster| %>
+                <td style="padding-right: 20px;">
+                  <div class="media">
+                    <a href="#" class="pull-left">
+                      <img class="media-object thumb-sm" src="/posters/<%= poster.filename %>"/>
+                    </a>
+
+                    <div>
+                      <p>
+                        Title: <a href="#"><%= poster.title %></a><br />
+                        Uploaded on <a href="#"><%= poster.created_at.to_date.strftime("%d-%b-%Y") %></a>
+                      </p>
+
+                      <button onclick="selectPosterConfirm('<%= poster.poster_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
+                      <button onclick="zoomPoster('<%= poster.poster_id %>')" class="btn btn-success"><i class="fa fa-eye"></i> Zoom</button>
                     </div>
                   </div>
                 </td>
