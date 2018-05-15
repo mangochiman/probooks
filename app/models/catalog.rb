@@ -1,4 +1,6 @@
 class Catalog < ActiveRecord::Base
+  set_table_name :catalogs
+  set_primary_key :catalog_id
 
   def uploaded_file=(data)
     self.filename = data.original_filename

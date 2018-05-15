@@ -1,4 +1,7 @@
 class Poster < ActiveRecord::Base
+  set_table_name :posters
+  set_primary_key :poster_id
+
   def uploaded_file=(data)
     self.filename = data.original_filename
     self.content_type = data.content_type
