@@ -481,6 +481,27 @@ class AdminController < ApplicationController
     end
   end
 
+  def create_poster
+    poster = Poster.new
+    poster.uploaded_file = params[:poster]
+    poster.title = params[:poster_title]
+
+    if poster.save
+      poster_data = File.read(params[:poster].path)
+
+      File.open(Rails.root.join('public', 'posters', poster.filename), 'wb') do |file|
+        file.write(poster_data) #Create a catalog to a directory
+      end
+
+      flash[:notice] = "You have successfully uploaded a poster"
+      redirect_to("/new_posters_menu")
+    else
+      #flash[:error] = book.errors.full_messages.join('<br />')
+      flash[:error] = poster.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      redirect_to("/new_posters_menu")
+    end
+  end
+
 
   def remove_catalogs_menu
     @page_title = "Remove Catalogs"
@@ -511,6 +532,23 @@ class AdminController < ApplicationController
     redirect_to("/remove_catalogs_menu") and return
   end
 
+  def remove_posters
+    poster_ids = params[:poster_ids].split(',')
+    if poster_ids.blank?
+      flash[:error] = "Select item to delete"
+      redirect_to("/remove_posters_menu") and return
+    end
+
+    poster_ids.each do |poster_id|
+      poster = Poster.find(poster_id)
+      poster.delete
+    end
+
+    flash[:notice] = "You have succesfully deleted posters"
+    redirect_to("/remove_posters_menu") and return
+  end
+
+
 
   def new_posters_menu
     @page_title = "New Posters"
@@ -534,6 +572,7 @@ class AdminController < ApplicationController
     @secondary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", secondary_category_id])
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
+    @posters = Poster.all
   end
 
 

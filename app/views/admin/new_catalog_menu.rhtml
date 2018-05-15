@@ -29,22 +29,3 @@
     </div>
   </form>
 </div>
-
-<script>
-  function checkValue(){
-    selectedValues = jQuery('.book-category').val();
-    if (selectedValues){
-      if (selectedValues.toString().match(/TERTIARY/i)){
-        jQuery('.faculty-div').show();
-      }else{
-        console.log('Here')
-        jQuery('.faculty-div').hide();
-        $(".faculty").val('').trigger("chosen:updated");
-      }
-    }else{
-      jQuery('.faculty-div').hide();
-      $(".faculty").val('').trigger("chosen:updated");
-    }
-  }
-
-</script>
