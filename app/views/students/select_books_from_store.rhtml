@@ -206,7 +206,7 @@
                       </p>
 
                       <button onclick="selectCatalogConfirm('<%= catalog.catalog_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                      <button onclick="zoomPoster('<%= catalog.catalog_id %>')" class="btn btn-success"><i class="fa fa-eye"></i> Zoom</button>
+                      <button onclick="zoomCatalog('<%= catalog.catalog_id %>')" class="btn btn-success"><i class="fa fa-eye"></i> Zoom</button>
                     </div>
                   </div>
                 </td>
@@ -316,6 +316,53 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="zoomCatalogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Catalog</h4>
+      </div>
+      <div class="modal-body">
+        <div class="catalog-zoom">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="zoomPosterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Poster</h4>
+      </div>
+      <div class="modal-body">
+        <div class="poster-zoom">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 
 
 <div class="col-lg-12">
@@ -450,5 +497,42 @@
 
   function viewPoster(posterID){
     //
+  }
+
+
+  function zoomCatalog(catalog_id){
+    //catalog-zoom
+    jQuery('#zoomCatalogModal').modal('show');
+    jQuery.ajax({
+      type: "POST",
+      url: "/students/get_catalog_file",
+      data: "catalog_id=" + catalog_id,
+      beforeSend: function(){
+        jQuery(".catalog-zoom").html("Loading........")
+      },
+      success: function(result){
+        img = '<img src="/catalogs/' + result+ '"></img>';
+        jQuery(".catalog-zoom").html(img)
+      }
+
+    });
+  }
+
+  function zoomPoster(poster_id){
+    //catalog-zoom
+    jQuery('#zoomPosterModal').modal('show');
+    jQuery.ajax({
+      type: "POST",
+      url: "/students/get_poster_file",
+      data: "poster_id=" + poster_id,
+      beforeSend: function(){
+        jQuery(".poster-zoom").html("Loading........")
+      },
+      success: function(result){
+        img = '<img src="/posters/' + result+ '"></img>';
+        jQuery(".poster-zoom").html(img)
+      }
+
+    });
   }
 </script>

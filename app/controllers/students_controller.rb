@@ -129,6 +129,16 @@ class StudentsController < ApplicationController
         params[:poster_id], session[:user].user_id])
     render :text => user_poster.poster.filename and return
   end
+
+  def get_catalog_file
+    catalog = Catalog.find(params[:catalog_id])
+    render :text => catalog.filename and return
+  end
+
+  def get_poster_file
+    poster = Poster.find(params[:poster_id])
+    render :text => poster.filename and return
+  end
   
   def my_recent_books_menu
     @page_title = "Recent Books"
