@@ -44,6 +44,32 @@ class StudentsController < ApplicationController
     end
   end
   
+  def update_my_catalog_shelf
+    student_catalog = StudentCatalog.new
+    student_catalog.user_id = session[:user].user_id
+    student_catalog.catalog_id = params[:catalog_id]
+    if student_catalog.save
+      flash[:notice] = "Your operation is successful"
+      redirect_to("/dashboard") and return
+    else
+      flash[:error] = "Unable to complete your request"
+      redirect_to("/select_books_from_store") and return
+    end
+  end
+
+  def update_my_poster_shelf
+    student_poster = StudentPoster.new
+    student_poster.user_id = session[:user].user_id
+    student_poster.poster_id = params[:poster_id]
+    if student_poster.save
+      flash[:notice] = "Your operation is successful"
+      redirect_to("/dashboard") and return
+    else
+      flash[:error] = "Unable to complete your request"
+      redirect_to("/select_books_from_store") and return
+    end
+  end
+  
   def remove_books_from_shelf_menu
     @page_title = "Remove Books"
   end

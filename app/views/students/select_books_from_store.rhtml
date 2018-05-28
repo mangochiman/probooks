@@ -34,7 +34,7 @@
 
   .primary, .secondary, .tertiary, .readers, .posters, .catalogs{
     display: none;
-}
+  }
 </style>
 <!--<div class="alert alert-success">
   Welcome to Bookstore. Subscribe to books that you like. Books that you have already subscribed to are NOT visible
@@ -270,6 +270,54 @@
 </div>
 <!-- /.modal -->
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="selectCatalogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Catalog Selection</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to select this catalog
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+        <button onclick="selectCatalog();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="selectPosterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Poster Selection</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to select this catalog
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+        <button onclick="selectPoster();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
 <div class="col-lg-12">
   <div class="modal fade" id="viewBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
@@ -346,4 +394,61 @@
     jQuery('#viewBook').modal('show');
   }
 
+
+  var catalogID;
+
+  function selectCatalogConfirm(catalogid){
+    catalogID = catalogid;
+    jQuery('#selectCatalogModal').modal('show');
+  }
+
+  function selectCatalog(){
+    body = document.getElementsByTagName("body")[0];
+
+    form = document.createElement("form");
+    form.method = "POST"
+    form.action = "/students/update_my_catalog_shelf";
+    body.appendChild(form);
+
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.value = catalogID;
+    input.name = "catalog_id";
+    form.appendChild(input);
+
+    form.submit();
+  }
+
+  function viewCatalog(catalogID){
+    //
+  }
+
+
+  var posterID;
+
+  function selectPosterConfirm(posterid){
+    posterID = posterid;
+    jQuery('#selectPosterModal').modal('show');
+  }
+
+  function selectPoster(){
+    body = document.getElementsByTagName("body")[0];
+
+    form = document.createElement("form");
+    form.method = "POST"
+    form.action = "/students/update_my_poster_shelf";
+    body.appendChild(form);
+
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.value = posterID;
+    input.name = "poster_id";
+    form.appendChild(input);
+
+    form.submit();
+  }
+
+  function viewPoster(posterID){
+    //
+  }
 </script>
