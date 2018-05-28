@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :books, :through => :user_books
   has_many :student_catalogs, :foreign_key => :user_id
   has_many :student_posters, :foreign_key => :user_id
+  has_many :catalogs, :through => :student_catalogs
+  has_many :posters, :through => :student_posters
 
   validates_uniqueness_of :username, :message => ' already taken'
   validates_uniqueness_of :email, :message => ' already taken'

@@ -33,7 +33,7 @@
 
   .scrollable{
     overflow: auto;
-    height: 450px;
+    height: 460px;
   }
 
   body{
@@ -80,6 +80,50 @@
                 </td>
               <%end%>
             </tr>
+            <tr><td style="padding: 10px;"></td></tr>
+          <% end %>
+
+          <% @my_catalogs.in_groups_of(4, false).each do |group| %>
+            <tr style="padding-bottom: 100px;">
+              <% group.each do |catalog| %>
+                <td style="padding-right: 20px;">
+                  <a href="#" class="pull-left">
+                    <img class="media-object thumb-sm" src="/catalogs/<%= catalog.filename %>"/>
+                  </a>
+                  <div>
+                    <p>
+                      Title: <a href="#"><%= catalog.title %></a><br />
+                      Uploaded on: <a href="#"><%= catalog.created_at.to_date.strftime("%d-%b-%Y") %></a><br />
+                    </p>
+                    <br /><br /><br /><br />
+                    <button style="width: 200px;" onclick="zoomCatalog('<%= catalog.catalog_id %>')" class="btn btn-default"><i class="fa fa-eye"></i> Zoom Catalog</button><br />
+                    <button style="width: 200px;" onclick="removeCatalogConfirm('<%= catalog.catalog_id %>')" class="btn btn-default"><i class="fa fa-cut"></i> Remove From Shelf</button><br />
+                  </div>
+                </td>
+              <%end%>
+            </tr>
+            <tr><td style="padding: 10px;"></td></tr>
+          <% end %>
+
+          <% @my_posters.in_groups_of(4, false).each do |group| %>
+            <tr style="padding-bottom: 100px;">
+              <% group.each do |poster| %>
+                <td style="padding-right: 20px;">
+                  <a href="#" class="pull-left">
+                    <img class="media-object thumb-sm" src="/posters/<%= poster.filename %>"/>
+                  </a>
+                  <div>
+                    <p>
+                      Title: <a href="#"><%= poster.title %></a><br />
+                      Uploaded on: <a href="#"><%= poster.created_at.to_date.strftime("%d-%b-%Y") %></a><br />
+                    </p>
+                    <br /><br /><br /><br />
+                    <button style="width: 200px;" onclick="zoomPoster('<%= poster.poster_id %>')" class="btn btn-default"><i class="fa fa-eye"></i> Zoom Poster</button><br />
+                    <button style="width: 200px;" onclick="removePosterConfirm('<%= poster.poster_id %>')" class="btn btn-default"><i class="fa fa-cut"></i> Remove From Shelf</button><br />
+                  </div>
+                </td>
+              <%end%>
+            </tr>
           <% end %>
         </table>
 
@@ -113,6 +157,95 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="deleteCatalogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to remove the selected catalog from your bookshelf?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+        <button onclick="removeCatalog();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="deletePosterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to remove the selected poster from your bookshelf?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+        <button onclick="removePoster();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="zoomCatalogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Catalog</h4>
+      </div>
+      <div class="modal-body">
+        <div class="catalog-zoom">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="zoomPosterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Poster</h4>
+      </div>
+      <div class="modal-body">
+        <div class="poster-zoom">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 
 <div class="col-lg-12">
   <div class="modal fade" id="viewBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
@@ -192,5 +325,95 @@
     iframe.src = '/books/' + bookID + '.pdf'
     jQuery('#viewBook').modal('show');
   }
-  
+
+  function zoomCatalog(catalog_id){
+
+  }
+
+
+  var catalogID;
+
+  function removeCatalogConfirm(catalogid){
+    catalogID = catalogid;
+    jQuery('#deleteCatalogModal').modal('show');
+  }
+
+  function removeCatalog(){
+    body = document.getElementsByTagName("body")[0];
+
+    form = document.createElement("form");
+    form.method = "POST"
+    form.action = "/students/delete_catalogs_from_my_shelf";
+    body.appendChild(form);
+
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.value = catalogID;
+    input.name = "catalog_id";
+    form.appendChild(input);
+
+    form.submit();
+  }
+
+
+  var posterID;
+
+  function removePosterConfirm(posterid){
+    posterID = posterid;
+    jQuery('#deletePosterModal').modal('show');
+  }
+
+  function removePoster(){
+    body = document.getElementsByTagName("body")[0];
+
+    form = document.createElement("form");
+    form.method = "POST"
+    form.action = "/students/delete_posters_from_my_shelf";
+    body.appendChild(form);
+
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.value = posterID;
+    input.name = "poster_id";
+    form.appendChild(input);
+
+    form.submit();
+  }
+
+  function zoomCatalog(catalog_id){
+    //catalog-zoom
+    jQuery('#zoomCatalogModal').modal('show');
+    jQuery.ajax({
+      type: "POST",
+      url: "/students/get_catalog_image",
+      data: "catalog_id=" + catalog_id,
+      beforeSend: function(){
+        jQuery(".catalog-zoom").html("Loading........")
+      },
+      success: function(result){
+        img = '<img src="/catalogs/' + result+ '"></img>';
+        jQuery(".catalog-zoom").html(img)
+      }
+
+    });
+  }
+
+  function zoomPoster(poster_id){
+    //catalog-zoom
+    jQuery('#zoomPosterModal').modal('show');
+    jQuery.ajax({
+      type: "POST",
+      url: "/students/get_poster_image",
+      data: "poster_id=" + poster_id,
+      beforeSend: function(){
+        jQuery(".poster-zoom").html("Loading........")
+      },
+      success: function(result){
+        img = '<img src="/posters/' + result+ '"></img>';
+        jQuery(".poster-zoom").html(img)
+      }
+
+    });
+  }
+
 </script>

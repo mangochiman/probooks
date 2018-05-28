@@ -5,6 +5,8 @@ class StudentsController < ApplicationController
     @page_title = "Book Shelf"
     @user = User.find(session[:user].user_id)
     @my_books = @user.books
+    @my_catalogs = @user.catalogs
+    @my_posters = @user.posters
   end
 
   def select_books_from_store
@@ -90,6 +92,42 @@ class StudentsController < ApplicationController
       flash[:info] = "Unable to process your request"
       redirect_to("/dashboard") and return
     end
+  end
+
+  def delete_catalogs_from_my_shelf
+    user_catalog = StudentCatalog.find(:last, :conditions => ["catalog_id =? AND user_id =?",
+        params[:catalog_id], session[:user].user_id])
+    if user_catalog.delete
+      flash[:info] = "Your operation was successful"
+      redirect_to("/dashboard") and return
+    else
+      flash[:info] = "Unable to process your request"
+      redirect_to("/dashboard") and return
+    end
+  end
+
+  def delete_posters_from_my_shelf
+    user_poster = StudentPoster.find(:last, :conditions => ["poster_id =? AND user_id =?",
+        params[:poster_id], session[:user].user_id])
+    if user_poster.delete
+      flash[:info] = "Your operation was successful"
+      redirect_to("/dashboard") and return
+    else
+      flash[:info] = "Unable to process your request"
+      redirect_to("/dashboard") and return
+    end
+  end
+
+  def get_catalog_image
+    user_catalog = StudentCatalog.find(:last, :conditions => ["catalog_id =? AND user_id =?",
+        params[:catalog_id], session[:user].user_id])
+    render :text => user_catalog.catalog.filename and return
+  end
+
+  def get_poster_image
+    user_poster = StudentPoster.find(:last, :conditions => ["poster_id =? AND user_id =?",
+        params[:poster_id], session[:user].user_id])
+    render :text => user_poster.poster.filename and return
   end
   
   def my_recent_books_menu
