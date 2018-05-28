@@ -27,8 +27,14 @@ class StudentsController < ApplicationController
     @reades_digest_books_category = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)",
       :conditions => ["category_id =? AND book_id NOT IN (?)", digest_category_id, selected_book_ids])
 
-    @catalogs = Catalog.all
-    @posters = Poster.all
+    catalog_ids = user.student_catalogs.collect{|c|c.catalog_id}
+    catalog_ids = [0] if catalog_ids.blank?
+
+    poster_ids = user.student_posters.collect{|c|c.poster_id}
+    poster_ids = [0] if poster_ids.blank?
+
+    @catalogs = Catalog.find(:all, :conditions => ["catalog_id NOT IN (?)", catalog_ids])
+    @posters = Poster.find(:all, :conditions => ["poster_id NOT IN (?)", poster_ids])
   end
 
   def update_my_book_shelf
