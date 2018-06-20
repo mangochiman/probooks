@@ -213,4 +213,16 @@
   }
 
   jQuery('img').on('dragstart', function(event) { event.preventDefault(); });
+
+  jQuery.fn.center = function() {
+    parent = this.parent();
+    this.css({
+      "position": "absolute",
+      "top": (((jQuery(parent).height() - this.outerHeight()) / 2) + jQuery(parent).scrollTop() - 70 + "px"),
+      "left": (((jQuery(parent).width() - this.outerWidth()) / 2) + jQuery(parent).scrollLeft() + "px")
+    });
+    return this;
+  }
+
+  jQuery('#login-overlay').center();
 </script>

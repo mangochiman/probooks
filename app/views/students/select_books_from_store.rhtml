@@ -1,12 +1,7 @@
 <script type="text/javascript">
-  function showBooks(bookCategory){
+  function showBooks(bookCategory, label){
     jQuery(".primary, .secondary, .tertiary, .readers, .posters, .catalogs").hide();
-    if (bookCategory.match(/poster|catalog/i)){
-      jQuery('.category').html(bookCategory.toUpperCase());
-    } else {
-      jQuery('.category').html(bookCategory.toUpperCase() + " Books");
-    }
-    
+    jQuery('.category').html(label);
     jQuery("." + bookCategory).show();
   }
 
@@ -45,12 +40,12 @@
   <p class="panel-heading"><b>BOOK CATEGORIES</b></p>
   <div class="panel-body book-category-buttons">
     <p style="text-align: center;">
-      <button onclick="showBooks('primary'); highLight(this);" class="btn btn-primary btn-large">Primary Books</button>
-      <button onclick="showBooks('secondary'); highLight(this);" class="btn btn-primary btn-large">Secondary Books</button>
-      <button onclick="showBooks('tertiary'); highLight(this);" class="btn btn-primary btn-large">Tertiary Books</button>
-      <button onclick="showBooks('readers'); highLight(this);" class="btn btn-primary btn-large">Readers Digest Books </button>
-      <button onclick="showBooks('posters'); highLight(this);" class="btn btn-primary btn-large">Posters </button>
-      <button onclick="showBooks('catalogs'); highLight(this);" class="btn btn-primary btn-large">Catalogs </button>
+      <button onclick="showBooks('primary', 'Primary Books'); highLight(this);" class="btn btn-primary btn-large">Primary Books</button>
+      <button onclick="showBooks('secondary', 'Secondary Books'); highLight(this);" class="btn btn-primary btn-large">Secondary Books</button>
+      <button onclick="showBooks('tertiary', 'Tertiary Books'); highLight(this);" class="btn btn-primary btn-large">Tertiary Books</button>
+      <button onclick="showBooks('readers', 'Readers Digest'); highLight(this);" class="btn btn-primary btn-large">Readers Digest </button>
+      <button onclick="showBooks('posters','Posters'); highLight(this);" class="btn btn-primary btn-large">Posters </button>
+      <button onclick="showBooks('catalogs', 'Catalogs'); highLight(this);" class="btn btn-primary btn-large">Catalogs </button>
     </p>
   </div>
 </div>
@@ -80,7 +75,7 @@
 
                       <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p><br />
                       <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Browse Book</button>
+                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Read</button>
                     </div>
                   </div>
                 </td>
@@ -113,7 +108,7 @@
 
                       <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p><br />
                       <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Browse Book</button>
+                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Read</button>
                     </div>
                   </div>
                 </td>
@@ -146,7 +141,7 @@
 
                       <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p><br />
                       <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Browse Book</button>
+                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Read</button>
                     </div>
                   </div>
                 </td>
@@ -178,7 +173,7 @@
 
                       <p>Subscribed By: <span class="label label-success"><%= category.book.users.count %></span> </p><br />
                       <button onclick="selectBookConfirm('<%= category.book.book_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Browse Book</button>
+                      <button onclick="viewBook('<%= category.book.book_id %>', '<%= category.book.title %>', '<%= category.book.author %>')" class="btn btn-success"><i class="fa fa-eye"></i> Read</button>
                     </div>
                   </div>
                 </td>
@@ -233,8 +228,8 @@
                         Uploaded on <a href="#"><%= poster.created_at.to_date.strftime("%d-%b-%Y") %></a>
                       </p>
 
-                      <button onclick="selectPosterConfirm('<%= poster.poster_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>
-                      <button onclick="zoomPoster('<%= poster.poster_id %>')" class="btn btn-success"><i class="fa fa-eye"></i> Zoom</button>
+                          <!--<button onclick="selectPosterConfirm('<%= poster.poster_id %>')" class="btn btn-primary"><i class="fa fa-thumbs-up "></i> Select</button>-->
+                      <button onclick="zoomPoster('<%= poster.poster_id %>')" class="btn btn-success"><i class="fa fa-eye"></i> View</button>
                     </div>
                   </div>
                 </td>
