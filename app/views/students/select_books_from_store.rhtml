@@ -328,7 +328,7 @@
         <div class="catalog-zoom">
 
         </div>
-        <iframe  width="100%" height="800px" src=""></iframe>
+        <iframe  id="catalog-iframe" width="100%" height="800px" src=""></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
@@ -372,7 +372,7 @@
         </div>
         <div class="modal-body">
           &nbsp;
-          <iframe  width="100%" height="1000px" src=""></iframe>
+          <iframe id="book-iframe" width="100%" height="1000px" src=""></iframe>
         </div>
         <!--<div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -433,7 +433,7 @@
 
   function viewBook(bookID, bookTitle, bookAuthor){
     document.getElementById('book-title').innerHTML = bookTitle + ' By ' + bookAuthor;
-    iframe = document.getElementsByTagName('iframe')[0];
+    iframe = document.getElementById("book-iframe");
     iframe.src = '/books/' + bookID + '.pdf'
     jQuery('#viewBook').modal('show');
   }
@@ -509,7 +509,7 @@
       },
       success: function(filename){
         jQuery(".catalog-zoom").hide();
-        iframe = document.getElementsByTagName('iframe')[0];
+        iframe = document.getElementById('catalog-iframe');
         iframe.src = "/catalogs/" + filename;
         //jQuery(".catalog-zoom").html(img);
       }
