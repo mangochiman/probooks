@@ -39,6 +39,8 @@ ActionController::Routing::Routes.draw do |map|
   map.new_posters_menu  '/new_posters_menu',  :controller => 'admin', :action => 'new_posters_menu'
   map.remove_posters_menu  '/remove_posters_menu',  :controller => 'admin', :action => 'remove_posters_menu'
 
+  map.new_advert  '/new_advert',  :controller => 'admin', :action => 'new_advert'
+  map.remove_adverts  '/remove_adverts',  :controller => 'admin', :action => 'remove_adverts'
 
   map.browse_by_category '/browse_by_category/:category_id', :controller => 'admin', :action => 'browse_by_category'
   map.edit_user '/edit_user/:user_id', :controller => 'admin', :action => 'edit_user'
