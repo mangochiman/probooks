@@ -87,16 +87,17 @@
             <tr style="padding-bottom: 100px;">
               <% group.each do |catalog| %>
                 <td style="padding-right: 20px;">
-                  <a href="#" class="pull-left">
+                  <!--<a href="#" class="pull-left">
                     <img class="media-object thumb-sm" src="/catalogs/<%= catalog.filename %>"/>
-                  </a>
+                  </a>-->
                   <div>
                     <p>
+                      Category: <a href="#">Catalog</a><br />
                       Title: <a href="#"><%= catalog.title %></a><br />
                       Uploaded on: <a href="#"><%= catalog.created_at.to_date.strftime("%d-%b-%Y") %></a><br />
                     </p>
-                    <br /><br /><br /><br />
-                    <button style="width: 200px;" onclick="zoomCatalog('<%= catalog.catalog_id %>')" class="btn btn-default"><i class="fa fa-eye"></i> View</button><br />
+                    
+                    <button style="width: 200px;" onclick="viewCatalog('<%= catalog.catalog_id %>')" class="btn btn-default"><i class="fa fa-eye"></i> View</button><br />
                     <button style="width: 200px;" onclick="removeCatalogConfirm('<%= catalog.catalog_id %>')" class="btn btn-default"><i class="fa fa-cut"></i> Remove</button><br />
                   </div>
                 </td>
@@ -205,7 +206,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="zoomCatalogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width: 60%;">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -215,6 +216,7 @@
         <div class="catalog-zoom">
 
         </div>
+        <iframe  id="catalog-iframe" width="100%" height="800px" src=""></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
@@ -225,7 +227,6 @@
   <!-- /.modal-dialog -->
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="zoomPosterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -257,7 +258,7 @@
         </div>
         <div class="modal-body">
           &nbsp;
-          <iframe  width="100%" height="1000px" src=""></iframe>
+          <iframe  id="book-iframe" width="100%" height="1000px" src=""></iframe>
         </div>
         <!--<div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -321,13 +322,29 @@
 
   function viewBook(bookID, bookTitle, bookAuthor){
     document.getElementById('book-title').innerHTML = bookTitle + ' By ' + bookAuthor;
-    iframe = document.getElementsByTagName('iframe')[0];
+    iframe = document.getElementById("book-iframe");
     iframe.src = '/books/' + bookID + '.pdf'
     jQuery('#viewBook').modal('show');
   }
 
-  function zoomCatalog(catalog_id){
+  function viewCatalog(catalog_id){
+    //catalog-zoom
+    jQuery('#zoomCatalogModal').modal('show');
+    jQuery.ajax({
+      type: "POST",
+      url: "/students/get_catalog_file",
+      data: "catalog_id=" + catalog_id,
+      beforeSend: function(){
+        jQuery(".catalog-zoom").html("Loading........")
+      },
+      success: function(filename){
+        jQuery(".catalog-zoom").hide();
+        iframe = document.getElementById('catalog-iframe');
+        iframe.src = "/catalogs/" + filename;
+        //jQuery(".catalog-zoom").html(img);
+      }
 
+    });
   }
 
 
