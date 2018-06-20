@@ -1,17 +1,15 @@
-class CreatePosters < ActiveRecord::Migration
+class CreateAdverts < ActiveRecord::Migration
   def self.up
-    create_table :posters, :primary_key => :poster_id do |t|
+    create_table :adverts, :primary_key => :advert_id do |t|
       t.string :title
       t.string :filename
       t.binary :content, :limit => 50.megabyte
       t.string :content_type
-      t.date :start_date
-      t.date :end_date
       t.timestamps
     end
   end
 
   def self.down
-    drop_table :posters
+    drop_table :adverts
   end
 end
