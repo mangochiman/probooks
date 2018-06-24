@@ -208,6 +208,21 @@ class StudentsController < ApplicationController
     end
   end
 
+  def save_bookmark
+    uri_referrer = request.referer
+    book_mark = BookMark.new
+    book_mark.link = params[:bookmark]
+    book_mark.user_id = session[:user].user_id
+    
+    if book_mark.save
+      flash[:notice] = "You have successfully saved your bookmark"
+      redirect_to(uri_referrer) and return
+    else
+      flash[:error] = book_mark.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      redirect_to(uri_referrer) and return
+    end
+  end
+
   def delete_user_notes
     uri_referrer = request.referer
     user_note = UserNote.find(params[:user_note_id])

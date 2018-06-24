@@ -32,6 +32,12 @@ module ApplicationHelper
     return user_notes
   end
 
+  def user_book_marks
+    user_id = session[:user].user_id
+    user_book_marks = BookMark.find(:all, :conditions => ["User_id =?", user_id], :order => "book_mark_id DESC")
+    return user_book_marks
+  end
+
   def headlines
     news = News.find(:all, :order => "news_id DESC")
     return news
