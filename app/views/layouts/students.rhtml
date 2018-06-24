@@ -315,8 +315,9 @@
             <% count = 1 %>
             <% user_book_marks.each do |user_book_mark| %>
               <li>
-                <a title="<%= user_book_mark.link %>" class="notes" href="<%= user_book_mark.link %>"><%= "#{count}.#{UserNote.trim(user_book_mark.link, 100)}"%></a>
-                <span onclick="showRemoveNotesPopup(<%= user_book_mark.book_mark_id%>);" style="color: #8B0000; padding-right: 10px !important;" class="pull-right del">X</span></li>
+                <a title="<%= user_book_mark.link %>" class="notes" href="<%= user_book_mark.link %>"><%= "#{count}.#{UserNote.trim(user_book_mark.link, 40)}"%></a>
+                <span onclick="showRemoveBookmarkPopup(<%= user_book_mark.book_mark_id%>);" style="color: #8B0000; padding-right: 10px !important;" class="pull-right del">X</span></li>
+              <br />
               <% count = count + 1 %>
             <% end %>
           </ul>
@@ -559,6 +560,30 @@
       </div>
       <!-- /.modal -->
 
+
+      <!-- Modal -->
+      <div class="modal fade" id="deleteBookMarksModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">Confirm Action</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to remove the selected bookmark?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">No, Am Not Sure</button>
+              <button onclick="removeBookMarks();" type="button" class="btn btn-primary">Yes, Am Sure</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+
       <div class="col-lg-12">
         <div class="modal" id="viewNotesModal" tabindex="-1"    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -644,10 +669,17 @@
     }
 
     var currentUserNotedID;
+    var currentUserBookMarkID;
     
     function showRemoveNotesPopup(userNotesID){
       currentUserNotedID = userNotesID
       jQuery('#deleteNotesModal').modal('show');
+      return false;
+    }
+
+    function showRemoveBookmarkPopup(userBookMarkID){
+      currentUserBookMarkID = userBookMarkID;
+      jQuery('#deleteBookMarksModal').modal('show');
       return false;
     }
 
@@ -663,6 +695,23 @@
       input.type = "hidden";
       input.value = currentUserNotedID;
       input.name = "user_note_id";
+      form.appendChild(input);
+
+      form.submit();
+    }
+
+    function removeBookMarks(){
+      body = document.getElementsByTagName("body")[0];
+
+      form = document.createElement("form");
+      form.method = "POST"
+      form.action = "/students/delete_user_bookmarks";
+      body.appendChild(form);
+
+      input = document.createElement("input");
+      input.type = "hidden";
+      input.value = currentUserBookMarkID;
+      input.name = "book_mark_id";
       form.appendChild(input);
 
       form.submit();

@@ -223,6 +223,18 @@ class StudentsController < ApplicationController
     end
   end
 
+  def delete_user_bookmarks
+    uri_referrer = request.referer
+    user_book_mark = BookMark.find(params[:book_mark_id])
+    if user_book_mark.delete
+      flash[:notice] = "Bookmark successfully deleted"
+      redirect_to(uri_referrer) and return
+    else
+      flash[:error] = "Unable to delete the selected bookmark"
+      redirect_to(uri_referrer) and return
+    end
+  end
+
   def delete_user_notes
     uri_referrer = request.referer
     user_note = UserNote.find(params[:user_note_id])
