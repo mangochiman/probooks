@@ -502,6 +502,26 @@ class AdminController < ApplicationController
     end
   end
 
+  def create_advert
+    advert = Advert.new
+    advert.uploaded_file = params[:advert]
+    advert.title = params[:advert_title]
+
+    if advert.save
+      poster_data = File.read(params[:advert].path)
+
+      File.open(Rails.root.join('public', 'adverts', advert.filename), 'wb') do |file|
+        file.write(poster_data) #Create a catalog to a directory
+      end
+
+      flash[:notice] = "You have successfully created an advert"
+      redirect_to("/new_advert")
+    else
+      #flash[:error] = book.errors.full_messages.join('<br />')
+      flash[:error] = advert.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      redirect_to("/new_advert")
+    end
+  end
 
   def remove_catalogs_menu
     @page_title = "Remove Catalogs"
@@ -736,6 +756,23 @@ class AdminController < ApplicationController
     @tertiary_books = BookCategory.find(:all, :joins => "INNER JOIN books USING (book_id)", :conditions => ["category_id =?", tertiary_category_id])
 
     @updates = Update.find(:all)
+    @adverts = Advert.all
+    
+    if request.post?
+      advert_ids = params[:advert_ids].split(',')
+      if advert_ids.blank?
+        flash[:error] = "Select item to delete"
+        redirect_to("/remove_adverts") and return
+      end
+
+      advert_ids.each do |advert_id|
+        advert = Advert.find(advert_id)
+        advert.delete
+      end
+
+      flash[:notice] = "You have succesfully deleted posters"
+      redirect_to("/remove_adverts") and return
+    end
   end
 
 end
