@@ -74,8 +74,8 @@
                       Uploaded on <%= Book.date_book_was_saved_by_user(session[:user].user_id, book.book_id).to_date.strftime("%d-%b-%Y") rescue "&nbsp;"%>
                     </p>
                     <p>Subscribed By: <span class="label label-success"><%= book.users.count %></span></p>
-                    <button style="width: 200px;" onclick="viewBook('<%= book.book_id %>', '<%= book.title %>', '<%= book.author %>')" class="btn btn-default"><i class="fa fa-eye"></i> Read</button><br />
-                    <button style="width: 200px;" onclick="removeBookConfirm('<%= book.book_id %>')" class="btn btn-default"><i class="fa fa-cut"></i> Remove</button><br />
+                    <button style="width: 80px; color: green; border-radius: 10px;" onclick="viewBook('<%= book.book_id %>', '<%= book.title %>', '<%= book.author %>')" class="btn btn-default"><i></i> Read</button>
+                    <button style="width: 80px; color: red; border-radius: 10px;" onclick="removeBookConfirm('<%= book.book_id %>')" class="btn btn-default"><i></i> Remove</button><br />
                   </div>
                 </td>
               <%end%>
@@ -97,8 +97,8 @@
                       Uploaded on: <a href="#"><%= catalog.created_at.to_date.strftime("%d-%b-%Y") %></a><br />
                     </p>
                     
-                    <button style="width: 200px;" onclick="viewCatalog('<%= catalog.catalog_id %>')" class="btn btn-default"><i class="fa fa-eye"></i> View</button><br />
-                    <button style="width: 200px;" onclick="removeCatalogConfirm('<%= catalog.catalog_id %>')" class="btn btn-default"><i class="fa fa-cut"></i> Remove</button><br />
+                    <button style="width: 80px; color: green; border-radius: 10px;" onclick="viewCatalog('<%= catalog.catalog_id %>')" class="btn btn-default"><i></i> View</button>
+                    <button style="width: 80px; color: red; border-radius: 10px;" onclick="removeCatalogConfirm('<%= catalog.catalog_id %>')" class="btn btn-default"><i></i> Remove</button><br />
                   </div>
                 </td>
               <%end%>
@@ -119,8 +119,8 @@
                       Uploaded on: <a href="#"><%= poster.created_at.to_date.strftime("%d-%b-%Y") %></a><br />
                     </p>
                     <br /><br /><br /><br />
-                    <button style="width: 200px;" onclick="zoomPoster('<%= poster.poster_id %>')" class="btn btn-default"><i class="fa fa-eye"></i> View</button><br />
-                    <button style="width: 200px;" onclick="removePosterConfirm('<%= poster.poster_id %>')" class="btn btn-default"><i class="fa fa-cut"></i> Remove</button><br />
+                    <button style="width: 80px; color: green; border-radius: 10px;" onclick="zoomPoster('<%= poster.poster_id %>')" class="btn btn-default"><i></i> View</button>
+                    <button style="width: 80px; color: red; border-radius: 10px;" onclick="removePosterConfirm('<%= poster.poster_id %>')" class="btn btn-default"><i></i> Remove</button><br />
                   </div>
                 </td>
               <%end%>
