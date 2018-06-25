@@ -70,5 +70,14 @@ module ApplicationHelper
     end
     browser
   end
+
+  def adverts
+    adverts = Advert.all
+    data = []
+    adverts.each do |advert|
+      data << "/adverts/#{advert.filename}"
+    end
+    return data
+  end
   
 end

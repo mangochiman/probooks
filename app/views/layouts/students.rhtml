@@ -17,6 +17,10 @@
     <link rel="stylesheet" type="text/css" href="/AircraftAdminFree/stylesheets/theme.css"/>
     <link rel="stylesheet" type="text/css" href="/AircraftAdminFree/stylesheets/premium.css"/>
 
+    <script type="text/javascript">
+      var adverts = JSON.parse('<%= adverts.to_json %>');
+      var adverts_copy = JSON.parse('<%= adverts.to_json %>');
+    </script>
   </head>
   <body class=" theme-blue">
 
@@ -374,8 +378,9 @@
     </div><br />
 
     <div class="adverts">
-      <img src="/adverts/01.jpg"></img>
+    
     </div>
+    
     <div class="row" style="padding-right: 64px; top: -36px; position: relative;">
 
       <button onclick="goToExtras();" class="btn btn-default btn-circle btn-xl pull-right main-icon" type="button" >
@@ -786,6 +791,25 @@
       },5000);
 
     },10000);
+
+    function loadAdverts(){
+      if (adverts.length == 0){
+        adverts = JSON.parse(JSON.stringify(adverts_copy));
+      }
+
+      advert = adverts.shift();
+
+      //adverts
+      advertsDiv = jQuery(".adverts")[0];
+      jQuery(".advert-img").remove();
+      img = document.createElement("img");
+      img.src = advert;
+      img.className = "advert-img";
+      advertsDiv.appendChild(img);
+      setTimeout(loadAdverts, 15000); //15 seconds
+    }
+
+    loadAdverts();
   </script>
 
 
