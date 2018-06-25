@@ -48,4 +48,27 @@ module ApplicationHelper
     return updates
   end
 
+  def browser_detection
+    result = request.env['HTTP_USER_AGENT']
+    browser = []
+    if result =~ /Safari/
+      unless result =~ /Chrome/
+        browser = ["Safari", "unknown" ]
+      else
+        version = result.split('Chrome/')[1].split(' ').first.split('.').first rescue "unknown"
+        browser = ["Chrome", version ]
+      end
+    elsif result =~ /Firefox/
+      version = result.split('Firefox/')[1].split('.').first rescue "unknown"
+      browser = ["Firefox", version ]
+    elsif result =~ /Opera/
+      version = result.split('Version/')[1].split('.').first rescue "unknown"
+      browser = ["Opera", version ]
+    elsif result =~ /MSIE/
+      version = result.split('MSIE')[1].split(' ').first rescue "unknown"
+      browser = ["MSIE", version ]
+    end
+    browser
+  end
+  
 end

@@ -437,7 +437,21 @@
                 <%= flash[:error] %>
               </div><br />
             <% end %>
-            <%= yield %>
+
+            <% if browser_detection[0].to_s.match(/Firefox|Chrome/i) %>
+              <%= yield %>
+            <% else %>
+              <div class="panel panel-default well" style="min-height: 500px">
+                <div class="bs-callout bs-callout-danger">
+                  <h2 style="color: red; text-align: center;">Your browser is not supported.</h2>
+                  <b>Browser</b>: <i><%= browser_detection[0] %></i> <br />
+                  <b>Version</b>: <i><%= browser_detection[1] %></i> <br />
+                  <br /><br /><br />
+                  <h3>Switch to Firefox or Chrome</h3>
+                </div>
+              </div>
+            <% end %>
+
           </div>
           <!--<div class="col-sm-3 col-md-3 pull-right">
             <div class="well well-small">
