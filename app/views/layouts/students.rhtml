@@ -813,12 +813,14 @@
       advert = adverts.shift();
 
       //adverts
+
       advertsDiv = jQuery(".adverts")[0];
       jQuery(".advert-img").remove();
       img = document.createElement("img");
       img.src = advert;
       img.className = "advert-img";
-      advertsDiv.appendChild(img);
+      if (adverts.length > 0) advertsDiv.appendChild(img);
+      
       setTimeout(loadAdverts, 15000); //15 seconds
     }
 
