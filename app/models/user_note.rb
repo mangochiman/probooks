@@ -6,11 +6,16 @@ class UserNote < ActiveRecord::Base
   validates_presence_of :data, :message => "_Notes can't be blank"
 
   def self.trim(data, size)
-    if data.size > size
-      return data[0..size].to_s.squish + ' ...'
+    unless data.blank?
+      if data.size > size
+        return data[0..size].to_s.squish + ' ...'
+      else
+        return data
+      end
     else
       return data
     end
+
   end
 
 end
