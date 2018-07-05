@@ -226,6 +226,10 @@
     .adverts img{
       max-height: 90px;
     }
+
+    body{
+      transform: scale(1);
+    }
   </style>
 
 
@@ -332,7 +336,7 @@
             <% count = 1 %>
             <% user_book_marks.each do |user_book_mark| %>
               <li>
-                <a title="<%= user_book_mark.link %>" class="notes" href="<%= user_book_mark.link %>"><%= "#{count}.#{UserNote.trim(user_book_mark.link, 40)}"%></a>
+                <a title="<%= user_book_mark.link %>" class="notes" target="_blank" rel="noopener noreferrer" href="<%= user_book_mark.link %>"><%= "#{count}.#{UserNote.trim(user_book_mark.link, 40)}"%></a>
                 <span onclick="showRemoveBookmarkPopup(<%= user_book_mark.book_mark_id%>);" style="color: #8B0000; padding-right: 10px !important;" class="pull-right del">X</span></li>
               <br />
               <% count = count + 1 %>
@@ -499,7 +503,7 @@
         <footer>
           <hr />
 
-          <p>© <%= Date.today.year %> <a href="#">Agoogoo</a></p>
+          <p style="text-align: center;">© <%= Date.today.year %> <a href="#">Agoogoo</a></p>
         </footer>
       </div>
 
