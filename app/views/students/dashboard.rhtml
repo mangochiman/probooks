@@ -96,7 +96,7 @@
                       Title: <a href="#"><%= catalog.title %></a><br />
                       Uploaded on: <a href="#"><%= catalog.created_at.to_date.strftime("%d-%b-%Y") %></a><br />
                     </p>
-                    
+
                     <button style="width: 80px; color: green; border-radius: 10px;" onclick="viewCatalog('<%= catalog.catalog_id %>')" class="btn btn-default"><i></i> View</button>
                     <button style="width: 80px; color: red; border-radius: 10px;" onclick="removeCatalogConfirm('<%= catalog.catalog_id %>')" class="btn btn-default"><i></i> Remove</button><br />
                   </div>
@@ -323,7 +323,9 @@
   function viewBook(bookID, bookTitle, bookAuthor){
     document.getElementById('book-title').innerHTML = bookTitle + ' By ' + bookAuthor;
     iframe = document.getElementById("book-iframe");
-    iframe.src = '/books/' + bookID + '.pdf'
+    src = "http://<%= request.env["HTTP_HOST"] %>/pdfjs/web/viewer.html?file=http://<%= request.env["HTTP_HOST"] %>" + '/books/' + bookID + '.pdf';
+    iframe.src = src//'/books/' + bookID + '.pdf'
+
     jQuery('#viewBook').modal('show');
   }
 
@@ -340,7 +342,9 @@
       success: function(filename){
         jQuery(".catalog-zoom").hide();
         iframe = document.getElementById('catalog-iframe');
-        iframe.src = "/catalogs/" + filename;
+        src = "http://<%= request.env["HTTP_HOST"] %>/pdfjs/web/viewer.html?file=http://<%= request.env["HTTP_HOST"] %>" + "/catalogs/" + filename;
+
+        iframe.src = src//"/catalogs/" + filename;
         //jQuery(".catalog-zoom").html(img);
       }
 

@@ -225,7 +225,7 @@
 
     .adverts img{
       max-height: 90px;
-}
+    }
   </style>
 
 
@@ -315,14 +315,14 @@
       </div>
       <span class="pull-right" style="position: relative; bottom:  50px; padding-right: 5px;"><a href="#" onclick="return showNewNotesPopup();"><i class="fa fa-plus"></i> New Note</a></span>
 
-    <div style="padding-left: 5px; width: 98%;">
-      <div class="well well-large" style="border-radius: 0px; min-height: 120px;">
-        <b class="notes-header">Apps </b>
-        <button class="btn btn-primary btn-block" style="line-height: 0.7;"><span class="fa fa-facebook"></span> Facebook </button>
-        <button class="btn btn-primary btn-block" style="line-height: 0.7;"><span class="fa fa-twitter"></span> Twitter </button>
-        <button class="btn btn-primary btn-block" style="line-height: 0.7;"><span class="fa fa-wechat"></span> We Chatt </button>
+      <div style="padding-left: 5px; width: 98%;">
+        <div class="well well-large" style="border-radius: 0px; min-height: 120px;">
+          <b class="notes-header">Apps </b>
+          <button class="btn btn-primary btn-block" style="line-height: 0.7;"><span class="fa fa-facebook"></span> Facebook </button>
+          <button class="btn btn-primary btn-block" style="line-height: 0.7;"><span class="fa fa-twitter"></span> Twitter </button>
+          <button class="btn btn-primary btn-block" style="line-height: 0.7;"><span class="fa fa-wechat"></span> We Chatt </button>
+        </div>
       </div>
-    </div>
     </div>
     <div style="padding-left: 5px; width: 98%;">
       <div class="well well-large" style="border-radius: 0px; min-height: 300px;">
@@ -391,9 +391,9 @@
     </div><br />
 
     <div class="adverts">
-    
+
     </div>
-    
+
     <div class="row" style="padding-right: 64px; top: -36px; position: relative;">
 
       <button onclick="goToExtras();" class="btn btn-default btn-circle btn-xl pull-right main-icon" type="button" >
@@ -459,15 +459,7 @@
             <% if browser_detection[0].to_s.match(/Firefox|Chrome/i) %>
               <%= yield %>
             <% else %>
-              <div class="panel panel-default well" style="min-height: 500px">
-                <div class="bs-callout bs-callout-danger">
-                  <h2 style="color: red; text-align: center;">Your browser is not supported.</h2>
-                  <b>Browser</b>: <i><%= browser_detection[0] %></i> <br />
-                  <b>Version</b>: <i><%= browser_detection[1] %></i> <br />
-                  <br /><br /><br />
-                  <h3>Switch to Firefox or Chrome</h3>
-                </div>
-              </div>
+              <%= yield %>
             <% end %>
 
           </div>
@@ -814,12 +806,14 @@
 
       //adverts
 
-      advertsDiv = jQuery(".adverts")[0];
-      jQuery(".advert-img").remove();
-      img = document.createElement("img");
-      img.src = advert;
-      img.className = "advert-img";
-      if (adverts.length > 0) advertsDiv.appendChild(img);
+      if (adverts.length > 0){
+        advertsDiv = jQuery(".adverts")[0];
+        jQuery(".advert-img").remove();
+        img = document.createElement("img");
+        img.src = advert;
+        img.className = "advert-img";
+        advertsDiv.appendChild(img);
+      }
       
       setTimeout(loadAdverts, 15000); //15 seconds
     }

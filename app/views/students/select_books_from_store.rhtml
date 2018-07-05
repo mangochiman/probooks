@@ -434,7 +434,8 @@
   function viewBook(bookID, bookTitle, bookAuthor){
     document.getElementById('book-title').innerHTML = bookTitle + ' By ' + bookAuthor;
     iframe = document.getElementById("book-iframe");
-    iframe.src = '/books/' + bookID + '.pdf'
+    src = "http://<%= request.env["HTTP_HOST"] %>/pdfjs/web/viewer.html?file=http://<%= request.env["HTTP_HOST"] %>" + '/books/' + bookID + '.pdf';
+    iframe.src = src//'/books/' + bookID + '.pdf'
     jQuery('#viewBook').modal('show');
   }
 
@@ -498,6 +499,7 @@
 
 
   function viewCatalog(catalog_id){
+    console.log("here")
     //catalog-zoom
     jQuery('#zoomCatalogModal').modal('show');
     jQuery.ajax({
@@ -510,7 +512,8 @@
       success: function(filename){
         jQuery(".catalog-zoom").hide();
         iframe = document.getElementById('catalog-iframe');
-        iframe.src = "/catalogs/" + filename;
+        src = "http://<%= request.env["HTTP_HOST"] %>/pdfjs/web/viewer.html?file=http://<%= request.env["HTTP_HOST"] %>" + "/catalogs/" + filename;
+        iframe.src = src//"/catalogs/" + filename;
         //jQuery(".catalog-zoom").html(img);
       }
 
