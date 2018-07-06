@@ -230,6 +230,7 @@
     body{
       transform: scale(1);
     }
+    
   </style>
 
 
@@ -823,6 +824,22 @@
     }
 
     loadAdverts();
+
+    function defaultSettings(){
+      jQuery('#book-iframe').contents().find('#download').hide();
+      jQuery('#book-iframe').contents().find('#openFile').hide();
+      jQuery('#book-iframe').contents().find('#print').hide();
+      jQuery('#book-iframe').contents().find('#viewBookmark').hide();
+      frame = window.frames["book-iframe"];
+      if (frame){
+        frame.contentWindow.document.oncontextmenu = function(){
+          return false;
+        }
+      }
+      setTimeout(defaultSettings, 100);
+    }
+
+    defaultSettings();
   </script>
 
 
