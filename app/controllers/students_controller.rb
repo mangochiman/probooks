@@ -218,7 +218,7 @@ class StudentsController < ApplicationController
       flash[:notice] = "You have successfully saved your bookmark"
       redirect_to(uri_referrer) and return
     else
-      flash[:error] = book_mark.errors.full_messages.collect{|m|m.split('_')[1]}.join('<br />')
+      flash[:error] = book_mark.errors.full_messages.join('<br />')
       redirect_to(uri_referrer) and return
     end
   end
