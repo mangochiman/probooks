@@ -825,6 +825,9 @@
     loadAdverts();
 
     function defaultSettings(){
+      jQuery('#book-iframe').contents().find('#secondaryOpenFile').hide();
+      jQuery('#book-iframe').contents().find('#secondaryPrint').hide();
+      jQuery('#book-iframe').contents().find('#secondaryDownload').hide();
       jQuery('#book-iframe').contents().find('#download').hide();
       jQuery('#book-iframe').contents().find('#openFile').hide();
       jQuery('#book-iframe').contents().find('#print').hide();
